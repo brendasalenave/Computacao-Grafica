@@ -41,13 +41,8 @@ Bola  *ball = NULL;
 int   opcao  = 50;
 float global = 0;
 
+int botaoStatus = 0;
 
-
-
-//#pragma comment(lib, "opengl32.lib")
-//#pragma comment(lib, "glu32.lib")
-//#pragma comment(lib, "glaux.lib")
-//#pragma comment(lib, "glut32.lib")
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
@@ -75,17 +70,18 @@ void render(){
 //   renderSphere();
 
    for(float i=0; i<950; i++){
-	   color(i/920, i/920, i/920);
+	   color(i/900, i/900, i/900);
 	   point((int)(i), (int)(68));
    }
-   for(float i=950; i>0; i--){
-	   color(i*-0.9, i*-0.9, i*-0.9);
-	   point((int)(i), (int)(71));
+    for(float i=0; i<950; i++){
+	   color(i/900, i/900, i/900);
+	   point((int)(i), (int)(70));
    }
-   for(float i=0; i<950; i++){
-	   color(i/920, i/920, i/920);
-	   point((int)(i), (int)(74));
+    for(float i=0; i<950; i++){
+	   color(i/900, i/900, i/900);
+	   point((int)(i), (int)(72));
    }
+
 
    text(20,580,"Programa do Demo Canvas C++.");
 
@@ -170,5 +166,10 @@ void keyboardUp(int key){
 
 //funcao para tratamento de mouse: cliques, movimentos e arrastos
 void mouse(int button, int state, int x, int y){
+    if((state == 0) && (button == 0)){
+        printf("ENTRA");
+        b->getMousePosition(x,y);
+    }
+
    //printf("\nmouse %d %d %d %d", button, state, x, y);
 }
