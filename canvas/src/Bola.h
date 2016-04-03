@@ -21,8 +21,7 @@ public:
      b = 0;
   }
 
-  void anima()
-  {
+  void anima(){
       r = altura/400.0;
       clear(0,0,0);
       color(r, 1-r, b);
@@ -50,8 +49,7 @@ public:
       circleFill(posicao, (int)altura, 30, 15);
   }
 
-  void move(int delta)
-  {
+  void move(int delta){
      posicao += delta;
   }
 };

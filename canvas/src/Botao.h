@@ -11,14 +11,14 @@ public:
   Botao(){
      posy = 20;
      posx = 850;
-     r = 0;
-     g = 20;
-     b = 0;
+     r = 0.5;
+     g = 0.03;
+     b = 0.8;
   }
 
   void anima(){
       //r = altura/400.0;
-      clear(0,0,0);
+      clear(255,255,255);
       color(r, g, b);
       /*if( altura > 10 && caindo == true ) //caindo
       {
@@ -48,9 +48,6 @@ public:
 
   }
 
-  void move(int delta){
-     //posicao += delta;
-  }
 };
 
 #endif

@@ -27,6 +27,7 @@
 //#include <GL/freeglut_ext.h> //callback da wheel do mouse.
 
 int largura, altura;
+int mousex, mousey, mouseState;
 
 void point(int x, int y){
    glBegin(GL_POINTS);
@@ -141,14 +142,17 @@ void keybUp(unsigned char key, int , int ){
 
 void mouseClick(int button, int state, int x, int y){
    mouse(button, state, x, y);
+   mousex = x;
+   mousey = y;
+   mouseState = state;
    //if((state == 1) && (posx > x) && (posx+35 < x) && (posy > y) && (posy+35 < y)) printf("FUNCIONOU");
    printf("\nmouse click %d %d", button, state);
+
 }
 
 void mouseWheelCB(int wheel, int direction, int x, int y){
 	printf("\nMouseWheel: %d %d \n", x, y);
 }
-
 
 void motion(int x, int y){
    mouse(-1, -1, x, y);
@@ -211,7 +215,7 @@ void initCanvas(int w, int h){
 
    glutInitWindowSize (w, h);
    glutInitWindowPosition (200, 200);
-   glutCreateWindow ("Canvas 2D - Pressione 1, 2, 3, 4 ou 5");
+   glutCreateWindow ("Computacao Grafica - Trabalho 1");
 
    inicializa();
 

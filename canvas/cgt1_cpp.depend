@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1459643216 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\gl_canvas2d.cpp
+1459697453 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\gl_canvas2d.cpp
 	"gl_canvas2d.h"
 	"botao.h"
 	<GL/glut.h>
@@ -29,7 +29,7 @@
 1426358040 d:\backup_kb\user\documents\github\computacao-grafica\canvas\include\gl\freeglut_ext.h
 	<stdarg.h>
 
-1459692743 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
+1459696589 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -39,7 +39,7 @@
 	"Bola.h"
 	"Botao.h"
 
-1459538844 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\bola.h
+1459693512 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\bola.h
 	"gl_canvas2d.h"
 
 1193149756 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\relogio.h
@@ -51,6 +51,6 @@
 	<stdio.h>
 	<stdlib.h>
 
-1459645978 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\botao.h
+1459698232 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\botao.h
 	"gl_canvas2d.h"
 

@@ -34,7 +34,8 @@
 #include "Botao.h"
 
 
-Botao   *b = NULL;
+Botao *b = NULL;
+Bola  *ball = NULL;
 
 //variaveis globais
 int   opcao  = 50;
@@ -62,6 +63,7 @@ int main(void){
    initCanvas(900,600);
 
    b = new Botao();
+   ball = new Bola();
 
    runCanvas();
 }
@@ -71,14 +73,26 @@ int main(void){
 void render(){
 //   renderCubo();
 //   renderSphere();
-   for(float i=0; i<250; i++){
-	   color(i/200, i/200, i/200);
-	   point((int)(i+100), (int)(200));
+
+   for(float i=0; i<950; i++){
+	   color(i/920, i/920, i/920);
+	   point((int)(i), (int)(68));
+   }
+   for(float i=950; i>0; i--){
+	   color(i*-0.9, i*-0.9, i*-0.9);
+	   point((int)(i), (int)(71));
+   }
+   for(float i=0; i<950; i++){
+	   color(i/920, i/920, i/920);
+	   point((int)(i), (int)(74));
    }
 
    text(20,580,"Programa do Demo Canvas C++.");
 
-   if( opcao == '2' ){ // = 50 bola
+   if( opcao == 49 ){ // = '1' bola
+      ball->anima();
+   }
+   if( opcao == '2' ){ // = 50 botao
       b->anima();
    }
    if( opcao == 51){ // = '3' linha animada
@@ -139,12 +153,12 @@ void keyboard(int key){
 
 	  //seta para a esquerda
       case 200:
-         b->move(-10);
+         ball->move(-10);
 	  break;
 
 	  //seta para a direita
 	  case 202:
-         b->move(10);
+         ball->move(10);
 	  break;
    }
 }
