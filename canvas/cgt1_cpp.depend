@@ -1,0 +1,57 @@
+# depslib dependency file v1.0
+1459643216 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	"botao.h"
+	<GL/glut.h>
+
+1452514658 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+
+1426358040 d:\backup_kb\user\documents\github\computacao-grafica\canvas\include\gl\glut.h
+	"freeglut_std.h"
+
+1437565542 d:\backup_kb\user\documents\github\computacao-grafica\canvas\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1426358040 d:\backup_kb\user\documents\github\computacao-grafica\canvas\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1459645238 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	"gl_canvas2d.h"
+	"Bola.h"
+	"Botao.h"
+	"Relogio.h"
+
+1459538844 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\bola.h
+	"gl_canvas2d.h"
+
+1193149756 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\relogio.h
+	"gl_canvas2d.h"
+
+1168271266 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\relogio.cpp
+	"Relogio.h"
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+
+1459645978 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\botao.h
+	"gl_canvas2d.h"
+

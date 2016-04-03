@@ -20,13 +20,13 @@ public:
      g = 0;
      b = 0;
   }
-  
+
   void anima()
   {
       r = altura/400.0;
       clear(0,0,0);
       color(r, 1-r, b);
-      if( altura > 10 && caindo == true ) //caindo  
+      if( altura > 10 && caindo == true ) //caindo
       {
          vel += 0.001;
          altura -= vel;
@@ -49,11 +49,11 @@ public:
       }
       circleFill(posicao, (int)altura, 30, 15);
   }
-  
+
   void move(int delta)
   {
      posicao += delta;
   }
 };
-      
+
 #endif

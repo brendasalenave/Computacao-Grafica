@@ -27,26 +27,31 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 
 #include "gl_canvas2d.h"
 
 #include "Bola.h"
+#include "Botao.h"
 #include "Relogio.h"
 
-Bola    *b = NULL;
+
+Botao   *b = NULL;
 Relogio *r = NULL;
 
 //variaveis globais
 int   opcao  = 50;
 float global = 0;
 
+
+
+
 //#pragma comment(lib, "opengl32.lib")
 //#pragma comment(lib, "glu32.lib")
 //#pragma comment(lib, "glaux.lib")
 //#pragma comment(lib, "glut32.lib")
 
-
+//funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
+//globais que podem ser setadas pelo metodo keyboard()
 void render();
 //funcao chamada toda vez que uma tecla for pressionada
 void keyboard(int key);
@@ -56,9 +61,9 @@ void keyboardUp(int key);
 void mouse(int button, int state, int x, int y);
 
 int main(void){
-   initCanvas(600,600);
+   initCanvas(900,600);
 
-   b = new Bola();
+   b = new Botao();
    r = new Relogio();
 
    runCanvas();
@@ -74,7 +79,7 @@ void render(){
 	   point((int)(i+100), (int)(200));
    }
 
-   text(20,500,"Programa Demo Canvas C++.");
+   text(20,580,"Programa do Demo Canvas C++.");
 
    if( opcao == 49 ){ // = '1' relogio
       r->anima();
@@ -117,8 +122,7 @@ void render(){
        //circle( 300,300, 100, 1150);
        float x=0, y;
        color(0, 1, 0);
-       for(float i=0; i < 68; i+=0.001)
-       {
+       for(float i=0; i < 68; i+=0.001){
           y = sin(i)*50;
           point((int)x, y+100);
           x+=0.01;

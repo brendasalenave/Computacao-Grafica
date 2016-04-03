@@ -16,11 +16,12 @@
 //*****************************************************************************
 //modificacoes
 //*****************************************************************************
-//- passar tamanho da janela
+//- passar tamaD:\Backup_KB\USER\Documents\GitHub\Computacao-Grafica\canvas\src\gl_canvas2d.cppnho da janela
 //- retangulo preenchido em qualquer orientacao (polygon)
 //-
 
 #include "gl_canvas2d.h"
+#include "botao.h"
 
 #include <GL/glut.h>
 //#include <GL/freeglut_ext.h> //callback da wheel do mouse.
@@ -40,8 +41,7 @@ void line( int x1, int y1, int x2, int y2 ){
    glEnd();
 }
 
-void rect( int x1, int y1, int x2, int y2 )
-{
+void rect( int x1, int y1, int x2, int y2 ){
    glBegin(GL_LINE_LOOP);
       glVertex2d(x1, y1);
       glVertex2d(x1, y2);
@@ -50,8 +50,7 @@ void rect( int x1, int y1, int x2, int y2 )
    glEnd();
 }
 
-void rectFill( int x1, int y1, int x2, int y2 )
-{
+void rectFill( int x1, int y1, int x2, int y2 ){
    glBegin(GL_QUADS);
       glVertex2d(x1, y1);
       glVertex2d(x1, y2);
@@ -74,8 +73,7 @@ void polygon(float vx[], float vy[], int elems){
 void polygonFill(float vx[], float vy[], int elems){
    int cont;
    glBegin(GL_POLYGON);
-      for(cont=0; cont<elems; cont++)
-      {
+      for(cont=0; cont<elems; cont++){
          glVertex2d(vx[cont], vy[cont]);
       }
    glEnd();
@@ -96,8 +94,7 @@ void clear(float r, float g, float b){
    glClearColor( r, g, b, 1 );
 }
 
-void circle( int x, int y, int raio, int div )
-{
+void circle( int x, int y, int raio, int div ){
    float ang, x1, y1;
    float inc = PI_2/div;
    glBegin(GL_LINE_LOOP);
@@ -110,13 +107,11 @@ void circle( int x, int y, int raio, int div )
    glEnd();
 }
 
-void circleFill( int x, int y, int raio, int div )
-{
+void circleFill( int x, int y, int raio, int div ){
    float ang, x1, y1;
    float inc = PI_2/div;
    glBegin(GL_POLYGON);
-      for(ang=0; ang<6.27; ang+=inc)
-      {
+      for(ang=0; ang<6.27; ang+=inc){
          x1 = (cos(ang)*raio);
          y1 = (sin(ang)*raio);
          glVertex2d(x1+x, y1+y);
@@ -140,31 +135,27 @@ void keyb(unsigned char key, int , int ){
    keyboard(key);
 }
 
-void keybUp(unsigned char key, int , int )
-{
+void keybUp(unsigned char key, int , int ){
    keyboardUp(key);
 }
 
-void mouseClick(int button, int state, int x, int y)
-{
+void mouseClick(int button, int state, int x, int y){
    mouse(button, state, x, y);
+   //if((state == 1) && (posx > x) && (posx+35 < x) && (posy > y) && (posy+35 < y)) printf("FUNCIONOU");
    printf("\nmouse click %d %d", button, state);
 }
 
-void mouseWheelCB(int wheel, int direction, int x, int y)
-{
+void mouseWheelCB(int wheel, int direction, int x, int y){
 	printf("\nMouseWheel: %d %d \n", x, y);
 }
 
 
-void motion(int x, int y)
-{
+void motion(int x, int y){
    mouse(-1, -1, x, y);
    printf("\nmotion %d %d", x, y);
 }
 
-void reshape (int w, int h)
-{
+void reshape (int w, int h){
    largura = w;
    altura  = h;
 
@@ -178,8 +169,7 @@ void reshape (int w, int h)
    glLoadIdentity ();
 }
 
-void inicializa()
-{
+void inicializa(){
    //definicao de valores para limpar buffers
    glClearColor(1,1,1,1);
    glColor3f(1, 0, 0);  // red
@@ -187,8 +177,7 @@ void inicializa()
    glClear(GL_COLOR_BUFFER_BIT );
 }
 
-void display (void)
-{
+void display (void){
    glClear(GL_COLOR_BUFFER_BIT );
 
    glMatrixMode (GL_PROJECTION);
@@ -244,8 +233,7 @@ void initCanvas(int w, int h){
 
 }
 
-void runCanvas()
-{
+void runCanvas(){
    glutMainLoop();
 }
 
