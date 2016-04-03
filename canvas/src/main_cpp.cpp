@@ -32,11 +32,9 @@
 
 #include "Bola.h"
 #include "Botao.h"
-#include "Relogio.h"
 
 
 Botao   *b = NULL;
-Relogio *r = NULL;
 
 //variaveis globais
 int   opcao  = 50;
@@ -64,7 +62,6 @@ int main(void){
    initCanvas(900,600);
 
    b = new Botao();
-   r = new Relogio();
 
    runCanvas();
 }
@@ -81,9 +78,6 @@ void render(){
 
    text(20,580,"Programa do Demo Canvas C++.");
 
-   if( opcao == 49 ){ // = '1' relogio
-      r->anima();
-   }
    if( opcao == '2' ){ // = 50 bola
       b->anima();
    }

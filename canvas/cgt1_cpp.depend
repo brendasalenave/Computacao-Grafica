@@ -29,7 +29,7 @@
 1426358040 d:\backup_kb\user\documents\github\computacao-grafica\canvas\include\gl\freeglut_ext.h
 	<stdarg.h>
 
-1459645238 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
+1459692743 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -38,7 +38,6 @@
 	"gl_canvas2d.h"
 	"Bola.h"
 	"Botao.h"
-	"Relogio.h"
 
 1459538844 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\bola.h
 	"gl_canvas2d.h"
