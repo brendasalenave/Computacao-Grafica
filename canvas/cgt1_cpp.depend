@@ -30,7 +30,7 @@
 1426358040 d:\backup_kb\user\documents\github\computacao-grafica\canvas\include\gl\freeglut_ext.h
 	<stdarg.h>
 
-1459709618 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
+1459713764 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -52,6 +52,6 @@
 	<stdio.h>
 	<stdlib.h>
 
-1459709919 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\botao.h
+1459713754 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\botao.h
 	"gl_canvas2d.h"
 
