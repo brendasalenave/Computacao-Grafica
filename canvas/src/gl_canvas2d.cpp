@@ -220,7 +220,6 @@ void initCanvas(int w, int h){
 
    glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
 
-
    glutInitWindowSize (w, h);
    glutInitWindowPosition (200, 200);
    glutCreateWindow ("Computacao Grafica - Trabalho 1");

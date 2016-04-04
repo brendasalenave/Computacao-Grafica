@@ -17,11 +17,10 @@ public:
   }
 
   void anima(){
-      clear(255,255,255);
-      criaBotao(posx, posy, "T", 0.5, 0.03, 0.8);
-      criaBotao(posx + 40, posy, "<", 0.94, 0.05, 0.01);
-      criaBotao(posx + 80, posy, ">", 0.94, 0.05, 0.01);
-
+    clear(255,255,255);
+    criaBotao(posx, posy, "T", 0.5, 0.03, 0.8);
+    criaBotao(posx + 40, posy, "<", 0.94, 0.05, 0.01);
+    criaBotao(posx + 80, posy, ">", 0.94, 0.05, 0.01);
   }
 
   /*Cria botao com as dimensoes, texto e cores passados por parametro*/
@@ -33,10 +32,11 @@ public:
   }
 
   int getMousePosition(int x, int y){
-    if(posx <= x && (posx+35) >= x && posy <= y && (posy+35) >= y){
-        color(1,0,0);
-        printf("FUNCIONOU");
-        return 1;
+    if(posx <= x && (posx+35) >= x){
+        if((posy <= y) && ((posy+35) >= y)){
+            printf("\n*BOTAO PRESSIONADO* ");
+            return 1;
+        }
     }
     return 0;
   }

@@ -40,6 +40,7 @@ Bola  *ball = NULL;
 //variaveis globais
 int   opcao  = 50;
 float global = 0;
+int height, width;
 
 int botaoStatus = 0;
 
@@ -55,7 +56,9 @@ void keyboardUp(int key);
 void mouse(int button, int state, int x, int y);
 
 int main(void){
-   initCanvas(900,600);
+    height = 600;
+    width = 900;
+   initCanvas(width,height);
 
    b = new Botao();
    ball = new Bola();
@@ -167,7 +170,7 @@ void keyboardUp(int key){
 //funcao para tratamento de mouse: cliques, movimentos e arrastos
 void mouse(int button, int state, int x, int y){
     if((state == 0) && (button == 0)){
-        printf("ENTRA");
+        y = height - y;
         b->getMousePosition(x,y);
     }
 
