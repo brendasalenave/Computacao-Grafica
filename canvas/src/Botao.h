@@ -33,6 +33,7 @@ public:
 
   int getMousePosition(int x, int y){
     if((posy <= y) && ((posy+35) >= y)){
+
         if(posx <= x && (posx+35) >= x){
             printf("\n*BOTAO 1 PRESSIONADO* ");
             return 1;
