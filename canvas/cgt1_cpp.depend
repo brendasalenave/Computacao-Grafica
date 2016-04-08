@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1459772858 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\gl_canvas2d.cpp
+1459804867 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\gl_canvas2d.cpp
 	<stdlib.h>
 	"gl_canvas2d.h"
 	"botao.h"
@@ -30,12 +30,13 @@
 1426358040 d:\backup_kb\user\documents\github\computacao-grafica\canvas\include\gl\freeglut_ext.h
 	<stdarg.h>
 
-1459773050 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
+1460126764 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
 	<stdio.h>
 	<stdlib.h>
+	<vector>
 	"gl_canvas2d.h"
 	"Bola.h"
 	"Botao.h"
@@ -52,6 +53,6 @@
 	<stdio.h>
 	<stdlib.h>
 
-1459773892 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\botao.h
+1460121214 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\botao.h
 	"gl_canvas2d.h"
 

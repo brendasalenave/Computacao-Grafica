@@ -29,7 +29,7 @@
 //#include <GL/freeglut_ext.h> //callback da wheel do mouse.
 
 int largura, altura;
-int mousex, mousey;
+//int mousex, mousey;
 
 void point(int x, int y){
    glBegin(GL_POINTS);
@@ -65,8 +65,7 @@ void rectFill( int x1, int y1, int x2, int y2 ){
 void polygon(float vx[], float vy[], int elems){
    int cont;
    glBegin(GL_LINE_LOOP);
-      for(cont=0; cont<elems; cont++)
-      {
+      for(cont=0; cont<elems; cont++){
          glVertex2d(vx[cont], vy[cont]);
       }
    glEnd();
