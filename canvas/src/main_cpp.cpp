@@ -30,14 +30,12 @@
 
 #include "gl_canvas2d.h"
 
-#include "Bola.h"
 #include "Botao.h"
+#include "Pontos.h"
 
 
-Botao *b = NULL;
-Bola  *ball = NULL;
-
-std:: vector <int> vety;
+std:: vector <int> vety (128);
+std:: vector <int> vetx (128);
 //std:: vector <int> vetx;
 
 //int vety[128];
@@ -48,12 +46,14 @@ int pt = 0;
 int   opcao  = 50;
 float global = 0;
 int xv = 0;
-int yv = 0;
+int px, py;
 int height = 0;
 int width = 0;
 
 int pressionado = 0;
 
+Botao *b = new Botao();
+Pontos * p = new Pontos(px, py, 1, 0, 0);
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
@@ -70,9 +70,6 @@ int main(void){
     width = 1100;
     initCanvas(width,height);
 
-   b = new Botao();
-   ball = new Bola();
-
    runCanvas();
 }
 
@@ -85,56 +82,15 @@ void render(){
    text(124, 555, "Area para desenho do Grafico");
 
 
-   for(float i=0; i<950; i++){
-	   color(i/900, i/900, i/900);
-	   point((int)(i), (int)(68));
-   }
-    for(float i=0; i<950; i++){
-	   color(i/900, i/900, i/900);
-	   point((int)(i), (int)(70));
-   }
-    for(float i=0; i<950; i++){
-	   color(i/900, i/900, i/900);
-	   point((int)(i), (int)(72));
-   }
+   color(0, 0, 0);
+   rectFill(0, 0, 1200, 80);
 
-   if( opcao == 49 ){ // = '1' bola
-      ball->anima();
+   b->exibe();
+   if(b->getFlag() == 1){
+      b->seno();
    }
-   if( opcao == '2' ){ // = 50 botao
-      b->anima();
-   }
-   if( opcao == 51){ // = '3' linha animada
-      clear(1,1,1); //limpa a tela de branco
-      color(0.7, 0.7, 0);
-      line((int)global, 100, (int)global, 400);
-      global += 0.1;
-   }
-   if( opcao == 52 ){ // = '5' linha andando
-      clear(0,0,0);
-      color(1, 1, 0);
-      rect(200-(int)global, 200-(int)global, 200+(int)global, 200 + (int)global);
-      global += 0.05;
-   }
-   if( opcao == 54 ){ // = '7' senoide
-       //line( 10,10, 300,300 );
-       //circle( 300,300, 100, 1150);
-       float x=0, y;
-       color(0, 1, 0);
-       for(float i=0; i < 6.28; i+=0.001){
-          y = sin(i)*50;
-          point((int)x, y+100);
-          x+=0.01;
-       }
-       //rectFill( 20,20,230,130 );
-   }
-
    for(int u = 0; u < vety.size(); u+=2){
-      color(1, 0, 0);
-      point(vety[u], vety[u+1]);
-      /*color(0,1,0.9);
-      point(vety[u],350);*/
-      //printf("\ntamanho vetor: %d", vety.size());
+      p->desenha(vetx[u], vety[u]);
    }
    color(0, 0, 0);
 }
@@ -148,16 +104,6 @@ void keyboard(int key){
    switch(key){
       case 27:
 	     exit(0);
-	  break;
-
-	  //seta para a esquerda
-      case 200:
-         ball->move(-10);
-	  break;
-
-	  //seta para a direita
-	  case 202:
-         ball->move(10);
 	  break;
    }
 }
@@ -180,13 +126,13 @@ void mouse(int button, int state, int x, int y){
         pressionado = 0;
 
     if(pressionado == 1){
-        yv = y;
         if(x > 24 && x < 512 && y > 150 && y <550){
             if(x > xv){
                 /* ceilf((float)x/(width/128.0f)) */
-                vety.push_back(x);
+                vetx.push_back(x);
                 vety.push_back(y);
                 xv = x;
+                pt++;
             }
         }
     }
