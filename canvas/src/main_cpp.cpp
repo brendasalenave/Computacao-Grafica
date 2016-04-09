@@ -25,6 +25,8 @@
 
 std:: vector <int> vety (128);
 std:: vector <int> vetx (128);
+int array_x[128];
+char array_y[128];
 
 //variaveis globais
 int   opcao  = 50;
@@ -61,8 +63,8 @@ int main(void){
 //globais que podem ser setadas pelo metodo keyboard()
 void render(){
    glLineWidth(2.0);
-   rect(24, 150, 512, 450);
-   line(24,300,512,300);
+   rect(24, 150, 536, 450);
+   line(24,300,536,300);
    text(24, 302, "(0,0)");
    text(124, 455, "Area para desenho do Grafico");
 
@@ -73,11 +75,21 @@ void render(){
    if(b->getFlag() == 1){
       b->seno();
    }
-    for(int u = 1; u < vety.size(); u++){
+   /*for(int u = 1; u < vety.size(); u++){
+      if(vety[u-1] != 0){
         p->desenha(vetx[u-1], vety[u-1], vetx[u], vety[u]);
-          //color(0,0,0);
-          pt++;
+        pt++;
+       }
+      //color(0,0,0);
+   }*/
+   for(int u = 1; u < 128; u++){
+      if(array_y[u-1] != 0){
+        p->desenha(array_x[u-1], array_y[u-1], array_x[u], array_y[u]);
+        //pt++;
+       }
+      //color(0,0,0);
    }
+
    pt = 0;
    color(0, 0, 0);
 }
@@ -113,16 +125,25 @@ void mouse(int button, int state, int x, int y){
         pressionado = 0;
 
     if(pressionado == 1){
-        if(x > 24 && x < 512 && y > 150 && y <550){
-            if(x > xv){
-                /* ceilf((float)x/(width/128.0f)) */
-                vetx.push_back(x);
-                vety.push_back(y);
-                xv = x;
-            }
-        }
-    }
+      if(x > 24 && x < 536 && y > 150 && y <550){
+        if(x > xv){
+          /* ceilf((float)x/(width/128.0f)) */
+          //array_x[i] = x;
+          //array_y[i] = y;
 
+          //  xv = x;
+
+          /*vetx.push_back(x);
+          vety.push_back(y);
+          xv = x;*/
+          int r = 522/128;
+          int i = x / r;
+          array_y[i] = y;
+          array_x[i] = x;
+
+        }
+      }
+    }
    //printf("\n BOTAO: %d ESTADO: %d X: %d Y:%d", button, state, x, y);
 }
 

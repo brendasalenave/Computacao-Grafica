@@ -72,9 +72,10 @@ public:
     float x=0, y;
     color(1, 0, 0.55);
     for(float i=0; i < PI_2 ; i+= PI_2/128){
-      y = sin(i)*200;
-      point((int)x+24, y+350);
-      x+= 4.0;
+      y = sin(i)*150;
+      point((int)x+24, y+300);
+      glVertex2f((int)x+24, y+300);
+      x+= 3.83;
     }
   }
 
