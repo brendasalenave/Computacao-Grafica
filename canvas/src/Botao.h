@@ -24,7 +24,7 @@ public:
      b = 0;
   }
 
-  void exibe(){
+  void desenha(){
     clear(255,255,255);
     criaBotao(posx, posy, " DCT");
     criaBotao(posx + 100, posy, " IDCT");
@@ -68,7 +68,7 @@ public:
         float x=0, y;
         color(1, 0, 0.55);
         for(float i=0; i < PI_2; i+= PI_2/128){
-          y = sin(i)*128;
+          y = sin(i)*200;
           point((int)x+24, y+350);
           x+=3.85;
        }

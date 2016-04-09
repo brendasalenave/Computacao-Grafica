@@ -18,13 +18,18 @@ public:
     void desenha(int x, int y){
         color(r, g, b);
         glPointSize(3.0);
-        point(x, y);
-       /*color(0,1,0.9);
-      point(vety[u],350);*/
+        //x = ceilf((float)x/(488/128.0f));
+        //y = ceilf((float)y/(400/128.0f));
+        //for(int i = 24; i < 536; i+= 4){
+        //    if(x == i){
+                point(x, y);
+                //break;
+        //    }
+        //}
+
     }
+
 };
-
-
 
 #endif
 

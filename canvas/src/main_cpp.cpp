@@ -1,23 +1,12 @@
 /*********************************************************************
-// Canvas para desenho - Versao CPP.
+// Computacao Grafica - Trabalho 1.
 //  Autor: Cesar Tadeu Pozzer
-//         10/2007
+//         04/2016
 //
 //  Pode ser utilizada para fazer desenhos ou animacoes, como jogos simples.
 //  Estude o OpenGL antes de tentar compreender o arquivo gl_canvas.cpp
 //
-//  Instruções:
-//    Para compilar em C, basta comentar o comando #define _CPP_
-//	  Para alterar a animacao, digite numeros entre 1 e 7
 // *********************************************************************/
-
-/*
-  Autor: Cesar Tadeu Pozzer
-         04/2013
-
-  Instruções:
-	  Para alterar a animacao, digite numeros entre 1 e 7
-*/
 
 #include <GL/glut.h>
 #include <GL/freeglut_ext.h> //callback da wheel do mouse.
@@ -36,23 +25,18 @@
 
 std:: vector <int> vety (128);
 std:: vector <int> vetx (128);
-//std:: vector <int> vetx;
 
-//int vety[128];
-//int vetx[128];
-
-int pt = 0;
 //variaveis globais
 int   opcao  = 50;
-float global = 0;
 int xv = 0;
 int px, py;
 int height = 0;
 int width = 0;
+int pt = 0;
 
 int pressionado = 0;
 
-Botao *b = new Botao();
+Botao  * b = new Botao();
 Pontos * p = new Pontos(px, py, 1, 0, 0);
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
@@ -76,22 +60,25 @@ int main(void){
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
 void render(){
-   rect(24, 150, 512, 550);
-   line(24,350,512,350);
+   rect(24, 150, 536, 550);
+   line(24,350,536,350);
    text(24, 353, "(0,0)");
    text(124, 555, "Area para desenho do Grafico");
-
 
    color(0, 0, 0);
    rectFill(0, 0, 1200, 80);
 
-   b->exibe();
+   b->desenha();
    if(b->getFlag() == 1){
       b->seno();
    }
-   for(int u = 0; u < vety.size(); u+=2){
-      p->desenha(vetx[u], vety[u]);
+   for(int u = 1; u < vety.size(); u++){
+      p->desenha(vetx[u-1], vety[u-1]);
+      //color(0,0,0);
+      line(vetx[u-1], vety[u-1], vetx[u], vety[u]);
+      pt++;
    }
+   pt = 0;
    color(0, 0, 0);
 }
 //funcao chamada toda vez que uma tecla for pressionada
@@ -132,7 +119,6 @@ void mouse(int button, int state, int x, int y){
                 vetx.push_back(x);
                 vety.push_back(y);
                 xv = x;
-                pt++;
             }
         }
     }
