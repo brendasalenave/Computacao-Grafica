@@ -9,7 +9,7 @@
 #include <GL/glut.h>
 #include <GL/freeglut_ext.h> //callback da wheel do mouse.
 
-#define PI_2 6.28318530717958
+//#define PI_2 6.28318530717958
 
 
 //funcoes da biblioteca

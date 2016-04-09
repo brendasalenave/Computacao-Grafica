@@ -7,10 +7,12 @@
 
 #define PI_2 6.2831853
 
+
 class Botao{
   int posx, posy;
   int largura;
   int flag;
+  int drawF;
   float r, g, b; //cor do botao
 
 public:
@@ -19,6 +21,7 @@ public:
      posx = 20;
      largura = 80;
      flag = 0;
+     drawF = 0;
      r = 0;
      g = 0;
      b = 0;
@@ -56,23 +59,24 @@ public:
     }
   }
 
-    int getFlag(){
-       return flag;
-    }
+  int getFlag(){
+    return flag;
+  }
 
-    void setFlag(){
-        flag = 0;
-    }
+  void setFlag(){
+     flag = 0;
+  }
 
-    void seno(){
-        float x=0, y;
-        color(1, 0, 0.55);
-        for(float i=0; i < PI_2; i+= PI_2/128){
-          y = sin(i)*200;
-          point((int)x+24, y+350);
-          x+=3.85;
-       }
+
+  void seno(){
+    float x=0, y;
+    color(1, 0, 0.55);
+    for(float i=0; i < PI_2 ; i+= PI_2/128){
+      y = sin(i)*200;
+      point((int)x+24, y+350);
+      x+= 4.0;
     }
+  }
 
 
 

@@ -51,7 +51,7 @@ void mouse(int button, int state, int x, int y);
 
 int main(void){
     height = 600;
-    width = 1100;
+    width = 800;
     initCanvas(width,height);
 
    runCanvas();
@@ -60,10 +60,11 @@ int main(void){
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
 void render(){
-   rect(24, 150, 536, 550);
-   line(24,350,536,350);
-   text(24, 353, "(0,0)");
-   text(124, 555, "Area para desenho do Grafico");
+   glLineWidth(2.0);
+   rect(24, 150, 512, 450);
+   line(24,300,512,300);
+   text(24, 302, "(0,0)");
+   text(124, 455, "Area para desenho do Grafico");
 
    color(0, 0, 0);
    rectFill(0, 0, 1200, 80);
@@ -72,11 +73,10 @@ void render(){
    if(b->getFlag() == 1){
       b->seno();
    }
-   for(int u = 1; u < vety.size(); u++){
-      p->desenha(vetx[u-1], vety[u-1]);
-      //color(0,0,0);
-      line(vetx[u-1], vety[u-1], vetx[u], vety[u]);
-      pt++;
+    for(int u = 1; u < vety.size(); u++){
+        p->desenha(vetx[u-1], vety[u-1], vetx[u], vety[u]);
+          //color(0,0,0);
+          pt++;
    }
    pt = 0;
    color(0, 0, 0);

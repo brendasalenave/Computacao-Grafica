@@ -15,17 +15,19 @@ public:
         this->b = b;
     }
 
-    void desenha(int x, int y){
+    void desenha(int x, int y, int x2, int y2){
         color(r, g, b);
         glPointSize(3.0);
+        line(x, y, x2, y2);
+
         //x = ceilf((float)x/(488/128.0f));
         //y = ceilf((float)y/(400/128.0f));
-        //for(int i = 24; i < 536; i+= 4){
-        //    if(x == i){
-                point(x, y);
-                //break;
-        //    }
-        //}
+        /*for(int i = 24; i < 536; i+= 4){
+          if(x == i){
+            point(x+4, y);
+                break;
+          }
+        }*/
 
     }
 
