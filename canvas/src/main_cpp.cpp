@@ -23,10 +23,10 @@
 #include "Pontos.h"
 
 
-std:: vector <int> vety (128);
-std:: vector <int> vetx (128);
-int array_x[128];
-char array_y[128];
+std:: vector <int> vety;
+std:: vector <int> vetx;
+//int array_x[128];
+//char array_y[128];
 
 //variaveis globais
 int   opcao  = 50;
@@ -34,8 +34,7 @@ int xv = 0;
 int px, py;
 int height = 0;
 int width = 0;
-int pt = 0;
-int j = 0;
+int insercao = 0;
 
 int pressionado = 0;
 
@@ -76,22 +75,23 @@ void render(){
    if(b->getFlag() == 1){
       b->seno();
    }
-   /*for(int u = 1; u < vety.size(); u++){
-      if(vety[u-1] != 0){
-        p->desenha(vetx[u-1], vety[u-1], vetx[u], vety[u]);
-        pt++;
+
+   if(b->getDrawF() == 0){
+       for(int u = 1; u < vety.size(); u++){
+          if(vety[u-1] != 0){
+            p->desenha(vetx[u-1], vety[u-1], vetx[u], vety[u]);
+           }
+          //color(0,0,0);
        }
-      //color(0,0,0);
-   }*/
-   for(int u = 1; u < 128; u++){
+   }
+   /*for(int u = 1; u < 128; u++){
       if(array_y[u-1] != 0){
         p->desenha(array_x[u-1], array_y[u-1], array_x[u], array_y[u]);
         //pt++;
        }
       //color(0,0,0);
-   }
+   }*/
 
-   pt = 0;
    color(0, 0, 0);
 }
 //funcao chamada toda vez que uma tecla for pressionada
@@ -126,23 +126,33 @@ void mouse(int button, int state, int x, int y){
         pressionado = 0;
 
     if(pressionado == 1){
-      if(x > 24 && x < 536 && y > 150 && y <550){
+      if(x > 24 && x < 536 && y > 150 && y <450){
         if(x > xv){
           /* ceilf((float)x/(width/128.0f)) */
           //array_x[i] = x;
           //array_y[i] = y;
 
           //  xv = x;
+          printf("  vety size: %d", vety.size());
+          if(insercao < 128){
+            for(int i =24; i<526; i+= 4){
+                if(x==i){
+                  vetx.push_back(x);
+                  vety.push_back(y);
+                  xv = x;
+                  insercao++;
+                  printf("   insercao: %d", insercao);
+                }
+            }
 
-          /*vetx.push_back(x);
-          vety.push_back(y);
-          xv = x;*/
-          if(j % 4 == 0){
+          }
+
+          /*if(j % 4 == 0){
               printf("  j: %d", j);
               array_y[j] = y;
               array_x[j] = x;
               j++;
-          }
+          }*/
 
         }
       }

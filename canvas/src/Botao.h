@@ -33,6 +33,7 @@ public:
     criaBotao(posx + 100, posy, " IDCT");
     criaBotao(posx + 200, posy, " SENO");
     criaBotao(posx + 300, posy, "LIMPAR");
+    criaBotao(posx + 400, posy, " DRAW");
   }
 
   /*Cria botao com as dimensoes, texto e cores passados por parametro*/
@@ -54,7 +55,11 @@ public:
             printf("\n*BOTAO 3 PRESSIONADO* ");
         }else if((posx+300) <= x && (posx+largura+300) >= x){
             flag = 0;
+            drawF = 1;
             printf("\n*BOTAO 4 PRESSIONADO* ");
+        }else if((posx+400) <= x && (posx+largura+400) >= x){
+            drawF = 0;
+            printf("\n*BOTAO 5 PRESSIONADO* ");
         }
     }
   }
@@ -65,6 +70,14 @@ public:
 
   void setFlag(){
      flag = 0;
+  }
+
+  int getDrawF(){
+    return drawF;
+  }
+
+  void setDrawF(){
+    drawF = 0;
   }
 
 

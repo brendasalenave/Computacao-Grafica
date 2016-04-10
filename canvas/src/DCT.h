@@ -2,47 +2,57 @@
 #define __DCT_H__
 
 #include <math.h>
+#include <stdlib.h>
 #include "gl_canvas2d.h"
 
 class DCT{
-    double m[8];
+    int *m;
+    int *m2;
+    double *mr;
+    int t;
+
 public:
     DCT(){
-
-
+      t = 0;
+      m  = (int)malloc(8 * sizeof(int));
+      m2 = (int)malloc(8 * sizeof(int));
+      mr = (double)malloc(8 * sizeof(double));
     }
 
-    double fdct(int n, int m){
+    double fdct(int m[8]){
         int u, v, x, y;
-        double val;
+        double p;
         for(u=0; u<8; u++){
-            val = 0.0;
+            p = 0.0;
             for(x=0; x<8; x++){
-                val += m1[x]*cos(((2.0*x+1.0)*PI*u)/16.0);
+                p += m[x]*cos(((2.0*x+1.0)*PI*u)/16.0);
             }
-            md[u] = (val/2.0)*C(u);
-            printf("\nMD: %f ",md[u]);
+            mr[u] = (p/2.0)*C(u);
+            printf("\nMD: %f ",mr[u]);
         }
-        return md;
+        return mr;
     }
 
-    int idct(int n, int m){
-        int u, x, y;
-        double pix, pi = M_PI;
-        for(x=0; x < n-1; x++){
-            for(y=0 ; y < y-1; y++){
-                pix = 0.0;
-                for(u=0; u < n-1; u++){
-                        pix += C(u) * mat[u]*cos(((2.0*x+1.0)*pi*u)/(2*n));
-                    }
-                }
-                mat[x] = round(pow((2/n), 0.5) * pow((2/m), 0.5) * (pix));
+    int idct(int mr[8]){
+      int u, v, x, y;
+      double p;
+      for(x=0; x<8; x++){
+            p = 0.0;
+            for(u=0; u<8; u++){
+                p += C(u)*mr[u]*cos(((2.0*x+1)*M_PI*u)/16.0);
             }
-        }
-        return i;
+            m2[x] = (int)(p/2.0);
+            printf("M2: %d",m2[x]);
+      }
+      return m2;
     }
 
-
+    void threshold(int mat[8]){
+        for(int u = 0; i < 8; i++){
+            if(mat[u] > t)
+                mat[u] = 0;
+        }
+    }
 };
 
 #endif
