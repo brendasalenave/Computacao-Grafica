@@ -11,20 +11,18 @@
 class Botao{
   int posx, posy;
   int largura;
-  int flag;
+  int sinF;
   int drawF;
-  float r, g, b; //cor do botao
+  int dctF;
 
 public:
   Botao(){
      posy = 20;
      posx = 20;
      largura = 80;
-     flag = 0;
-     drawF = 0;
-     r = 0;
-     g = 0;
-     b = 0;
+     sinF = 0;  /* Flag para 'apagar' funcao seno */
+     drawF = 0; /* Flag para 'apagar' desenho */
+     dctF = 0;  /* Flag botao dct */
   }
 
   void desenha(){
@@ -48,38 +46,36 @@ public:
     if((posy <= y) && ((posy+largura/2) >= y)){
         if(posx <= x && (posx+largura) >= x){
             printf("\n*BOTAO 1 PRESSIONADO* ");
-        }else if((posx+100) <= x && (posx+largura+100) >= x){
+
+        }else if((posx+100) <= x && (posx+largura+50) >= x){
             printf("\n*BOTAO 2 PRESSIONADO* ");
-        }else if((posx+200) <= x && (posx+largura+200) >= x){
-            flag = 1;
+
+        }else if((posx+150) <= x && (posx+largura+150) >= x){
             printf("\n*BOTAO 3 PRESSIONADO* ");
-        }else if((posx+300) <= x && (posx+largura+300) >= x){
-            flag = 0;
-            drawF = 1;
+
+        }else if((posx+200) <= x && (posx+largura+200) >= x){
+            sinF = 1;
             printf("\n*BOTAO 4 PRESSIONADO* ");
+
+        }else if((posx+300) <= x && (posx+largura+300) >= x){
+            sinF = 0;
+            drawF = 1;
+            printf("\n*BOTAO 5 PRESSIONADO* ");
+
         }else if((posx+400) <= x && (posx+largura+400) >= x){
             drawF = 0;
-            printf("\n*BOTAO 5 PRESSIONADO* ");
+            printf("\n*BOTAO 6 PRESSIONADO* ");
         }
     }
   }
 
-  int getFlag(){
-    return flag;
-  }
-
-  void setFlag(){
-     flag = 0;
+  int getSinF(){
+    return sinF;
   }
 
   int getDrawF(){
     return drawF;
   }
-
-  void setDrawF(){
-    drawF = 0;
-  }
-
 
   void seno(){
     float x=0, y;
