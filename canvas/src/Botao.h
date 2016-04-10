@@ -73,6 +73,7 @@ public:
     color(1, 0, 0.55);
     for(float i=0; i < PI_2 ; i+= PI_2/128){
       y = sin(i)*150;
+      glPointSize(3.0);
       point((int)x+24, y+300);
       glVertex2f((int)x+24, y+300);
       x+= 3.83;

@@ -5,7 +5,13 @@
 #include "gl_canvas2d.h"
 
 class DCT{
+    double m[8];
 public:
+    DCT(){
+
+
+    }
+
     double fdct(int n, int m){
         int u, v, x, y;
         double val;

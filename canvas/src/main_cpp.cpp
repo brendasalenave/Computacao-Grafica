@@ -35,6 +35,7 @@ int px, py;
 int height = 0;
 int width = 0;
 int pt = 0;
+int j = 0;
 
 int pressionado = 0;
 
@@ -136,10 +137,12 @@ void mouse(int button, int state, int x, int y){
           /*vetx.push_back(x);
           vety.push_back(y);
           xv = x;*/
-          int r = 522/128;
-          int i = x / r;
-          array_y[i] = y;
-          array_x[i] = x;
+          if(j % 4 == 0){
+              printf("  j: %d", j);
+              array_y[j] = y;
+              array_x[j] = x;
+              j++;
+          }
 
         }
       }
