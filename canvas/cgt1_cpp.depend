@@ -30,7 +30,7 @@
 1426358040 d:\backup_kb\user\documents\github\computacao-grafica\canvas\include\gl\freeglut_ext.h
 	<stdarg.h>
 
-1460296604 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
+1460313358 source:d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\main_cpp.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -40,6 +40,7 @@
 	"gl_canvas2d.h"
 	"Botao.h"
 	"Pontos.h"
+	"DCT.h"
 
 1460140757 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\bola.h
 	"gl_canvas2d.h"
@@ -53,10 +54,13 @@
 	<stdio.h>
 	<stdlib.h>
 
-1460296735 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\botao.h
+1460309002 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\botao.h
 	<math.h>
 	"gl_canvas2d.h"
 
-1460294221 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\pontos.h
+1460313547 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\pontos.h
+	"gl_canvas2d.h"
+
+1460313288 d:\backup_kb\user\documents\github\computacao-grafica\canvas\src\dct.h
 	"gl_canvas2d.h"
 

@@ -21,6 +21,7 @@
 
 #include "Botao.h"
 #include "Pontos.h"
+#include "DCT.h"
 
 
 std:: vector <int> vety;
@@ -40,6 +41,7 @@ int pressionado = 0;
 
 Botao  * b = new Botao();
 Pontos * p = new Pontos(px, py, 1, 0, 0);
+DCT    * d = new DCT();
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
@@ -51,7 +53,7 @@ void keyboardUp(int key);
 //funcao para tratamento de mouse: cliques, movimentos e arrastos
 void mouse(int button, int state, int x, int y);
 
-int main(void){
+int main(int argc, char const *argv[]) {
     height = 600;
     width = 800;
     initCanvas(width,height);
@@ -62,26 +64,51 @@ int main(void){
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
 void render(){
+      color(0, 0, 0);
+   rectFill(0, 0, 1200, 80);
    glLineWidth(2.0);
    rect(24, 150, 536, 450);
    line(24,300,536,300);
+
    text(24, 302, "(0,0)");
    text(124, 455, "Area para desenho do Grafico");
 
-   color(0, 0, 0);
-   rectFill(0, 0, 1200, 80);
-
    b->desenha();
+   line(160, 20, 160, 60);
    if(b->getFlag() == 1){
       b->seno();
    }
 
    if(b->getDrawF() == 0){
        for(int u = 1; u < vety.size(); u++){
-          if(vety[u-1] != 0){
-            p->desenha(vetx[u-1], vety[u-1], vetx[u], vety[u]);
-           }
-          //color(0,0,0);
+          //if(vety[u-1] != 0){
+            p->desenha(vetx[u-1], vety[u-1], vetx[u], vety[u],0);
+            /*int i = u-1;
+            if(i%8 == 0){
+                int c = 0;
+                int m[8], mx[8];
+                double* m1 = (double*)malloc(8*sizeof(double));
+                int *m2 = (int*)malloc(8*sizeof(int));
+                double* m3 = (double*)malloc(8*sizeof(double));
+                int *m4 = (int*)malloc(8*sizeof(int));
+
+                int j = i+8;
+                for(i, c; i < j; i++, c++){
+                    m[c] = vety[i];
+                    mx[c] = vetx[i];
+                }
+                m1 = d->fdct(m);
+                m2 = d->idct(m1);
+
+                color(1,1,0.1);
+                for(c = 1; c < 8; c++){
+                    d->t = 40;
+                    d->threshold(m2);
+                    //p->desenha(mx[c-1],m2[c-1],mx[c],m2[c],1);
+                }
+            }*/
+
+           //}
        }
    }
    /*for(int u = 1; u < 128; u++){

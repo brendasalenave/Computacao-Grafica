@@ -30,7 +30,7 @@ public:
   void desenha(){
     clear(255,255,255);
     criaBotao(posx, posy, " DCT");
-    criaBotao(posx + 100, posy, " IDCT");
+    criaBotao(posx + 100, posy, "<    >");
     criaBotao(posx + 200, posy, " SENO");
     criaBotao(posx + 300, posy, "LIMPAR");
     criaBotao(posx + 400, posy, " DRAW");
