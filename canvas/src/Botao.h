@@ -63,7 +63,10 @@ public:
             printf("\n*BOTAO 5 PRESSIONADO* ");
 
         }else if((posx+400) <= x && (posx+largura+400) >= x){
-            drawF = 0;
+            if(drawF == 1)
+                drawF = 0;
+            else
+                printf("\n'DRAW: ja esta ativo");
             printf("\n*BOTAO 6 PRESSIONADO* ");
         }
     }

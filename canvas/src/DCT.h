@@ -17,45 +17,58 @@ public:
       t = 0;
     }
 
-    double* fdct(int m[8]){
+    double* fdct(std::vector<char>& str){
         int u, x;
         double p;
-        for(u=0; u<8; u++){
+        double* f = (double*)malloc(128*sizeof(double));
+
+        for(u=0; u <str.size(); u++){
             p = 0.0;
-            for(x=0; x<8; x++){
-                p += m[x]*cos(((2.0*x+1.0)* PI *u)/16.0);
+            for(x=0; x <str.size(); x++){
+                p += str[x]*cos(((2.0*x+1.0)* PI *u)/256);
             }
-            mr[u] = (p/2.0)*C(u);
-            printf("\nMR: %f ",mr[u]);
+            f[u] = p*C(u);
+            //printf("\nMR: %f ",mr[u]);
         }
-        return mr;
+        return f;
     }
 
-    int *idct(double mr[8]){
+    int *idct(double* f){
       int u, x;
+      int * mr = (int*)malloc(128 * sizeof(int));
       double p;
-      for(x=0; x<8; x++){
+
+      for(x=0; x<128; x++){
             p = 0.0;
-            for(u=0; u<8; u++){
-                p += C(u)*mr[u]*cos(((2.0*x+1)*PI*u)/16.0);
+            for(u=0; u<128; u++){
+                p += C(u)*f[u]*cos(((2.0*x+1)*PI*u)/256);
             }
-            m2[x] = (int)(p/2.0);
-            printf("M2: %d",m2[x]);
+            mr[x] = ((int)ceil(p));
+           // printf("M2: %d",m2[x]);
       }
-      return m2;
+      return mr;
     }
 
     double C(int w){
-      if(w==0)
-         return 0.707106781186;  /* 1/sqrt(2) */
-      return 1.0;
+       if(w == 0){
+        return sqrt(1/128);
+       }else{
+        return sqrt(2/128);
+       }
+
+      /*if(w==0)
+         return 0.707106781186;  // 1/sqrt(2)
+      return 1.0;*/
    }
 
-    void threshold(int mat[8]){
-        for(int u = 0; u < 8; u++){
-            if(mat[u] < t)
-                mat[u] = 0;
-        }
+     void setThreshold(int u){
+        t = u;
+     }
+
+    void threshold(double mat[128]){
+        for(int u = 0; u < 128; u++)
+            if(mat[u] < t) mat[u] = 0;
+
     }
 };
 

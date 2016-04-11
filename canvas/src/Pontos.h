@@ -20,19 +20,10 @@ public:
             color(r, g, b);
 
         glPointSize(3.0);
-        line(x, y, x2, y2);
-        color(0,0.5,1);
+        line(x, y+300, x2, y2+300);
         //marca de azul o ponto x armazenado
+        color(0,0.5,1);
         point(x,300);
-
-        //x = ceilf((float)x/(488/128.0f));
-        //y = ceilf((float)y/(400/128.0f));
-        /*for(int i = 24; i < 536; i+= 4){
-          if(x == i){
-            point(x+4, y);
-                break;
-          }
-        }*/
 
     }
 

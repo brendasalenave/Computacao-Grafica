@@ -25,7 +25,7 @@
 #include "DCT.h"
 
 
-std:: vector <int> vety;
+std:: vector <char> vety;
 std:: vector <int> vetx;
 //int array_x[128];
 //char array_y[128];
@@ -83,45 +83,24 @@ void render(){
    }
 
    if(b->getDrawF() == 0){
-       for(int u = 1; u < vety.size(); u++){
+       /*for(int u = 1; u < vety.size(); u++){
           //if(vety[u-1] != 0){
-            p->desenha(vetx[u-1], vety[u-1], vetx[u], vety[u],0);
-
-            /*int i = u-1;
-            if(i%8 == 0){
-                int c = 0;
-                int m[8], mx[8];
-                double* m1 = (double*)malloc(8*sizeof(double));
-                int *m2 = (int*)malloc(8*sizeof(int));
-
-                int j = i+8;
-                for(i, c; i < j; i++, c++){
-                    m[c] = vety[i];
-                    mx[c] = vetx[i];
-                }
-                m1 = d->fdct(m);
-                d->t = 10;
-                d->threshold(m2);
-                m2 = d->idct(m1);
-
-                color(1,1,0.1);
-                for(c = 1; c < 8; c++){
-                    p->desenha(mx[c-1],m2[c-1],mx[c],m2[c],1);
-                }
-            }*/
-
-           //}
-       }
+            int y = (int)vety[u-1] - 48; /* converte para inteiro
+            int y1 = (int)vety[u] - 48;  /* converte para inteiro
+            p->desenha(vetx[u-1], y, vetx[u], y1,0);
+       }*/
+        double* m1 = (double*)malloc(128*sizeof(double));
+        m1 = d->fdct(vety);
+        d->setThreshold(2);
+        d->threshold(m1);
+        int *m = (int*)malloc(128 * sizeof(int));
+        m = d->idct(m1);
+        for(int u = 1; u < vety.size(); u++){
+            color(1,1,0);
+            p->desenha(vetx[u-1], m[u-1], vetx[u], m[u],1);
+        }
    }
-   /*for(int u = 1; u < 128; u++){
-      if(array_y[u-1] != 0){
-        p->desenha(array_x[u-1], array_y[u-1], array_x[u], array_y[u]);
-        //pt++;
-       }
-      //color(0,0,0);
-   }*/
-
-   color(0, 0, 0);
+    color(0, 0, 0);
 }
 //funcao chamada toda vez que uma tecla for pressionada
 void keyboard(int key){
@@ -157,14 +136,9 @@ void mouse(int button, int state, int x, int y){
     if(pressionado == 1){
       if(x > 24 && x < 536 && y > 150 && y <450){
         if(x > xv){
-          /* ceilf((float)x/(width/128.0f)) */
-          //array_x[i] = x;
-          //array_y[i] = y;
-
-          //  xv = x;
           printf("  vety size: %d", vety.size());
           if(insercao < 128){
-            for(int i =24; i<526; i+= 4){
+            for(int i = 24; i < 536; i+= 4){
                 if(x==i){
                   vetx.push_back(x);
                   vety.push_back(y);
@@ -175,21 +149,8 @@ void mouse(int button, int state, int x, int y){
             }
 
           }
-
-          /*if(j % 4 == 0){
-              printf("  j: %d", j);
-              array_y[j] = y;
-              array_x[j] = x;
-              j++;
-          }*/
-
         }
       }
     }
    //printf("\n BOTAO: %d ESTADO: %d X: %d Y:%d", button, state, x, y);
 }
-
-/*void geraGrafico(int x1, int x2, int y1, int y2){
-    line(x1, y1, x2, y2 );
-    point(x1, y1);
-}*/
