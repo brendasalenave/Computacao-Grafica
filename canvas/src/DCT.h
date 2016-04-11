@@ -53,10 +53,8 @@ public:
 
     void threshold(int mat[8]){
         for(int u = 0; u < 8; u++){
-            if(mat[u] < t){
+            if(mat[u] < t)
                 mat[u] = 0;
-                printf("COLOCOU EM ZERO");
-            }
         }
     }
 };

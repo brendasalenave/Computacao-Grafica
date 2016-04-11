@@ -80,13 +80,18 @@ public:
   void seno(){
     float x=0, y;
     color(1, 0, 0.55);
+
+    glBegin(GL_LINE_STRIP);
     for(float i=0; i < PI_2 ; i+= PI_2/128){
       y = sin(i)*150;
-      glPointSize(3.0);
-      point((int)x+24, y+300);
-      glVertex2f((int)x+24, y+300);
-      x+= 3.83;
+      //glPointSize(3.0);
+      //point((int)x+24, y+300);
+      glVertex2i((int)x+24, y+300);
+      x+= 3.99999;
+
     }
+    glEnd();
+    line(531,292,535,300);
   }
 
 

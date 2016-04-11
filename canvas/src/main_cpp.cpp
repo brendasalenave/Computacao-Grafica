@@ -87,7 +87,7 @@ void render(){
           //if(vety[u-1] != 0){
             p->desenha(vetx[u-1], vety[u-1], vetx[u], vety[u],0);
 
-            int i = u-1;
+            /*int i = u-1;
             if(i%8 == 0){
                 int c = 0;
                 int m[8], mx[8];
@@ -108,7 +108,7 @@ void render(){
                 for(c = 1; c < 8; c++){
                     p->desenha(mx[c-1],m2[c-1],mx[c],m2[c],1);
                 }
-            }
+            }*/
 
            //}
        }
