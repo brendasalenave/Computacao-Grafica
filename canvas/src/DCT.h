@@ -62,6 +62,13 @@ public:
 
      void setThreshold(int u){
         t = u;
+        char str[3];
+        sprintf (str, "%d", u);
+        text(703, 76, str);
+     }
+
+     int getThreshold(){
+        return t;
      }
 
     void threshold(double mat[128]){

@@ -14,12 +14,15 @@ class Botao{
   int sinF;
   int drawF;
   int dctF;
+  public:
+      int t;
 
 public:
   Botao(){
      posy = 20;
      posx = 20;
      largura = 80;
+     t = 0;
      sinF = 0;  /* Flag para 'apagar' funcao seno */
      drawF = 0; /* Flag para 'apagar' desenho */
      dctF = 0;  /* Flag botao dct */
@@ -27,49 +30,44 @@ public:
 
   void desenha(){
     clear(255,255,255);
-    criaBotao(posx, posy, " DCT");
-    criaBotao(posx + 100, posy, "<    >");
-    criaBotao(posx + 200, posy, " SENO");
-    criaBotao(posx + 300, posy, "LIMPAR");
-    criaBotao(posx + 400, posy, " DRAW");
+    //criaBotao(posx, posy, " DCT");
+    criaBotao(posx, posy, "--  ++");
+    criaBotao(posx + 100, posy, " SENO");
+    criaBotao(posx + 200, posy, "LIMPAR");
+    criaBotao(posx + 300, posy, " DRAW");
   }
 
   /*Cria botao com as dimensoes, texto e cores passados por parametro*/
   void criaBotao(int x, int y, const char* t){
     color(0, 0.6,0.9);
-    rectFill(x, y, x+largura, y+largura/2 ); //coordenadas do retangulo x1, y1, x2, y2
+    rectFill(x, y, x+largura, y+60/2 ); //coordenadas do retangulo x1, y1, x2, y2
     color(0,0,0);
-    text(x+12,y+15,t);
+    text(x+12,y+12,t);
   }
 
   void getMousePosition(int x, int y){
-    if((posy <= y) && ((posy+largura/2) >= y)){
-        if(posx <= x && (posx+largura) >= x){
-            printf("\n*BOTAO 1 PRESSIONADO* ");
+    int key = 0;
+    if((posy <= y) && ((posy+60/2) >= y)){
+        if(posx <= x && (posx+40) >= x){
+            key = 1;
 
-        }else if((posx+100) <= x && (posx+largura+50) >= x){
-            printf("\n*BOTAO 2 PRESSIONADO* ");
+        }else if((posx+40) <= x && (posx+80) >= x){
+            key = 2;
 
-        }else if((posx+150) <= x && (posx+largura+150) >= x){
-            printf("\n*BOTAO 3 PRESSIONADO* ");
+        }else if((posx+100) <= x && (posx+largura+100) >= x){
+            key = 3;
 
         }else if((posx+200) <= x && (posx+largura+200) >= x){
-            sinF = 1;
-            printf("\n*BOTAO 4 PRESSIONADO* ");
+            key = 4;
 
         }else if((posx+300) <= x && (posx+largura+300) >= x){
-            sinF = 0;
-            drawF = 1;
-            printf("\n*BOTAO 5 PRESSIONADO* ");
-
-        }else if((posx+400) <= x && (posx+largura+400) >= x){
-            if(drawF == 1)
-                drawF = 0;
-            else
-                printf("\n'DRAW: ja esta ativo");
-            printf("\n*BOTAO 6 PRESSIONADO* ");
+            key = 5;
         }
+    }else if(x > 540 && x < 560 && y > 188 && y < 208){
+        key = 6;
     }
+    eventoBotao(key);
+
   }
 
   int getSinF(){
@@ -80,23 +78,66 @@ public:
     return drawF;
   }
 
+  int getDctF(){
+    return dctF;
+  }
+
   void seno(){
     float x=0, y;
     color(1, 0, 0.55);
 
     glBegin(GL_LINE_STRIP);
     for(float i=0; i < PI_2 ; i+= PI_2/128){
-      y = sin(i)*150;
+      y = sin(i)*95;
       //glPointSize(3.0);
       //point((int)x+24, y+300);
-      glVertex2i((int)x+24, y+300);
+      glVertex2i((int)x+24, y+481);
       x+= 3.99999;
 
     }
     glEnd();
-    line(531,292,535,300);
+    line(531,475,535,480);
   }
 
+  void eventoBotao(int c){
+    switch(c){
+        case 1:
+            printf("\n*BOTAO 1 PRESSIONADO* ");
+            if(t > 0) t-=2;
+            break;
+        case 2:
+            printf("\n*BOTAO 2 PRESSIONADO* ");
+            if(t < 100) t+=2;
+            break;
+        case 3:
+            sinF = 1;
+            dctF = 1;
+            drawF = 1;
+            printf("\n*BOTAO 3 PRESSIONADO* ");
+            break;
+        case 4:
+           sinF = 0;
+           drawF = 1;
+           printf("\n*BOTAO 4 PRESSIONADO* ");
+           break;
+        case 5:
+           if(drawF == 1)
+               drawF = 0;
+           else
+               printf("\n'DRAW: ja esta ativo");
+           printf("\n*BOTAO 5 PRESSIONADO* ");
+           break;
+        case 6:
+           printf("\n*BOTAO DCT PRESSIONADO* ");
+           if(dctF == 0)
+             dctF = 1;
+           else
+            dctF = 0;
+           break;
+
+    }
+
+  }
 
 
 };

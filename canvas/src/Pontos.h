@@ -15,15 +15,18 @@ public:
         this->b = b;
     }
 
-    void desenha(int x, char y, int x2, char y2, int cod){
+    void desenha(int x, char y, int x2, char y2, int cod, int cod2){
         if(cod == 0)
             color(r, g, b);
 
         glPointSize(3.0);
-        line(x, y+255, x2, y2+255);
+        if(cod2 == 0)
+            line(x, y+510, x2, y2+510);
+        else
+            line(x, y+230, x2, y2+230);
         //marca de azul o ponto x armazenado
         color(0,0.5,1);
-        point(x,300);
+        point(x,481);
 
     }
 
