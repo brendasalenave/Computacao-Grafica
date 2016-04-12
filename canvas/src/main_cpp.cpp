@@ -98,6 +98,7 @@ void render(){
       b->seno();
    }
 
+
    if(b->getDrawF() == 0){
        for(int u = 1; u < vety.size(); u++){
           //if(vety[u-1] != 0){

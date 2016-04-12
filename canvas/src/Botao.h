@@ -14,6 +14,7 @@ class Botao{
   int sinF;
   int drawF;
   int dctF;
+  float* arraySin;
   public:
       int t;
 
@@ -26,6 +27,7 @@ public:
      sinF = 0;  /* Flag para 'apagar' funcao seno */
      drawF = 0; /* Flag para 'apagar' desenho */
      dctF = 0;  /* Flag botao dct */
+     float* arraySin = (float*)malloc(128*sizeof(float));
   }
 
   void desenha(){
@@ -70,6 +72,10 @@ public:
 
   }
 
+  float* getArraySin(){
+    return arraySin;
+  }
+
   int getSinF(){
     return sinF;
   }
@@ -87,13 +93,16 @@ public:
     color(1, 0, 0.55);
 
     glBegin(GL_LINE_STRIP);
+    int u = 0;
     for(float i=0; i < PI_2 ; i+= PI_2/128){
       y = sin(i)*95;
+      //arraySin[u] = y;
       //glPointSize(3.0);
       //point((int)x+24, y+300);
       glVertex2i((int)x+24, y+481);
       x+= 3.99999;
-
+      //printf("U: %d",u);
+      //u++;
     }
     glEnd();
     line(531,475,535,480);
