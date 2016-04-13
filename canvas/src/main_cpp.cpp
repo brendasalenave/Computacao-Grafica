@@ -36,6 +36,8 @@ int xv = 0;
 int px, py;
 int height = 0;
 int width = 0;
+int razaoL, razaoH;
+
 int insercao = 0;
 
 int pressionado = 0;
@@ -65,27 +67,37 @@ int main(int argc, char const *argv[]) {
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
 void render(){
+    int tamL = glutGet(GLUT_WINDOW_WIDTH);
+    int tamH = glutGet(GLUT_WINDOW_HEIGHT);
+    //printf("LARGURA ATUAL TELA: %d", tamL);
+    //printf("ALTURA ATUAL TELA: %d", tamH);
+    razaoL = (int)ceil((tamL * 512)/800);
+    b->setRazao(razaoL);
+    d->setRazao(razaoL);
+    razaoH = (tamH * 193)/630;
+    //printf("RAZAO L : %d", razaoL);
+
    color(0, 0, 0);
-   rectFill(0, 0, 1200, 60);
+   rectFill(0 , 0, 1200, 60);
    glLineWidth(2.0);
-   rect(24, 578, 536, 385);
-   line(24,481,536,481); /* (0,0)*/
-   rect(24, 70 ,536, 325);
+   rect(24, 578, razaoL + 24, 385);
+   line(24,481,razaoL + 24,481); /* (0,0)*/
+   rect(24, 70 ,razaoL + 24, 325);
    //line(24,198,536,198); /* (0,0)*/
 
 
-   rect(540, 188,560 ,208);
+   rect(razaoL + 28, 188, razaoL+48 ,208); //caixinha
    if(b->getDctF() == 0){
       color(0.156,0.192,0.592);
       glLineWidth(3.0);
-      line(540,198 ,550, 188);
-      line(550,188 , 570, 215);
+      line(razaoL + 28,198 ,razaoL + 38, 188);
+      line(razaoL + 38,188 , razaoL + 58, 215);
       glLineWidth(2.0);
    }
 
    color(0,0,0);
-   rect(600,70, 744, 90);
-   text(603,76,"Threshold: ");
+   rect(razaoL + 88,70, razaoL + 232, 90);
+   text(razaoL + 91,76,"Threshold: ");
 
    text(24, 455, "(0,0)");
    text(124, 603, "Area para desenho do Grafico");
@@ -155,11 +167,11 @@ void mouse(int button, int state, int x, int y){
         pressionado = 0;
 
     if(pressionado == 1){
-      if(x > 24 && x < 586 && y > 385 && y <578){
+      if(x > 24 && x < razaoL+24 && y > 385 && y <578){
         if(x > xv){
           printf("  vety size: %d", vety.size());
           if(insercao < 128){
-            for(int i = 24; i < 536; i+= 4){
+            for(int i = 24; i < razaoL+24; i+= 4){
                 if(x==i){
                   vetx.push_back(x);
                   vety.push_back(y);

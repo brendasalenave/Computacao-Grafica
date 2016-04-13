@@ -9,12 +9,14 @@ class DCT{
     int m[8];
     int m2[8];
     double mr[8];
+    int r;
     public:
     int t;
 
 public:
     DCT(){
       t = 0;
+      r = 0;
     }
 
     double* fdct(std::vector<char>& str){
@@ -64,7 +66,7 @@ public:
         t = u;
         char str[3];
         sprintf (str, "%d", u);
-        text(703, 76, str);
+        text(r+191, 76, str);
      }
 
      int getThreshold(){
@@ -76,36 +78,8 @@ public:
             if(mat[u] < t) mat[u] = 0;
 
     }
-
-    double* fdctSin(float* m){
-        int u, x;
-        double p;
-        double* f = (double*)malloc(128*sizeof(double));
-
-        for(u=0; u < 128; u++){
-            p = 0.0;
-            for(x=0; x < 128; x++){
-                p += m[x]*cos(((2.0*x+1.0)* PI *u)/256);
-            }
-            f[u] = p*C(u);
-            //printf("\nMR: %f ",mr[u]);
-        }
-        return f;
-    }
-
-    int* idctSin(double* f){
-      int u, x;
-      int *mr = (int*)malloc(128 * sizeof(int));
-      double p;
-
-      for(x = 0; x < 128; x++){
-            p = 0.0;
-            for(u = 0; u < 128; u ++){
-                p += C(u)*f[u]*cos(((2.0*x+1.0)*PI*u)/256);
-            }
-            mr[x] = (int)(ceil(p));
-      }
-      return mr;
+    void setRazao(int razao){
+        r = razao;
     }
 
 };

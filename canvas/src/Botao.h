@@ -2,6 +2,7 @@
 #define __BOTAO_H__
 
 #include <math.h>
+#include <stdlib.h>
 
 #include "gl_canvas2d.h"
 
@@ -14,7 +15,7 @@ class Botao{
   int sinF;
   int drawF;
   int dctF;
-  float* arraySin;
+  int r;
   public:
       int t;
 
@@ -27,7 +28,7 @@ public:
      sinF = 0;  /* Flag para 'apagar' funcao seno */
      drawF = 0; /* Flag para 'apagar' desenho */
      dctF = 0;  /* Flag botao dct */
-     float* arraySin = (float*)malloc(128*sizeof(float));
+     r = 0;
   }
 
   void desenha(){
@@ -49,6 +50,7 @@ public:
 
   void getMousePosition(int x, int y){
     int key = 0;
+
     if((posy <= y) && ((posy+60/2) >= y)){
         if(posx <= x && (posx+40) >= x){
             key = 1;
@@ -65,16 +67,14 @@ public:
         }else if((posx+300) <= x && (posx+largura+300) >= x){
             key = 5;
         }
-    }else if(x > 540 && x < 560 && y > 188 && y < 208){
+    }else if(x > r+28 && x < r+48 && y > 188 && y < 208){
         key = 6;
     }
     eventoBotao(key);
 
   }
 
-  float* getArraySin(){
-    return arraySin;
-  }
+
 
   int getSinF(){
     return sinF;
@@ -88,21 +88,22 @@ public:
     return dctF;
   }
 
+  void setRazao(int razao){
+    r = razao;
+  }
+
   void seno(){
     float x=0, y;
     color(1, 0, 0.55);
 
     glBegin(GL_LINE_STRIP);
-    int u = 0;
     for(float i=0; i < PI_2 ; i+= PI_2/128){
       y = sin(i)*95;
-      //arraySin[u] = y;
       //glPointSize(3.0);
       //point((int)x+24, y+300);
       glVertex2i((int)x+24, y+481);
       x+= 3.99999;
       //printf("U: %d",u);
-      //u++;
     }
     glEnd();
     line(531,475,535,480);
