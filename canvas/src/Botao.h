@@ -25,6 +25,7 @@ class Botao{
   int sinF;
   int drawF;
   int dctF;
+  int quantF;
   int r;
   public:
       int t;
@@ -34,10 +35,11 @@ public:
      posy = 20;
      posx = 20;
      largura = 80;
-     t = 0;
+     t = 2;
      sinF = 0;  /* Flag para 'apagar' funcao seno */
      drawF = 0; /* Flag para 'apagar' desenho */
      dctF = 0;  /* Flag botao dct */
+     quantF = 0;
      r = 0;
   }
 
@@ -49,6 +51,7 @@ public:
     criaBotao(posx + 100, posy, " SENO");
     criaBotao(posx + 200, posy, "LIMPAR");
     criaBotao(posx + 300, posy, " DRAW");
+    criaBotao(posx + 400, posy, "QUANTI"); //Quantizacao
   }
 
   /*Cria botao nas coordenadas passadas por parametro*/
@@ -78,9 +81,11 @@ public:
 
         }else if((posx+300) <= x && (posx+largura+300) >= x){
             key = 5;
+        }else if((posx+400) <= x && (posx+largura+400) >= x){
+            key = 6;
         }
     }else if(x > r+28 && x < r+48 && y > 188 && y < 208){
-        key = 6;
+        key = 7;
     }
     eventoBotao(key);
 
@@ -98,8 +103,23 @@ public:
     return dctF;
   }
 
+  int getQuantF(){
+    return quantF;
+  }
+
   void setRazao(int razao){
     r = razao;
+  }
+
+  /* vetor de quantizacao */
+  void quantizacao(double vet[128], int t){
+      double *v = (double*)malloc(128 * sizeof(double));
+      if (t== 0) t=2;
+      for(int u = 0; u < 128; u++)
+        v[u] = (t*1.9999);
+
+      for(int u = 0; u < 128; u++)
+        vet[u] /= v[u];
   }
 
   /* Metodo utilizado para gerar 1 período da funcao seno */
@@ -149,6 +169,10 @@ public:
            printf("\n*BOTAO 5 PRESSIONADO* ");
            break;
         case 6:
+            quantF = 1;
+            printf("BOTAO 'QUANTIZACAO' PRESSIONADO");
+            break;
+        case 7:
            printf("\n*BOTAO DCT PRESSIONADO* ");
            if(dctF == 0)
              dctF = 1;

@@ -79,7 +79,7 @@ void render(){
     //printf("RAZAO L : %d", razaoL);
 
    color(0, 0, 0);
-   rectFill(0 , 0, 1200, 60);
+   rectFill(0 , 0, tamL, 60);
    glLineWidth(2.0);
    rect(24, 578, razaoL + 24, 385);
    line(24,481,razaoL + 24,481); /* (0,0)*/
@@ -120,6 +120,8 @@ void render(){
             double* m1 = (double*)malloc(128*sizeof(double));
             m1 = d->fdct(vety);
             d->setThreshold(b->t);
+            if(b->getQuantF() == 1)
+                b->quantizacao(m1,d->getThreshold());
             d->threshold(m1);
             int * m = (int*)malloc(128 * sizeof(int));
             m = d->idct(m1);
@@ -174,7 +176,6 @@ void mouse(int button, int state, int x, int y){
                   vety.push_back(y);
                   xv = x;
                   insercao++;
-                  //printf("   insercao: %d", insercao);
                 }
             }
 

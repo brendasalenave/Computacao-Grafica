@@ -78,6 +78,9 @@ public:
 
     /* Metodo utilizado para aplicacao do threshold */
     void threshold(double mat[128]){
+        if(t == 0)
+            return;
+
         for(int u = 0; u < 128; u++)
             if(mat[u] < t) mat[u] = 0;
 
