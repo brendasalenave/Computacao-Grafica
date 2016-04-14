@@ -13,23 +13,14 @@
 **/
 
 
-//*****************************************************************************
-//modificacoes
-//*****************************************************************************
-//- passar tamaD:\Backup_KB\USER\Documents\GitHub\Computacao-Grafica\canvas\src\gl_canvas2d.cppnho da janela
-//- retangulo preenchido em qualquer orientacao (polygon)
-//-
-
 #include <stdlib.h>
 
 #include "gl_canvas2d.h"
 #include "botao.h"
 
 #include <GL/glut.h>
-//#include <GL/freeglut_ext.h> //callback da wheel do mouse.
 
 int largura, altura;
-//int mousex, mousey;
 
 void point(int x, int y){
    glBegin(GL_POINTS);

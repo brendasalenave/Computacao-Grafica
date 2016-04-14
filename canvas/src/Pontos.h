@@ -1,3 +1,13 @@
+/*********************************************************************
+// Computacao Grafica - Trabalho 1.
+//  Autor: Brenda Salenave Santana
+//         2016/1
+//  E-mail: bsantana@inf.ufsm.br
+//
+//  Classe Pontos: Classe utilizada para implementar o metodo que desenha os
+//  pontos desenhados.
+// *********************************************************************/
+
 #ifndef __PONTOS_H__
 #define __PONTOS_H__
 
@@ -15,6 +25,7 @@ public:
         this->b = b;
     }
 
+    /* Metodo utilizado para desenho do sinal entrado pelo usuario */
     void desenha(int x, char y, int x2, char y2, int cod, int cod2){
         if(cod == 0)
             color(r, g, b);

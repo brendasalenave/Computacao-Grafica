@@ -1,3 +1,13 @@
+/*********************************************************************
+// Computacao Grafica - Trabalho 1.
+//  Autor: Brenda Salenave Santana
+//         2016/1
+//  E-mail: bsantana@inf.ufsm.br
+//
+//  Classe DCT: Classe utilizada para implementar metodos relacionados
+//  a DCT, IDCT e Threshold.
+// *********************************************************************/
+
 #ifndef __DCT_H__
 #define __DCT_H__
 
@@ -6,9 +16,6 @@
 #define PI 3.14159265
 
 class DCT{
-    int m[8];
-    int m2[8];
-    double mr[8];
     int r;
     public:
     int t;
@@ -30,7 +37,6 @@ public:
                 p += str[x]*cos(((2.0*x+1.0)* PI *u)/256);
             }
             f[u] = p*C(u);
-            //printf("\nMR: %f ",mr[u]);
         }
         return f;
     }
@@ -55,29 +61,29 @@ public:
             return 0.088388347;
         else
             return 0.125;
+    }
 
-
-      /*if(w==0)
-         return 0.707106781186;  // 1/sqrt(2)
-      return 1.0;*/
-   }
-
-     void setThreshold(int u){
+    /* Metodo utilizado para setar o valor do threshold */
+    void setThreshold(int u){
         t = u;
         char str[3];
         sprintf (str, "%d", u);
         text(r+191, 76, str);
      }
 
-     int getThreshold(){
+     /* Metodo utilizado para retornar o valor atual do threshold */
+    int getThreshold(){
         return t;
      }
 
+    /* Metodo utilizado para aplicacao do threshold */
     void threshold(double mat[128]){
         for(int u = 0; u < 128; u++)
             if(mat[u] < t) mat[u] = 0;
 
     }
+
+    /* Metodo utilizado para setar a variavel r, utilizada para o redimensionamento */
     void setRazao(int razao){
         r = razao;
     }

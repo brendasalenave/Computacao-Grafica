@@ -1,3 +1,13 @@
+/*********************************************************************
+// Computacao Grafica - Trabalho 1.
+//  Autor: Brenda Salenave Santana
+//         2016/1
+//  E-mail: bsantana@inf.ufsm.br
+//
+//  Classe Botao: Classe utilizada para implementar metodos relacionadas
+//  aos botoes e seus eventos.
+// *********************************************************************/
+
 #ifndef __BOTAO_H__
 #define __BOTAO_H__
 
@@ -31,6 +41,7 @@ public:
      r = 0;
   }
 
+  /* Metodo utilizado para desenho dos botoes criados*/
   void desenha(){
     clear(255,255,255);
     //criaBotao(posx, posy, " DCT");
@@ -40,7 +51,7 @@ public:
     criaBotao(posx + 300, posy, " DRAW");
   }
 
-  /*Cria botao com as dimensoes, texto e cores passados por parametro*/
+  /*Cria botao nas coordenadas passadas por parametro*/
   void criaBotao(int x, int y, const char* t){
     color(0, 0.6,0.9);
     rectFill(x, y, x+largura, y+60/2 ); //coordenadas do retangulo x1, y1, x2, y2
@@ -48,6 +59,7 @@ public:
     text(x+12,y+12,t);
   }
 
+  /*Verifica se o mouse foi pressionado dentro da area de um botao */
   void getMousePosition(int x, int y){
     int key = 0;
 
@@ -74,8 +86,6 @@ public:
 
   }
 
-
-
   int getSinF(){
     return sinF;
   }
@@ -92,6 +102,7 @@ public:
     r = razao;
   }
 
+  /* Metodo utilizado para gerar 1 período da funcao seno */
   void seno(){
     float x=0, y;
     color(1, 0, 0.55);
@@ -103,12 +114,12 @@ public:
       //point((int)x+24, y+300);
       glVertex2i((int)x+24, y+481);
       x+= 3.99999;
-      //printf("U: %d",u);
     }
     glEnd();
     line(531,475,535,480);
   }
 
+  /*Metodo utilizado para verificar e chamar o evento relacionado a cada botao */
   void eventoBotao(int c){
     switch(c){
         case 1:
