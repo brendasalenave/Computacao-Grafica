@@ -1,4 +1,5 @@
 QT += widgets
+QT += multimedia
 
 SOURCES += main.cpp \
            mainwindow.cpp \
@@ -16,3 +17,6 @@ HEADERS += \
 target.path = $$[QT_INSTALL_EXAMPLES]/opengl/qopenglwidget
 
 INSTALLS += target
+
+RESOURCES += \
+    rcc.qrc

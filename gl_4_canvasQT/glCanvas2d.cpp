@@ -3,11 +3,8 @@
 //  Autor: Cesar Tadeu Pozzer
 //         01/2016
 //
-//  Pode ser utilizada para fazer desenhos ou animacoes, como jogos simples.
-//  Tem tratamento de mouse
 // *
-// *   pozzer@inf.ufsm.br
-// *   pozzer3@gmail.com
+// *   bsantana@inf.ufsm.br
 // *
 //
 
@@ -25,23 +22,20 @@
 #define PI_2 6.28318530717958
 
 
-void GLWidget::point(int x, int y)
-{
+void GLWidget::point(int x, int y){
    glBegin(GL_POINTS);
       glVertex2d(x, y);
    glEnd();
 }
 
-void GLWidget::line( int x1, int y1, int x2, int y2 )
-{
+void GLWidget::line( int x1, int y1, int x2, int y2 ){
    glBegin(GL_LINES);
       glVertex2d(x1, y1);
       glVertex2d(x2, y2);
    glEnd();
 }
 
-void GLWidget::rect( int x1, int y1, int x2, int y2 )
-{
+void GLWidget::rect( int x1, int y1, int x2, int y2 ){
    glBegin(GL_LINE_LOOP);
       glVertex2d(x1, y1);
       glVertex2d(x1, y2);
@@ -60,32 +54,27 @@ void GLWidget::rectFill( int x1, int y1, int x2, int y2 )
    glEnd();
 }
 
-void GLWidget::polygon(float vx[], float vy[], int elems)
-{
+void GLWidget::polygon(float vx[], float vy[], int elems){
    int cont;
    glBegin(GL_LINE_LOOP);
-      for(cont=0; cont<elems; cont++)
-      {
+      for(cont=0; cont<elems; cont++){
          glVertex2d(vx[cont], vy[cont]);
       }
    glEnd();
 
 }
 
-void GLWidget::polygonFill(float vx[], float vy[], int elems)
-{
+void GLWidget::polygonFill(float vx[], float vy[], int elems){
    int cont;
    glBegin(GL_POLYGON);
-      for(cont=0; cont<elems; cont++)
-      {
+      for(cont=0; cont<elems; cont++){
          glVertex2d(vx[cont], vy[cont]);
       }
    glEnd();
 
 }
 
-void GLWidget::text(int x, int y, const char *t)
-{
+void GLWidget::text(int x, int y, const char *t){
     QPainter painter;
     painter.begin(this);
 
@@ -96,13 +85,11 @@ void GLWidget::text(int x, int y, const char *t)
     painter.end();
 }
 
-void GLWidget::clear(float r, float g, float b)
-{
+void GLWidget::clear(float r, float g, float b){
    glClearColor( r, g, b, 1 );
 }
 
-void GLWidget::circle( int x, int y, int raio, int div )
-{
+void GLWidget::circle( int x, int y, int raio, int div ){
    float ang, x1, y1;
    float inc = PI_2/div;
    glBegin(GL_LINE_LOOP);
@@ -115,8 +102,7 @@ void GLWidget::circle( int x, int y, int raio, int div )
    glEnd();
 }
 
-void GLWidget::circleFill( int x, int y, int raio, int div )
-{
+void GLWidget::circleFill( int x, int y, int raio, int div ){
    float ang, x1, y1;
    float inc = PI_2/div;
    glBegin(GL_POLYGON);
@@ -129,14 +115,12 @@ void GLWidget::circleFill( int x, int y, int raio, int div )
    glEnd();
 }
 
-void GLWidget::color(float r, float g, float b)
-{
+void GLWidget::color(float r, float g, float b){
    glColor3d(r, g, b  );
 }
 
 
-void GLWidget::resizeGL(int w, int h)
-{
+void GLWidget::resizeGL(int w, int h){
     printf("\n Resize w=%d h=%d", w, h);
 
     glViewport (0, 0, (GLsizei) w, (GLsizei) h);
@@ -154,7 +138,7 @@ void GLWidget::initializeGL()
 {
     initializeOpenGLFunctions();
 
-    glClearColor(0.5,0.5,0.5,1.0);
+    glClearColor(0,0,0,1.0);
 
     glPolygonMode(GL_FRONT, GL_FILL);
 
@@ -162,8 +146,8 @@ void GLWidget::initializeGL()
     //define o framerate de desenho.
     //**************************************
 
-    //QTimer *timer = new QTimer(this);
-    //connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    //timer->start(1);
-    //timer->setInterval(20);
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    timer->start(1);
+    timer->setInterval(20);
 }

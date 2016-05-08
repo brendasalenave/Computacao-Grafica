@@ -55,7 +55,7 @@ MainWindow::MainWindow(){
     timerBased->setToolTip("Toggles using a timer to trigger update()");
 
     //QPushButton *button1 = new QPushButton("Button 1 - Status Bar");
-    QPushButton *button2 = new QPushButton("Limpar");
+    QPushButton *button2 = new QPushButton("Visualizar comandos");
 
     QLabel *updateLabel = new QLabel("Tempo de Espera entre updates da Canvas");
 
@@ -83,7 +83,7 @@ MainWindow::MainWindow(){
 
     QGroupBox * groupBox = new QGroupBox(this);
     groupBox->setLayout(gridLayout);
-    //groupBox->setTitle("QGroupBox Grid");
+    groupBox->setTitle("PARA INICIAR O JOGO CLIQUE NA TELA!!");
     setCentralWidget(groupBox);
 
 
@@ -92,11 +92,11 @@ MainWindow::MainWindow(){
     //gridLayout->addWidget(scrollArea,1,0,8,1);
 
     QMenu *fileMenu = menuBar()->addMenu("&File");
-    QMenu *showMenu = menuBar()->addMenu("&Show");
+    QMenu *showMenu = menuBar()->addMenu("&Info");
     //statusBar()->addWidget(button1);
 
     QAction *actExit        = new QAction("E&xit", fileMenu);
-    QAction *actShowMsgGL   = new QAction("Info", showMenu);
+    QAction *actShowMsgGL   = new QAction("Comandos", showMenu);
     //QAction *actShowMsgThis = new QAction("Show Msg na MainWindow", showMenu);
 
     fileMenu->addAction(actExit);

@@ -19,8 +19,7 @@ int main( int argc, char ** argv ){
     mw.setMinimumSize(1000,800);
     mw.resize(600,600);
     mw.setWindowTitle("COMPUTAÇÃO GRÁFICA - T2");
-
+    mw.setStyleSheet("background-image: url(space.jpg)");
     mw.show();
-
     return a.exec();
 }

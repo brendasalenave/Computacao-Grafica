@@ -1,14 +1,9 @@
 
 // *********************************************************************
-// Canvas para desenho - Versao C.
-//  Autor: Cesar Tadeu Pozzer
-//         01/2016
-//
-//  Pode ser utilizada para fazer desenhos ou animacoes, como jogos simples.
-//  Tem tratamento de mosue
+//  Autor: Brenda S. Santana
+//         05/2016
 // *
-// *   pozzer@inf.ufsm.br
-// *   pozzer3@gmail.com
+// *   bsantana@inf.ufsm.br
 // *
 //
 
@@ -26,7 +21,9 @@
 
 
 float global = 0;
-int rdir = 0;
+int r_dir = 0, r_esq = 0;
+int up = 0, down = 0;
+int a = 0, s = 0;
 Nave *n = new Nave();
 
 GLWidget::GLWidget(MainWindow *_mw){
@@ -45,25 +42,48 @@ GLWidget::~GLWidget(){
 // *******************************************************************************
 void GLWidget::paintGL(){
     clear(0, 0, 0);
+    //mw->setStyleSheet("color:white;");
+    mw->setStyleSheet("background-image:url(:/images/background.jpg);");
 
-    //float x=0, y;
-
-    n->setShape(0,0);
-    if(rdir == 1){
-        n->setTheta(n->getTheta() + 0.01);
-        n->rotacao(n->getTheta());
+    //n->setShape(n->getX(),n->getY());
+    if(r_dir == 1){
+        if(n->getTheta() >= 6.27)
+            n->setTheta(0);
+        n->setTheta(n->getTheta() + 0.05);
+        n->rotacao(1, 0.05);
     }
-    /*for(int i = 0; i < 3; i++)
-       printf("\nvx[%d]: %f", i, n->vx[i]);
-    for(int i = 0; i < 3; i++)
-       printf("\nvy[%d]: %f", i, n->vy[i]);*/
+    if(r_esq == 1){
+        if(n->getTheta() >= 6.27)
+            n->setTheta(0);
+        n->setTheta(n->getTheta() - 0.05);
+        n->rotacao(0, 0.05);
+    }
+    if(up == 1){
+        n->deslocamento();
+    }
+    if(a == 1){
+        n->setSpeed(0.1, 1);
+    }
+    if(s == 1){
+        n->setSpeed(0.1, 2);
+
+    }
+    /*float vecX[3], vecY[3];
+    vecX[0] = 350; vecY[0] = 275;
+    vecX[1] = 250; vecY[1] = 275;
+    vecX[2] = 300; vecY[2] = 325;
+    polygonFill(vecX,vecY,3);*/
+
+    /*for(int i = 0; i < 3; i++){
+        printf("vx[%d]: %f  -  vy[%d]: %f", i, n->vx[i],i,n->vy[i]);
+    }*/
 
     drawNave(n->vx,n->vy);
+
 }
 
 
-void GLWidget::wheelEvent(QWheelEvent *event)
-{
+void GLWidget::wheelEvent(QWheelEvent *event){
     //printf("\nMouse Wheel event: %d", event->delta() );
     qDebug("Mouse Wheel event %d", event->delta() );
     mw->list->addItem("Mouse Wheel event");
@@ -90,8 +110,22 @@ void GLWidget::keyPressEvent(QKeyEvent* event){
       mw->list->addItem("Keyboard Press Event");
       switch(event->key()){
         case Qt::Key_Right:
-          rdir = 1;
-         // n->setTheta(n->getTheta() + 0.26);
+          r_dir = 1;
+          break;
+        case Qt::Key_Left:
+          r_esq = 1;
+          break;
+        case Qt::Key_Up:
+          up = 1;
+          break;
+        case Qt::Key_Down:
+          down = 1;
+          break;
+        case Qt::Key_A:
+          a = 1;
+          break;
+        case Qt::Key_S:
+          s = 1;
           break;
       }
 
@@ -101,15 +135,35 @@ void GLWidget::keyReleaseEvent(QKeyEvent* event){
     qDebug("\nKeyboard Release: %c", event->key());
 
     switch(event->key()){
-      case Qt::Key_E:
-        rdir = 0;
+      case Qt::Key_Right:
+        r_dir = 0;
+        break;
+      case Qt::Key_Left:
+        r_esq = 0;
+        break;
+      case Qt::Key_Up:
+        up = 0;
+        break;
+      case Qt::Key_Down:
+        down = 0;
+        break;
+      case Qt::Key_A:
+        a = 0;
+        break;
+      case Qt::Key_S:
+        s = 0;
+        break;
     }
 }
 
-//callback para botao definido na mainWindow.
+//callback para botao definido na mainWindow
 void GLWidget::showMsg(){
     QMessageBox* msg = new QMessageBox(this);
-    msg->setText("Computação Gráfica - T2\nbsantana@inf.ufsm.br");
+    msg->setText("A : acelera \nS : freia \n"
+                 "Up arrow: desloca nave \nRight arrow: giro à direita \n"
+                 "Left arrow: giro à esquerda \n"
+                 "\n**PARA INICIAR O JOGO, CLIQUE NA TELA!");
+    msg->setWindowTitle("Comandos de Jogo");
     msg->show();
 }
 
