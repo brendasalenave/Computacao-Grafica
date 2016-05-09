@@ -1,10 +1,15 @@
+// *********************************************************************
+//  Autor: Brenda S. Santana
+//         05/2016
+// *
+// *   bsantana@inf.ufsm.br
+// *
+//
+
 #include "math.h"
 #include "tiro.h"
 
 Tiro::Tiro(){
-    x = 0;
-    y = 0;
-    vel = 3.5;
 
 }
 
@@ -13,20 +18,12 @@ void Tiro::setPos(float px, float py){
     y = py;
 }
 
-int Tiro::getX(){
+float Tiro::getX(){
     return x;
 }
 
-int Tiro::getY(){
+float Tiro::getY(){
     return y;
-}
-
-void Tiro::setX(int px){
-    x = px;
-}
-
-void Tiro::setY(int py){
-    y = py;
 }
 
 float Tiro::getSpeed(){

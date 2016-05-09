@@ -1,3 +1,12 @@
+// *********************************************************************
+//  Autor: Brenda S. Santana
+//         05/2016
+// *
+// *   bsantana@inf.ufsm.br
+// *
+// Objetivo da Classe: Implementar funções de transformações geométricas.
+//
+
 #ifndef TRANSFORMACOES_H
 #define TRANSFORMACOES_H
 
@@ -15,6 +24,11 @@ public:
     float deslocamentoX(float x, float theta, float vel);
 
     float deslocamentoY(float y, float theta, float vel);
+
+    float deslocamentoXT(float x, float vel);
+
+    float deslocamentoYT(float y, float vel);
+
 
 };
 

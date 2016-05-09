@@ -1,3 +1,13 @@
+// *********************************************************************
+//  Autor: Brenda S. Santana
+//         05/2016
+// *
+// *   bsantana@inf.ufsm.br
+// *
+// Objetivo da Classe: Implementar funções relacionas a forma e as operações realizadas
+// sobre a nave.
+//
+
 #ifndef NAVE_H
 #define NAVE_H
 

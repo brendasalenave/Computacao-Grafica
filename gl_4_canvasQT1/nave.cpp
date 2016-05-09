@@ -1,3 +1,11 @@
+// *********************************************************************
+//  Autor: Brenda S. Santana
+//         05/2016
+// *
+// *   bsantana@inf.ufsm.br
+// *
+//
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
@@ -5,6 +13,7 @@
 
 #include "nave.h"
 #include "tiro.h"
+
 #include "transformacoes.h"
 
 Nave::Nave(){
@@ -117,9 +126,8 @@ void Nave::deslocaTiro(){
     std::vector<Tiro*>::iterator it;
 
     for(it = tmp.begin(); it != tmp.end(); it++){
-        //(*it)->setAlpha(theta);
-        float ax = t->deslocamentoX((*it)->getX(), (*it)->getAlpha(), (*it)->getSpeed());
-        float ay = t->deslocamentoY((*it)->getY(), (*it)->getAlpha(), (*it)->getSpeed());
+        float ax = t->deslocamentoX((*it)->getX(),(*it)->getAlpha(),(*it)->getSpeed());
+        float ay = t->deslocamentoY((*it)->getY(),(*it)->getAlpha(),(*it)->getSpeed());
         (*it)->setPos(ax, ay+10);
     }
 
