@@ -17,7 +17,6 @@ public:
 public:
     Nave();
 
-
     std::vector<Tiro*> tiro;
 
     void rotacao(int cod, float ang);
@@ -35,7 +34,6 @@ public:
 
     void atira();
     void deslocaTiro();
-    void desalocaTiro(int w, int h);
 };
 
 #endif // NAVE_H

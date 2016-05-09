@@ -105,8 +105,7 @@ void GLWidget::circleFill( int x, int y, int raio, int div ){
    float ang, x1, y1;
    float inc = PI_2/div;
    glBegin(GL_POLYGON);
-      for(ang=0; ang<6.27; ang+=inc)
-      {
+      for(ang=0; ang<6.27; ang+=inc)      {
          x1 = (cos(ang)*raio);
          y1 = (sin(ang)*raio);
          glVertex2d(x1+x, y1+y);

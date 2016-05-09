@@ -86,7 +86,13 @@ void GLWidget::paintGL(){
 
     drawTiro();
     n->deslocaTiro();
-    n->desalocaTiro(mw->width(),mw->height());
+    for(int i = 0; i < n->tiro.size(); i++){
+        if((n->tiro[i]->getX() > mw->width()) ||(n->tiro[i]->getX() < 0))
+            n->tiro.erase(n->tiro.begin()+i);
+        if((n->tiro[i]->getY() > mw->height()) ||(n->tiro[i]->getY() < 0))
+            n->tiro.erase(n->tiro.begin()+i);
+    }
+
     n->deslocamento(mw->width(),mw->height());
 
 
@@ -183,7 +189,7 @@ void GLWidget::drawTiro(){
     std::vector<Tiro*> tmp;
     tmp = n->tiro;
     color(0.8, 0.8, 0);
-    glPointSize(4.0);
+    glPointSize(3.0);
     std::vector<Tiro*>::iterator it;
 
     for(it = tmp.begin(); it != tmp.end(); it++){

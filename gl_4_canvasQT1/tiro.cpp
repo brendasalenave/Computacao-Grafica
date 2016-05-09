@@ -8,10 +8,9 @@ Tiro::Tiro(){
 
 }
 
-void Tiro::setPos(float px, float py, float theta){
+void Tiro::setPos(float px, float py){
     x = px;
     y = py;
-    alpha = theta;
 }
 
 int Tiro::getX(){

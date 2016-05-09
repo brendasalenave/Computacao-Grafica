@@ -11,7 +11,7 @@ class Tiro{
 public:
     Tiro();
 
-    void setPos(float px, float py, float theta);
+    void setPos(float px, float py);
     int getX();
     int getY();
     void setX(int px);

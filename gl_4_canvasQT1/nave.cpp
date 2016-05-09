@@ -105,39 +105,9 @@ void Nave::setShape(){
 void Nave::atira(){
     Tiro* s = new Tiro();
     tiro.push_back(s);
-    s->setX(x);
-    s->setY(y);
+    s->setPos(x,y);
     s->setAlpha(theta);
-    s->setSpeed(speed + 0.3);
-}
-
-/*void Ship::liberaShoots(void){
-        fbs *tmp = this->f;
-        while(tmp->prox!=NULL){
-            tmp = tmp->prox;
-            if(tmp->b->getY()>200){
-                this->f->prox = tmp->prox;
-                free(tmp);
-                imprimeShoots();
-            }
-        }
-}*/
-
-void Nave::desalocaTiro(int w, int h){
-    std::vector<Tiro*> tmp;
-    tmp = tiro;
-    std::vector<Tiro*>::iterator it;
-    int c = 0;
-
-    for(it = tmp.begin(); it != tmp.end(); it++){
-        c++;
-        if(((*it)->getX() > w) || ((*it)->getX() < 0 )){
-            //tiro.erase(tiro.begin()+c);
-        }else if(((*it)->getY() > h) || ((*it)->getY() < 0)){
-            //tiro.erase(tiro.begin()+c);
-        }
-    }
-
+    s->setSpeed(speed - 3.0);
 }
 
 void Nave::deslocaTiro(){
@@ -147,9 +117,10 @@ void Nave::deslocaTiro(){
     std::vector<Tiro*>::iterator it;
 
     for(it = tmp.begin(); it != tmp.end(); it++){
+        //(*it)->setAlpha(theta);
         float ax = t->deslocamentoX((*it)->getX(), (*it)->getAlpha(), (*it)->getSpeed());
         float ay = t->deslocamentoY((*it)->getY(), (*it)->getAlpha(), (*it)->getSpeed());
-        (*it)->setPos(ax, ay, (*it)->getAlpha());
+        (*it)->setPos(ax, ay+10);
     }
 
 }
