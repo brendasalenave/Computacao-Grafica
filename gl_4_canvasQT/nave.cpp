@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 #include <math.h>
 
 #include "nave.h"
@@ -93,15 +94,28 @@ void Nave::setTheta(float ang){
 
 
 void Nave::setShape(){
-    tempX[0] = vx[0] + x;
+    for(int i = 0; i < 3; i++){
+        tempX[i] = vx[i] + x;
+        tempY[i] = vy[i] + y;
+    }
+   /* tempX[0] = vx[0] + x;
     tempX[1] = vx[1] + x;
     tempX[2] = vx[2] + x;
     tempY[0] = vy[0] + y;
     tempY[1] = vy[1] + y;
-    tempY[2] = vy[2] + y;
+    tempY[2] = vy[2] + y;*/
 }
 
 void Nave::atira(){
     Tiro* s = new Tiro();
-    listaT.push_back(s);
+    tiro.push_back(s);
+}
+
+void Nave::deslocaTiro(){
+   /* fbs *tmp = this->f;
+    while(tmp->prox!=NULL){
+        tmp=tmp->prox;
+        tmp->b->setY(tmp->b->getY()+5);
+    }*/
+
 }

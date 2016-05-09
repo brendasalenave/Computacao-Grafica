@@ -1,7 +1,7 @@
 #ifndef NAVE_H
 #define NAVE_H
 
-#include <list>
+#include <vector>
 #include "tiro.h"
 
 
@@ -18,7 +18,7 @@ public:
     Nave();
 
 
-    std::list<Tiro*> listaT;
+    std::vector<Tiro*> tiro;
 
     void rotacao(int cod, float ang);
     //void translacao(float px, float py);
@@ -34,6 +34,7 @@ public:
     void setShape();
 
     void atira();
+    void deslocaTiro();
 };
 
 #endif // NAVE_H

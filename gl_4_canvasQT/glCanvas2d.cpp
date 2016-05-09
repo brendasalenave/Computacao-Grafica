@@ -1,7 +1,6 @@
 // *********************************************************************
-// Canvas para desenho - Versao C.
-//  Autor: Cesar Tadeu Pozzer
-//         01/2016
+//  Autor: Brenda Salenave Santana
+//         05/2016
 //
 // *
 // *   bsantana@inf.ufsm.br

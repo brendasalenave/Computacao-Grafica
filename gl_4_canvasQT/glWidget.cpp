@@ -24,6 +24,8 @@
 
 #define PI_2 6.2831853
 
+using namespace std;
+
 float global = 0;
 int r_dir = 0, r_esq = 0;
 int up = 0, down = 0;
@@ -58,7 +60,7 @@ void GLWidget::paintGL(){
             n->setTheta(0);
         else if(n->getTheta() <= 0)
             n->setTheta(PI_2);
-        n->setTheta(n->getTheta() - 0.05);
+        n->setTheta(n->getTheta() - 0.08);
 
         n->rotacao(1, 0.08);
     }
@@ -68,7 +70,7 @@ void GLWidget::paintGL(){
         else if(n->getTheta() <= 0)
             n->setTheta(6.27);
 
-        n->setTheta(n->getTheta() + 0.05);
+        n->setTheta(n->getTheta() + 0.08);
         n->rotacao(0, 0.08);
     }
 
@@ -79,8 +81,8 @@ void GLWidget::paintGL(){
         n->setSpeed(0.2, 2);
     }
     if(space == 1){
-        n->atira();
-        drawTiro();
+        //n->atira();
+        //drawTiro();
     }
     n->deslocamento(mw->width(),mw->height());
 
@@ -174,6 +176,11 @@ void GLWidget::drawNave(float vpx[3], float vpy[3]){
 }
 
 void GLWidget::drawTiro(){
+    std::vector<Tiro*> tmp;
+    tmp = n->tiro;
 
-    //for (iterator i = n->listaT.begin(); i != n->listaT.end(); i++)
+    std::vector<Tiro*>::iterator it;
+    for(it = tmp.begin(); it != tmp.end(); it++){
+        point(tmp->getX(), tmp->getY());
+    }
 }

@@ -2,8 +2,8 @@
 #include "tiro.h"
 
 Tiro::Tiro(){
-    x = 100;
-    y = 10;
+    x = 0;
+    y = 0;
     vel = 5.0;
 
 }
