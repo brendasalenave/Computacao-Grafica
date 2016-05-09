@@ -20,6 +20,8 @@ Nave::Nave(){
     vy[1] = -25;
     vy[2] = 25;
 
+    //tiro = new Tiro();
+
 }
 
 
@@ -98,24 +100,30 @@ void Nave::setShape(){
         tempX[i] = vx[i] + x;
         tempY[i] = vy[i] + y;
     }
-   /* tempX[0] = vx[0] + x;
-    tempX[1] = vx[1] + x;
-    tempX[2] = vx[2] + x;
-    tempY[0] = vy[0] + y;
-    tempY[1] = vy[1] + y;
-    tempY[2] = vy[2] + y;*/
 }
 
 void Nave::atira(){
     Tiro* s = new Tiro();
     tiro.push_back(s);
+    s->setX(x);
+    s->setY(y);
 }
 
-void Nave::deslocaTiro(){
-   /* fbs *tmp = this->f;
+/*void Ship::updateBulletsPosition(){
+    fbs *tmp = this->f;
     while(tmp->prox!=NULL){
         tmp=tmp->prox;
         tmp->b->setY(tmp->b->getY()+5);
-    }*/
+    }
+}*/
+
+void Nave::deslocaTiro(){
+    std::vector<Tiro*> tmp;
+    tmp = tiro;
+    std::vector<Tiro*>::iterator it;
+
+    for(it = tmp.begin(); it != tmp.end(); it++){
+        (*it)->setPos(getX(), getY());
+    }
 
 }

@@ -81,10 +81,11 @@ void GLWidget::paintGL(){
         n->setSpeed(0.2, 2);
     }
     if(space == 1){
-        //n->atira();
-        //drawTiro();
+        n->atira();
+        drawTiro();
     }
     n->deslocamento(mw->width(),mw->height());
+    n->deslocaTiro();
 
     drawNave(n->tempX,n->tempY);
 
@@ -178,9 +179,12 @@ void GLWidget::drawNave(float vpx[3], float vpy[3]){
 void GLWidget::drawTiro(){
     std::vector<Tiro*> tmp;
     tmp = n->tiro;
-
+    color(0.8, 0.8, 0);
+    glPointSize(4.0);
     std::vector<Tiro*>::iterator it;
+
     for(it = tmp.begin(); it != tmp.end(); it++){
-        point(tmp->getX(), tmp->getY());
+        /* por enquanto ta desenhando 'dentro' do poligono */
+        point((*it)->getX(), (*it)->getY());
     }
 }
