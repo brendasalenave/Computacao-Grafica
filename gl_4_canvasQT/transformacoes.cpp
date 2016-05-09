@@ -2,8 +2,6 @@
 #include "transformacoes.h"
 
 Transformacoes::Transformacoes(){
-    tx = 0.2;
-    ty = 0.2;
 
 }
 
@@ -19,22 +17,6 @@ float Transformacoes::rotacaoY(float x, float y, float theta, int cod){
         return (y = x * sin(theta) + y * cos(theta));
     else
         return (y = -1 * x * sin(theta) + y * cos(theta));
-}
-
-float Transformacoes::translacaoX(float x){
-    return (x += tx);
-}
-
-float Transformacoes::translacaoY(float y){
-    return (y += ty);
-}
-
-float Transformacoes::dirX(float x, float theta){
-    return (x = cos(theta));
-}
-
-float Transformacoes::dirY(float y, float theta){
-    return (y = sin(theta));
 }
 
 float Transformacoes::deslocamentoX(float x, float theta, float vel){

@@ -120,8 +120,6 @@ MainWindow::MainWindow(){
     //tratamento de checkbox
     connect(timerBased,  &QCheckBox::toggled, this,        &MainWindow::timerUsageChanged);
     connect(timerBased,  &QCheckBox::toggled, refreshRate, &QWidget::setEnabled);
-
-
 }
 
 void MainWindow::showMsg(){
@@ -146,5 +144,5 @@ void MainWindow::timerUsageChanged(bool enabled){
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e){
-    //printf("\nJanela redimensionada %d %d",e->size().height(), e->size().width() );
+    printf("\nJanela redimensionada %d %d",e->size().height(), e->size().width() );
 }

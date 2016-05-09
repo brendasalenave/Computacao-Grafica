@@ -27,7 +27,6 @@ public:
     GLWidget(MainWindow *mw);
     ~GLWidget();
 
-
 //Callbacks de Widgets
 public slots:
     void showMsg(); //metodo chamado quando o botao eh pressionado
@@ -74,7 +73,8 @@ protected:
     void text(int x, int y, const char *t);
 
     //Draw functions
-    void drawNave(float vpx[3], float vpy[3]);
+    void drawNave(float vecx[3], float vecy[3]);
+    void drawTiro();
 };
 
 #endif

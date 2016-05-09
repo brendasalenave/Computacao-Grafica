@@ -7,9 +7,12 @@
 // *
 //
 
+#include <math.h>
+
 #include "glwidget.h"
 #include "mainwindow.h"
 #include "nave.h"
+#include "tiro.h"
 
 #include <QPainter>
 #include <QPaintEngine>
@@ -19,15 +22,18 @@
 #include <QWheelEvent>
 #include <QKeyEvent>
 
+#define PI_2 6.2831853
 
 float global = 0;
 int r_dir = 0, r_esq = 0;
 int up = 0, down = 0;
-int a = 0, s = 0;
+int space = 0;
 Nave *n = new Nave();
 
 GLWidget::GLWidget(MainWindow *_mw){
     setMinimumSize(600, 250);
+    setMaximumHeight(600);
+
     mw = _mw;
     this->setFocusPolicy(Qt::StrongFocus);
 }
@@ -42,43 +48,43 @@ GLWidget::~GLWidget(){
 // *******************************************************************************
 void GLWidget::paintGL(){
     clear(0, 0, 0);
+
     //mw->setStyleSheet("color:white;");
     mw->setStyleSheet("background-image:url(:/images/background.jpg);");
 
     //n->setShape(n->getX(),n->getY());
     if(r_dir == 1){
-        if(n->getTheta() >= 6.27)
+        if(n->getTheta() >= PI_2)
             n->setTheta(0);
-        n->setTheta(n->getTheta() + 0.05);
-        n->rotacao(1, 0.05);
+        else if(n->getTheta() <= 0)
+            n->setTheta(PI_2);
+        n->setTheta(n->getTheta() - 0.05);
+
+        n->rotacao(1, 0.08);
     }
     if(r_esq == 1){
         if(n->getTheta() >= 6.27)
             n->setTheta(0);
-        n->setTheta(n->getTheta() - 0.05);
-        n->rotacao(0, 0.05);
+        else if(n->getTheta() <= 0)
+            n->setTheta(6.27);
+
+        n->setTheta(n->getTheta() + 0.05);
+        n->rotacao(0, 0.08);
     }
+
     if(up == 1){
-        n->deslocamento();
+        n->setSpeed(0.2, 1);
     }
-    if(a == 1){
-        n->setSpeed(0.1, 1);
+    if(down == 1){
+        n->setSpeed(0.2, 2);
     }
-    if(s == 1){
-        n->setSpeed(0.1, 2);
-
+    if(space == 1){
+        n->atira();
+        drawTiro();
     }
-    /*float vecX[3], vecY[3];
-    vecX[0] = 350; vecY[0] = 275;
-    vecX[1] = 250; vecY[1] = 275;
-    vecX[2] = 300; vecY[2] = 325;
-    polygonFill(vecX,vecY,3);*/
+    n->deslocamento(mw->width(),mw->height());
 
-    /*for(int i = 0; i < 3; i++){
-        printf("vx[%d]: %f  -  vy[%d]: %f", i, n->vx[i],i,n->vy[i]);
-    }*/
-
-    drawNave(n->vx,n->vy);
+    drawNave(n->tempX,n->tempY);
 
 }
 
@@ -121,13 +127,10 @@ void GLWidget::keyPressEvent(QKeyEvent* event){
         case Qt::Key_Down:
           down = 1;
           break;
-        case Qt::Key_A:
-          a = 1;
+        case Qt::Key_Space:
+          space = 1;
           break;
-        case Qt::Key_S:
-          s = 1;
-          break;
-      }
+        }
 
 }
 
@@ -147,11 +150,8 @@ void GLWidget::keyReleaseEvent(QKeyEvent* event){
       case Qt::Key_Down:
         down = 0;
         break;
-      case Qt::Key_A:
-        a = 0;
-        break;
-      case Qt::Key_S:
-        s = 0;
+      case Qt::Key_Space:
+        space = 0;
         break;
     }
 }
@@ -159,15 +159,21 @@ void GLWidget::keyReleaseEvent(QKeyEvent* event){
 //callback para botao definido na mainWindow
 void GLWidget::showMsg(){
     QMessageBox* msg = new QMessageBox(this);
-    msg->setText("A : acelera \nS : freia \n"
-                 "Up arrow: desloca nave \nRight arrow: giro à direita \n"
-                 "Left arrow: giro à esquerda \n"
+    msg->setText(" Up arrow: acelera \n"
+                 " Down arrow: freia \n"
+                 " Right arrow: giro à direita \n"
+                 " Left arrow: giro à esquerda \n"
                  "\n**PARA INICIAR O JOGO, CLIQUE NA TELA!");
-    msg->setWindowTitle("Comandos de Jogo");
+    msg->setWindowTitle("Comandos do Jogo");
     msg->show();
 }
 
 void GLWidget::drawNave(float vpx[3], float vpy[3]){
     color(0,0.4,1);
     polygonFill(vpx,vpy,3);
+}
+
+void GLWidget::drawTiro(){
+
+    //for (iterator i = n->listaT.begin(); i != n->listaT.end(); i++)
 }

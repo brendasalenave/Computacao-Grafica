@@ -134,8 +134,7 @@ void GLWidget::resizeGL(int w, int h){
 }
 
 
-void GLWidget::initializeGL()
-{
+void GLWidget::initializeGL(){
     initializeOpenGLFunctions();
 
     glClearColor(0,0,0,1.0);

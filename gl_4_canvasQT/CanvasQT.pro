@@ -6,13 +6,16 @@ SOURCES += main.cpp \
            glCanvas2d.cpp \
            glWidget.cpp \
            nave.cpp \
-           transformacoes.cpp
+           transformacoes.cpp \
+    tiro.cpp \
+    desenho.cpp
 
 HEADERS += \
            mainwindow.h \
            glwidget.h \
            nave.h \
-           transformacoes.h
+           transformacoes.h \
+    tiro.h
 
 target.path = $$[QT_INSTALL_EXAMPLES]/opengl/qopenglwidget
 
