@@ -116,7 +116,7 @@ void Nave::atira(){
     tiro.push_back(s);
     s->setPos(x,y);
     s->setAlpha(theta);
-    s->setSpeed(speed - 3.0);
+    s->setSpeed(speed + 3.0);
 }
 
 void Nave::deslocaTiro(){
@@ -128,7 +128,7 @@ void Nave::deslocaTiro(){
     for(it = tmp.begin(); it != tmp.end(); it++){
         float ax = t->deslocamentoX((*it)->getX(),(*it)->getAlpha(),(*it)->getSpeed());
         float ay = t->deslocamentoY((*it)->getY(),(*it)->getAlpha(),(*it)->getSpeed());
-        (*it)->setPos(ax, ay+10);
+        (*it)->setPos(ax, ay);
     }
 
 }

@@ -8,7 +8,7 @@ Autor: Brenda Salenave Santana
 - Interatividade – não usar o refresh do teclado para mover o veículo;
 - Disparo de projéteis;
 - Disparo de projéteis em rajadas;
-- Background;
+- Background texturizado;
 
 
 

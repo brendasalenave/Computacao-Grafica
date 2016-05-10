@@ -35,7 +35,7 @@ void Tiro::setSpeed(float speed){
 }
 
 void Tiro::setAlpha(float theta){
-    alpha = theta;
+    alpha = -theta;
 }
 
 float Tiro::getAlpha(){
