@@ -25,11 +25,6 @@ public:
 
     float deslocamentoY(float y, float theta, float vel);
 
-    float deslocamentoXT(float x, float vel);
-
-    float deslocamentoYT(float y, float vel);
-
-
 };
 
 #endif // TRANSFORMACOES_H

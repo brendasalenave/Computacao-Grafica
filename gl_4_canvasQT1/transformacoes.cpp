@@ -34,11 +34,3 @@ float Transformacoes::deslocamentoX(float x, float theta, float vel){
 float Transformacoes::deslocamentoY(float y, float theta, float vel){
     return (y += sin(theta) * vel);
 }
-
-float Transformacoes::deslocamentoXT(float x, float vel){
-    return (x += vel);
-}
-
-float Transformacoes::deslocamentoYT(float y, float vel){
-    return (y += vel);
-}

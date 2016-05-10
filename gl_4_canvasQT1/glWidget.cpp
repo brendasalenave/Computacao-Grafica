@@ -21,6 +21,7 @@
 #include <QMessageBox>
 #include <QWheelEvent>
 #include <QKeyEvent>
+#include <QMediaPlayer>
 
 #define PI_2 6.2831853
 
@@ -81,6 +82,10 @@ void GLWidget::paintGL(){
         n->setSpeed(0.2, 2);
     }
     if(space == 1){
+        QMediaPlayer* effect = new QMediaPlayer;
+        effect->setMedia(QUrl(":/sound/tiro.mp3"));
+        effect->setVolume(50);
+        effect->play();
         n->atira();
     }
 
