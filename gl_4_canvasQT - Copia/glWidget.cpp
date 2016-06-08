@@ -74,7 +74,7 @@ void GLWidget::paintGL(){
         }
         //if(i == 1)
         //   printf("PX: %d  PY: %d", ptos->ptosX[i],ptos->ptosY[i]);
-        color(1,0,0);
+        color(1,0.5,0);
         rectFill(ptos->ptosX[i]-2, ptos->ptosY[i]-2, ptos->ptosX[i]+2, ptos->ptosY[i]+2);
     }
     //qDebug("LARGURA: %d", mw->width());

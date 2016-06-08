@@ -1,6 +1,7 @@
 #include "pontos.h"
 
 Pontos::Pontos(){
+    d = -10.0;
 
 }
 
@@ -26,4 +27,27 @@ void Pontos::setX(int u, int x){
 
 void Pontos::setY(int u, int y){
     ptosY[u] = y;
+}
+
+void Pontos::projeta(float x, float y, float z, int *xt, int *yt){
+    *xt = (x*d)/z;
+    *yt = (y*d)/z;
+}
+
+void Pontos::transforma() {
+   for(int x=0; x < 10; x++){
+      for(int z=0; z < 10; z++){
+           //copia os pontos originais
+           //transf[x][z] = mat[x][z];
+
+           //rotacao no eixo x
+           //transf[x][z] = rotacionaX( transf[x][z] );
+
+           //translacao no eixo z
+           //transf[x][z] = translada( transf[x][z] );
+
+           //projecao em perspectiva
+           //transf[x][z] = projeta(transf[x][z] );
+      }
+   }
 }

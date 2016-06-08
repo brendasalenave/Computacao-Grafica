@@ -65,7 +65,7 @@ MainWindow::MainWindow(){
 
     //QPushButton *button1 = new QPushButton("Button 1 - Status Bar");
     //QPushButton *button2 = new QPushButton("Button 2 - Dummy");
-    QPushButton *button3 = new QPushButton("Button 3 - Dummy");
+    QPushButton *button3 = new QPushButton("Sweep Rotacional");
     button3->setStyleSheet("background-color: green;");
 
     QRadioButton *radioB1 = new QRadioButton("Copo");
