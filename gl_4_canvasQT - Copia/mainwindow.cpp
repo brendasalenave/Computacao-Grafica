@@ -137,17 +137,20 @@ MainWindow::MainWindow(){
     //gridLayout->addWidget(scrollArea,1,0,8,1);
     menuBar()->setFont(f1);
     menuBar()->setStyleSheet("background-color: green;");
-    QMenu *fileMenu = menuBar()->addMenu("&File");
-    QMenu *showMenu = menuBar()->addMenu("&Infomações");
+    QMenu *fileMenu = menuBar()->addMenu("&Arquivo");
+    QMenu *showMenu = menuBar()->addMenu("&Sobre");
+
     //statusBar()->addWidget(button1);
 
-    QAction *actExit        = new QAction("E&xit", fileMenu);
+    QAction *actExit        = new QAction("Sair", fileMenu);
     QAction *actShowMsgGL   = new QAction("Show Msg na GLWidget", showMenu);
-    QAction *actShowMsgThis = new QAction("Show Msg na MainWindow", showMenu);
+    QAction *actShowMsgThis = new QAction("Pontos", showMenu);
+    QAction *aboutMenu = new QAction("Sobre", showMenu);
 
     fileMenu->addAction(actExit);
     showMenu->addAction(actShowMsgGL);
     showMenu->addAction(actShowMsgThis);
+    showMenu->addAction(aboutMenu);
 
 
     m_timer = new QTimer(this);
@@ -160,6 +163,7 @@ MainWindow::MainWindow(){
     connect(actExit,        SIGNAL(triggered(bool)),   this,     SLOT(close())   );
     connect(actShowMsgGL,   SIGNAL(triggered(bool)),   glwidget, SLOT(showMsg()) );
     connect(actShowMsgThis, SIGNAL(triggered(bool)),   this,     SLOT(showMsg()) );
+    connect(aboutMenu, SIGNAL(triggered(bool)),   this,     SLOT(showMsg2()) );
     //connect(button1,        SIGNAL(released()) ,       glwidget, SLOT(showMsg()) );
     connect(refreshRate,    SIGNAL(valueChanged(int)), this,     SLOT(updateIntervalChanged(int)) );
 
@@ -172,7 +176,21 @@ MainWindow::MainWindow(){
 
 void MainWindow::showMsg(){
     QMessageBox* msg = new QMessageBox(this);
-    msg->setText("Movimentação dos pontos: ");
+    msg->setWindowTitle("Pontos");
+    msg->setText("Movimentação dos pontos:\n• Para criação dos pontos basta clicar na àrea de desenho utilizando"
+                 " o botão direito do mouse"
+                 "\n\n• Para movimentação dos pontos já existentes clique sobre o ponto que deseja mover utilizando"
+                 " o botão esquerdo do mouse"
+                 "\n\nOBS: É possível criar apenas 10 (dez) pontos!!");
+    msg->show();
+}
+
+void MainWindow::showMsg2(){
+    QMessageBox* msg = new QMessageBox(this);
+    msg->setWindowTitle("Sobre");
+    msg->setText("Programa implementado em C++ para fazer a modelagem e visualização"
+                 " de um objeto 3D, representado por meio de sweep, utilizando uma câmera sintética."
+                 " A visualização pode ser feita por meio de projeção perspectiva e ortográfica");
     msg->show();
 }
 

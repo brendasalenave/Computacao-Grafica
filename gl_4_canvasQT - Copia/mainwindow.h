@@ -33,6 +33,7 @@ private slots:
     void updateIntervalChanged(int value);
     void timerUsageChanged(bool enabled);
     void showMsg();
+    void showMsg2();
 
 private:
     QTimer *m_timer;
