@@ -3,22 +3,17 @@ QT += widgets
 SOURCES += main.cpp \
            mainwindow.cpp \
            glCanvas2d.cpp \
-           glWidget.cpp \
-           pontos.cpp \
-           sweep.cpp
+    myCanvas.cpp \
+    ponto.cpp
 
 HEADERS += \
            mainwindow.h \
-           glwidget.h \
-           pontos.h \
-           sweep.h
+    glCanvas2d.h \
+    ponto.h
 
 target.path = $$[QT_INSTALL_EXAMPLES]/opengl/qopenglwidget
 
 INSTALLS += target
 
-RESOURCES += rsc.qrc
-
-win32: LIBS += -lopengl32
-
-win32: LIBS += -lglu32
+RESOURCES += \
+    src.qrc

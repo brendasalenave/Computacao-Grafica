@@ -10,8 +10,8 @@
 
 #include <QMainWindow>
 #include <QTimer>
-#include <QGridLayout>
 #include <QListWidget>
+#include <QSpinBox>
 
 
 QT_FORWARD_DECLARE_CLASS(QOpenGLWidget)
@@ -25,18 +25,19 @@ public:
     bool timerEnabled() const { return m_timer->isActive(); }
     void resizeEvent(QResizeEvent *);
 
+    QTimer   *m_timer;
+    QSpinBox *refreshRate;
     QListWidget *list;
-    QOpenGLWidget *m_glWidget;
+
 
 //Callbacks de Widgets
 private slots:
     void updateIntervalChanged(int value);
-    void timerUsageChanged(bool enabled);
     void showMsg();
     void showMsg2();
+    void sliderChanged(int i);
+    void checkBoxChanged(bool b);
 
-private:
-    QTimer *m_timer;
 };
 
 #endif

@@ -9,8 +9,6 @@
 #define CANVAS_2D_WIDGET_H
 
 #include <QOpenGLWidget>
-#include <QTimer>
-#include <QPushButton>
 #include <QOpenGLFunctions_1_1>
 
 
@@ -32,14 +30,21 @@ public slots:
 
 protected:
     void resizeGL(int w, int h) Q_DECL_OVERRIDE;
-    void paintGL() Q_DECL_OVERRIDE;
     void initializeGL() Q_DECL_OVERRIDE;
+
+    void paintGL() Q_DECL_OVERRIDE;
 
     //mouse functions
     void mousePressEvent(QMouseEvent  *event) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent * event);
     void mouseReleaseEvent(QMouseEvent *event);
     void wheelEvent(QWheelEvent *event);
+
+    //keyboard functions
+    void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
+    void keyReleaseEvent(QKeyEvent* event);
+
+    void movimenta(int u);
 
 
     //Canvas2D functions

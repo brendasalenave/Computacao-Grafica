@@ -11,7 +11,8 @@
 
 //Baseado no demo C:\Qt\Qt5.5.1\Examples\Qt-5.5\opengl\qopenglwidget
 
-int main( int argc, char ** argv ){
+int main( int argc, char ** argv )
+{
     QApplication a( argc, argv );
 
     MainWindow mw;

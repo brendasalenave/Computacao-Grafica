@@ -21,25 +21,20 @@
 #include <QMessageBox>
 #include <QResizeEvent>
 #include <QListWidget>
+#include <QGridLayout>
 #include <QRadioButton>
 #include <QVBoxLayout>
 
 #include "glwidget.h"
 
 MainWindow::MainWindow(){
-
     //****************************************************
     //cria os Widgets
     //****************************************************
 
-    GLWidget *glwidget = new GLWidget(this);
-    m_glWidget = glwidget;
-    m_glWidget->setMinimumHeight(600);
-    m_glWidget->setMaximumHeight(600);
-
-    QFont f( "Tahoma", 10, QFont::Bold);
-    QFont f1( "Tahoma", 10);
-    f1.setItalic(true);
+    Canvas2D *canvas = new Canvas2D(this);
+    canvas->setMinimumHeight(600);
+    canvas->setMaximumHeight(600);
 
     QLabel *label = new QLabel(this);
     label->setText("A scrollable QOpenGLWidget");
@@ -53,32 +48,33 @@ MainWindow::MainWindow(){
     slider->setRange(0, 50);
     slider->setSliderPosition(30);
 
-    QSpinBox *refreshRate = new QSpinBox(this);
+    refreshRate = new QSpinBox(this);
     refreshRate->setSuffix(" ms");
     refreshRate->setValue(10);
     refreshRate->setSingleStep(10);
     refreshRate->setToolTip("Dica do que o componente faz");
 
-    QCheckBox *timerBased = new QCheckBox("Timer", this);
+    QCheckBox *timerBased = new QCheckBox("Use timer", this);
     timerBased->setChecked(true);
     timerBased->setToolTip("Toggles using a timer to trigger update()");
 
     //QPushButton *button1 = new QPushButton("Button 1 - Status Bar");
-    //QPushButton *button2 = new QPushButton("Button 2 - Dummy");
-    QPushButton *button3 = new QPushButton("Sweep Rotacional");
+    QPushButton *button2 = new QPushButton("Limpar");
+    QPushButton *button3 = new QPushButton("Sweep");
+    button2->setStyleSheet("background-color: orange;");
     button3->setStyleSheet("background-color: green;");
 
-    QRadioButton *radioB1 = new QRadioButton("Copo");
-    QRadioButton *radioB2 = new QRadioButton("Vaso");
-    QRadioButton *radioB3 = new QRadioButton("Personalizado");
+    QFont f( "Tahoma", 10, QFont::Bold);
+    QFont f1( "Tahoma", 10);
+    f1.setItalic(true);
 
-    QRadioButton *button_r1 = new QRadioButton("Perspectiva");
-    button_r1->setToolTip("Projeção em perpectiva do objeto");
-    QRadioButton *button_r2 = new QRadioButton("Ortográfica");
-    button_r2->setToolTip("Projeção ortográfica do objeto");
+    QRadioButton *radioB1 = new QRadioButton("Perspectiva");
+    radioB1->setToolTip("Projeção em perpectiva do objeto");
+    QRadioButton *radioB2 = new QRadioButton("Ortográfica");
+    radioB2->setToolTip("Projeção ortográfica do objeto");
+    radioB1->setChecked(true);
 
-
-    QLabel *updateLabel = new QLabel("Tempo de Espera entre updates");
+    QLabel *updateLabel = new QLabel("Tempo de Espera entre updates da Canvas");
 
     //****************************************************
     //cria os Layouts
@@ -97,33 +93,22 @@ MainWindow::MainWindow(){
     QVBoxLayout *verticalLayout = new QVBoxLayout;
     verticalLayout->addWidget(radioB1);
     verticalLayout->addWidget(radioB2);
-    verticalLayout->addWidget(radioB3);
 
     QGroupBox *radioGroupBox = new QGroupBox(this);
     radioGroupBox->setLayout(verticalLayout);
-    radioGroupBox->setTitle("     FORMAS");
+    radioGroupBox->setTitle("            PROJEÇÃO");
     radioGroupBox->setFont(f);
-
-    radioB3->setChecked(true);
-
-    QVBoxLayout *verticalLayout2 = new QVBoxLayout;
-    verticalLayout2->addWidget(button_r1);
-    verticalLayout2->addWidget(button_r2);
-
-    QGroupBox *radioGroupBox2 = new QGroupBox(this);
-    radioGroupBox2->setLayout(verticalLayout2);
-    radioGroupBox2->setTitle("  PROJEÇÃO");
-    radioGroupBox2->setFont(f);
-
-    button_r1->setChecked(true);
+    radioGroupBox->setMinimumWidth(170);
+    radioGroupBox->setMaximumWidth(170);
+    radioGroupBox->setFixedHeight(140);
 
     QGridLayout *gridLayout = new QGridLayout;// Pozzer: aqui estava QGridLayout(groupBox);
-    gridLayout->addWidget(glwidget,       0, 0, 3, 1);
-    //gridLayout->addWidget(button2,        0, 1, 1, 1);
-    gridLayout->addWidget(radioGroupBox,  0, 1, 1, 1);
-    gridLayout->addWidget(radioGroupBox2,  1, 1, 1, 1);
-    gridLayout->addWidget(button3,        2, 1, 1, 1);
-    gridLayout->addWidget(updateGroupBox, 5, 0, 1, 2); //row, column, rowSpan, colSpan
+    gridLayout->addWidget(canvas,       0, 0, 3, 1);
+    gridLayout->addWidget(radioGroupBox, 2, 1, 1, 1);
+    gridLayout->addWidget(button2,        1, 1, 1, 1);
+    gridLayout->addWidget(button3,        0, 1, 1, 1);
+    //gridLayout->addWidget(list,           3, 1, 1, 1);
+    gridLayout->addWidget(updateGroupBox, 3, 0, 1, 2); //row, column, rowSpan, colSpan
     gridLayout->addWidget(slider,         4, 0, 1, 1);
 
     QGroupBox * groupBox = new QGroupBox(this);
@@ -131,21 +116,21 @@ MainWindow::MainWindow(){
     //groupBox->setTitle("QGroupBox Grid");
     setCentralWidget(groupBox);
 
-
     //QScrollArea *scrollArea = new QScrollArea;
-    //scrollArea->setWidget(glwidget);
+    //scrollArea->setWidget(canvas);
     //gridLayout->addWidget(scrollArea,1,0,8,1);
+
     menuBar()->setFont(f1);
     menuBar()->setStyleSheet("background-color: green;");
     QMenu *fileMenu = menuBar()->addMenu("&Arquivo");
-    QMenu *showMenu = menuBar()->addMenu("&Sobre");
-
+    QMenu *showMenu = menuBar()->addMenu("&Ajuda");
     //statusBar()->addWidget(button1);
 
-    QAction *actExit        = new QAction("Sair", fileMenu);
-    QAction *actShowMsgGL   = new QAction("Show Msg na GLWidget", showMenu);
+    QAction *actExit        = new QAction("E&xit", fileMenu);
+    QAction *actShowMsgGL   = new QAction("Show Msg na Canvas", showMenu);
     QAction *actShowMsgThis = new QAction("Pontos", showMenu);
     QAction *aboutMenu = new QAction("Sobre", showMenu);
+
 
     fileMenu->addAction(actExit);
     showMenu->addAction(actShowMsgGL);
@@ -153,26 +138,40 @@ MainWindow::MainWindow(){
     showMenu->addAction(aboutMenu);
 
 
+    //o timer eh usado para controlar o refresh de tela, via SLOT(update()) abaixo. Ele nao faz controle de FPS
     m_timer = new QTimer(this);
     m_timer->setInterval(10);
     m_timer->start();
 
-    connect(m_timer, SIGNAL(timeout()), glwidget, SLOT(update()));
 
-    //tratamento de eventos de menu, botao e QSpinBox
-    connect(actExit,        SIGNAL(triggered(bool)),   this,     SLOT(close())   );
-    connect(actShowMsgGL,   SIGNAL(triggered(bool)),   glwidget, SLOT(showMsg()) );
-    connect(actShowMsgThis, SIGNAL(triggered(bool)),   this,     SLOT(showMsg()) );
-    connect(aboutMenu, SIGNAL(triggered(bool)),   this,     SLOT(showMsg2()) );
-    //connect(button1,        SIGNAL(released()) ,       glwidget, SLOT(showMsg()) );
-    connect(refreshRate,    SIGNAL(valueChanged(int)), this,     SLOT(updateIntervalChanged(int)) );
-
-    //tratamento de checkbox
-    connect(timerBased,  &QCheckBox::toggled, this,        &MainWindow::timerUsageChanged);
-    connect(timerBased,  &QCheckBox::toggled, refreshRate, &QWidget::setEnabled);
-
-
+    //tratamento de eventos de menu, checkbox, timer, botao, slider e QSpinBox (e etc)
+    connect(m_timer,        SIGNAL(timeout()),         canvas, SLOT(update()));
+    connect(actExit,        SIGNAL(triggered(bool)),   this,   SLOT(close())   );
+    connect(actShowMsgGL,   SIGNAL(triggered(bool)),   canvas, SLOT(showMsg()) );
+    connect(actShowMsgThis, SIGNAL(triggered(bool)),   this,   SLOT(showMsg()) );
+    connect(aboutMenu, SIGNAL(triggered(bool)),   this,   SLOT(showMsg2()) );
+    //connect(button1,        SIGNAL(released()) ,       canvas, SLOT(showMsg()) );
+    connect(refreshRate,    SIGNAL(valueChanged(int)), this,   SLOT(updateIntervalChanged(int)) );
+    connect(slider,         SIGNAL(valueChanged(int)), this,   SLOT(sliderChanged(int)) );
+    connect(timerBased,     SIGNAL(clicked(bool)),     this,   SLOT(checkBoxChanged(bool)));
 }
+
+void MainWindow::checkBoxChanged(bool enabled)
+{
+    qDebug("Checkbox: %d", enabled );
+    if (enabled) {
+        m_timer->start();
+    } else {
+        m_timer->stop();
+    }
+    refreshRate->setEnabled(enabled);
+}
+
+void MainWindow::sliderChanged(int i)
+{
+    qDebug("Slider: %d", i );
+}
+
 
 void MainWindow::showMsg(){
     QMessageBox* msg = new QMessageBox(this);
@@ -180,8 +179,7 @@ void MainWindow::showMsg(){
     msg->setText("Movimentação dos pontos:\n• Para criação dos pontos basta clicar na àrea de desenho utilizando"
                  " o botão direito do mouse"
                  "\n\n• Para movimentação dos pontos já existentes clique sobre o ponto que deseja mover utilizando"
-                 " o botão esquerdo do mouse"
-                 "\n\nOBS: É possível criar apenas 10 (dez) pontos!!");
+                 " o botão esquerdo do mouse");
     msg->show();
 }
 
@@ -190,25 +188,19 @@ void MainWindow::showMsg2(){
     msg->setWindowTitle("Sobre");
     msg->setText("Programa implementado em C++ para fazer a modelagem e visualização"
                  " de um objeto 3D, representado por meio de sweep, utilizando uma câmera sintética."
-                 " A visualização pode ser feita por meio de projeção perspectiva e ortográfica");
+                 " A visualização pode ser feita por meio de projeção em perspectiva ou ortográfica"
+                 "\n\nBrenda Salenave Santana\nbsantana@inf.ufsm.br");
     msg->show();
 }
 
-void MainWindow::updateIntervalChanged(int value){
+void MainWindow::updateIntervalChanged(int value)
+{
     m_timer->setInterval(value);
     if (m_timer->isActive())
         m_timer->start();
 }
 
-void MainWindow::timerUsageChanged(bool enabled){
-    if (enabled) {
-        m_timer->start();
-    } else {
-        m_timer->stop();
-        m_glWidget->update();
-    }
-}
-
-void MainWindow::resizeEvent(QResizeEvent *e){
-    printf("\nJanela redimensionada %d %d",e->size().height(), e->size().width() );
+void MainWindow::resizeEvent(QResizeEvent *e)
+{
+     qDebug("janela redimensionada" );
 }

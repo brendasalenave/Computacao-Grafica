@@ -13,32 +13,56 @@
 
 
 
+//OBSERVACAO IMPORTANTE
+//OBSERVACAO IMPORTANTE
+//OBSERVACAO IMPORTANTE
+//OBSERVACAO IMPORTANTE
+//OBSERVACAO IMPORTANTE
+//OBSERVACAO IMPORTANTE
+//OBSERVACAO IMPORTANTE
+//OBSERVACAO IMPORTANTE
+//*************************************************************
+// ESTE ARQUIVO NAO PODE SER MODIFICADO PARA OS TRABALHOS DE COMPUTACAO GRAFICA
+//*************************************************************
+
 #include <math.h>
 #include <QPainter>
 
-#include <QPaintEngine>
+//#include <QPaintEngine>
 #include <QCoreApplication>
 
-#include "glwidget.h"
+#include "glCanvas2d.h"
 
 
 #define PI_2 6.28318530717958
 
+Canvas2D::Canvas2D(MainWindow *_mw)
+{
+    setMinimumSize(300, 250);
+    mw = _mw;
+}
 
-void GLWidget::point(int x, int y){
+Canvas2D::~Canvas2D()
+{
+
+}
+
+void Canvas2D::point(int x, int y)
+{
    glBegin(GL_POINTS);
       glVertex2d(x, y);
    glEnd();
 }
 
-void GLWidget::line( int x1, int y1, int x2, int y2 ){
+void Canvas2D::line( int x1, int y1, int x2, int y2 )
+{
    glBegin(GL_LINES);
       glVertex2d(x1, y1);
       glVertex2d(x2, y2);
    glEnd();
 }
 
-void GLWidget::rect( int x1, int y1, int x2, int y2 )
+void Canvas2D::rect( int x1, int y1, int x2, int y2 )
 {
    glBegin(GL_LINE_LOOP);
       glVertex2d(x1, y1);
@@ -48,7 +72,7 @@ void GLWidget::rect( int x1, int y1, int x2, int y2 )
    glEnd();
 }
 
-void GLWidget::rectFill( int x1, int y1, int x2, int y2 )
+void Canvas2D::rectFill( int x1, int y1, int x2, int y2 )
 {
    glBegin(GL_QUADS);
       glVertex2d(x1, y1);
@@ -58,7 +82,7 @@ void GLWidget::rectFill( int x1, int y1, int x2, int y2 )
    glEnd();
 }
 
-void GLWidget::polygon(float vx[], float vy[], int elems)
+void Canvas2D::polygon(float vx[], float vy[], int elems)
 {
    int cont;
    glBegin(GL_LINE_LOOP);
@@ -70,7 +94,7 @@ void GLWidget::polygon(float vx[], float vy[], int elems)
 
 }
 
-void GLWidget::polygonFill(float vx[], float vy[], int elems)
+void Canvas2D::polygonFill(float vx[], float vy[], int elems)
 {
    int cont;
    glBegin(GL_POLYGON);
@@ -82,7 +106,7 @@ void GLWidget::polygonFill(float vx[], float vy[], int elems)
 
 }
 
-void GLWidget::text(int x, int y, const char *t)
+void Canvas2D::text(int x, int y, const char *t)
 {
     QPainter painter;
     painter.begin(this);
@@ -94,12 +118,12 @@ void GLWidget::text(int x, int y, const char *t)
     painter.end();
 }
 
-void GLWidget::clear(float r, float g, float b)
+void Canvas2D::clear(float r, float g, float b)
 {
    glClearColor( r, g, b, 1 );
 }
 
-void GLWidget::circle( int x, int y, int raio, int div )
+void Canvas2D::circle( int x, int y, int raio, int div )
 {
    float ang, x1, y1;
    float inc = PI_2/div;
@@ -113,7 +137,7 @@ void GLWidget::circle( int x, int y, int raio, int div )
    glEnd();
 }
 
-void GLWidget::circleFill( int x, int y, int raio, int div )
+void Canvas2D::circleFill( int x, int y, int raio, int div )
 {
    float ang, x1, y1;
    float inc = PI_2/div;
@@ -127,13 +151,13 @@ void GLWidget::circleFill( int x, int y, int raio, int div )
    glEnd();
 }
 
-void GLWidget::color(float r, float g, float b)
+void Canvas2D::color(float r, float g, float b)
 {
    glColor3d(r, g, b  );
 }
 
 
-void GLWidget::resizeGL(int w, int h)
+void Canvas2D::resizeGL(int w, int h)
 {
     printf("\n Resize w=%d h=%d", w, h);
 
@@ -148,20 +172,11 @@ void GLWidget::resizeGL(int w, int h)
 }
 
 
-void GLWidget::initializeGL()
+void Canvas2D::initializeGL()
 {
     initializeOpenGLFunctions();
 
     glClearColor(0.5,0.5,0.5,1.0);
 
     glPolygonMode(GL_FRONT, GL_FILL);
-
-
-    //define o framerate de desenho.
-    //**************************************
-
-    //QTimer *timer = new QTimer(this);
-    //connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    //timer->start(1);
-    //timer->setInterval(20);
 }
