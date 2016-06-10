@@ -11,7 +11,8 @@ Transformacoes::Transformacoes(){
     theta = 6.28;
 }
 
-void Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t){
+std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t){
+    std::vector<Ponto> ponto2;
 
     for(int x=0; x <t ; x++){
         for(float z=0; z<=theta; z+=0.001){
@@ -19,13 +20,15 @@ void Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t)
             //resp.x =cos(z) * p[x].x;
             resp.setX(cos(z) * p[x].getX());
             resp.setY(p[x].getY());
-            resp.setZ(sin(z) * p[x].getX());
+            resp.setZ(sin(z) * 6);
 
             resp = translada(resp);
             resp = rotacionaY(resp);
             resp = projeta(resp);
+            ponto2.push_back(resp);
       }
     }
+    return ponto2;
 }
 
 Ponto Transformacoes::projeta( Ponto p ){

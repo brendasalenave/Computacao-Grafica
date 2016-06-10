@@ -69,7 +69,17 @@ void Canvas2D::paintGL(){
         oldY = ponto[u].getY();
     }
 
-    t->cria(ponto, tam);
+    ponto2 = t->cria(ponto, tam);
+
+    oldX = 0, oldY = 0;
+    for(int u = 0; u < tam ; u++){
+        if(oldX !=0 && oldY !=0){
+            color(1,1,1);
+            line(oldX, oldY, ponto[u].getX(), ponto2[u].getY());
+        }
+        oldX = ponto2[u].getX();
+        oldY = ponto2[u].getY();
+    }
 
 
 }

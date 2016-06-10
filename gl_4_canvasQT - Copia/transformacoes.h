@@ -11,7 +11,7 @@ class Transformacoes{
 
 public:
     Transformacoes();
-    void cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t);
+    std::vector<Ponto> cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t);
     Ponto projeta( Ponto p );
     Ponto rotacionaY(Ponto p );
     Ponto translada(Ponto p);
