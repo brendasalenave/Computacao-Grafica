@@ -61,7 +61,7 @@ MainWindow::MainWindow(){
     //QPushButton *button1 = new QPushButton("Button 1 - Status Bar");
     QPushButton *button2 = new QPushButton("Limpar");
     QPushButton *button3 = new QPushButton("Sweep");
-    button2->setStyleSheet("background-color: orange;");
+    button2->setStyleSheet("background-color: red;");
     button3->setStyleSheet("background-color: green;");
 
     QFont f( "Tahoma", 10, QFont::Bold);
@@ -105,9 +105,9 @@ MainWindow::MainWindow(){
     QGridLayout *gridLayout = new QGridLayout;// Pozzer: aqui estava QGridLayout(groupBox);
     gridLayout->addWidget(canvas,       0, 0, 3, 1);
     gridLayout->addWidget(radioGroupBox, 2, 1, 1, 1);
-    gridLayout->addWidget(button2,        1, 1, 1, 1);
-    gridLayout->addWidget(button3,        0, 1, 1, 1);
-    //gridLayout->addWidget(list,           3, 1, 1, 1);
+    gridLayout->addWidget(button2,      1, 1, 1, 1);
+    gridLayout->addWidget(button3,      0, 1, 1, 1);
+    //gridLayout->addWidget(list,       3, 1, 1, 1);
     gridLayout->addWidget(updateGroupBox, 3, 0, 1, 2); //row, column, rowSpan, colSpan
     gridLayout->addWidget(slider,         4, 0, 1, 1);
 
@@ -193,14 +193,12 @@ void MainWindow::showMsg2(){
     msg->show();
 }
 
-void MainWindow::updateIntervalChanged(int value)
-{
+void MainWindow::updateIntervalChanged(int value){
     m_timer->setInterval(value);
     if (m_timer->isActive())
         m_timer->start();
 }
 
-void MainWindow::resizeEvent(QResizeEvent *e)
-{
+void MainWindow::resizeEvent(QResizeEvent *e){
      qDebug("janela redimensionada" );
 }

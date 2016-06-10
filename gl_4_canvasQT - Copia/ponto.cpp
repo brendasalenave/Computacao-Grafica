@@ -1,7 +1,7 @@
 #include "ponto.h"
 
 Ponto::Ponto(){
-
+    z = 10.0;
 }
 
 void Ponto::setX(int u){
@@ -12,14 +12,18 @@ void Ponto::setY(int u){
     y = u;
 }
 
-/*void Ponto::setZ(int u){
+void Ponto::setZ(int u){
     z = u;
-}*/
+}
 
-int Ponto::getX(){
+float Ponto::getX(){
     return x;
 }
 
-int Ponto::getY(){
+float Ponto::getY(){
     return y;
+}
+
+float Ponto::getZ(){
+    return z;
 }

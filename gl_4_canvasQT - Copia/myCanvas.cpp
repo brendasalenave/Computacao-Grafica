@@ -15,6 +15,7 @@
 #include "glCanvas2d.h"
 #include "mainwindow.h"
 #include "ponto.h"
+#include "transformacoes.h"
 
 #include <math.h>
 #include <QMessageBox>
@@ -26,6 +27,8 @@ using namespace std;
 float global = 0;
 
 std::vector<Ponto*> ponto;
+std::vector<Ponto*> ponto2;
+
 
 int f, v = -1;
 int up = 0, down = 0, l = 0, r = 0;
@@ -64,6 +67,8 @@ void Canvas2D::paintGL(){
         oldX = ponto[u]->getX();
         oldY = ponto[u]->getY();
     }
+
+
 
 }
 
