@@ -34,6 +34,7 @@ Transformacoes *t = new Transformacoes();
 int f, v = -1;
 int up = 0, down = 0, l = 0, r = 0;
 //int del = 0;
+int b = 0;
 
 
 // *******************************************************************************
@@ -68,17 +69,10 @@ void Canvas2D::paintGL(){
         oldX = ponto[u].getX();
         oldY = ponto[u].getY();
     }
-
-    ponto2 = t->cria(ponto, tam);
-
+     std::vector<Ponto>::size_type tam2 = ponto2.size();
     oldX = 0, oldY = 0;
-    for(int u = 0; u < tam ; u++){
-        if(oldX !=0 && oldY !=0){
-            color(1,1,1);
-            line(oldX, oldY, ponto[u].getX(), ponto2[u].getY());
-        }
-        oldX = ponto2[u].getX();
-        oldY = ponto2[u].getY();
+    for(int u = 0; u < tam2 ; u++){
+        point(ponto2[u].getX(),ponto2[u].getY());
     }
 
 

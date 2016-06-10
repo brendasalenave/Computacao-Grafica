@@ -42,9 +42,6 @@ Ponto Transformacoes::projeta( Ponto p ){
     resp.setX((x*d)/z);
     resp.setY((y*d)/z);
     resp.setZ(0);
-    //resp.x = (p.x*d) / p.z;
-    //resp.y = (p.y*d) / p.z;
-    //resp.z = 0;
 
     return resp;
 }
@@ -66,7 +63,7 @@ Ponto Transformacoes::rotacionaY(Ponto p ){
     //resp.z = sin(theta)*p.y + cos(theta)*p.z;
 
     return resp;
- }
+}
 
 Ponto Transformacoes::translada(Ponto p){
     Ponto resp;
