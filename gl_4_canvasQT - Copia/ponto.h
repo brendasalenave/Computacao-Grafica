@@ -7,9 +7,9 @@ class Ponto{
 public:
     Ponto();
 
-    void setX(int u);
-    void setY(int u);
-    void setZ(int u);
+    void setX(float u);
+    void setY(float u);
+    void setZ(float u);
     float getX();
     float getY();
     float getZ();

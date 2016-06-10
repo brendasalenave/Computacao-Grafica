@@ -26,9 +26,10 @@ using namespace std;
 
 float global = 0;
 
-std::vector<Ponto*> ponto;
-std::vector<Ponto*> ponto2;
+std::vector<Ponto> ponto;
+std::vector<Ponto> ponto2;
 
+Transformacoes *t = new Transformacoes();
 
 int f, v = -1;
 int up = 0, down = 0, l = 0, r = 0;
@@ -44,7 +45,7 @@ void Canvas2D::paintGL(){
     mw->update();
 
 
-    int tam = ponto.size();
+    std::vector<Ponto>::size_type tam = ponto.size();
 
     for(int u = 0; u < tam; u ++){
         if(v == u){
@@ -58,36 +59,37 @@ void Canvas2D::paintGL(){
     for(int u = 0; u < tam ; u++){
         if(oldX !=0 && oldY !=0){
             color(1,1,1);
-            line(oldX, oldY, ponto[u]->getX(), ponto[u]->getY());
+            line(oldX, oldY, ponto[u].getX(), ponto[u].getY());
         }
         glPointSize(3);
         color(1,0.5,0);
-        rectFill(ponto[u]->getX()-2, ponto[u]->getY()-2, ponto[u]->getX()+2, ponto[u]->getY()+2);
+        rectFill(ponto[u].getX()-2, ponto[u].getY()-2, ponto[u].getX()+2, ponto[u].getY()+2);
 
-        oldX = ponto[u]->getX();
-        oldY = ponto[u]->getY();
+        oldX = ponto[u].getX();
+        oldY = ponto[u].getY();
     }
 
+    t->cria(ponto, tam);
 
 
 }
 
 void Canvas2D::movimenta(int u){
-    if(ponto[u]->getY() > 15){
+    if(ponto[u].getY() > 15){
         if(down)
-            ponto[u]->setY(ponto[u]->getY() - 2);
+            ponto[u].setY(ponto[u].getY() - 2);
     }
-    if(ponto[u]->getY() < 590){
+    if(ponto[u].getY() < 590){
         if(up)
-            ponto[u]->setY(ponto[u]->getY() + 2);
+            ponto[u].setY(ponto[u].getY() + 2);
     }
-    if(ponto[u]->getX() > 15){
+    if(ponto[u].getX() > 15){
         if(l)
-            ponto[u]->setX(ponto[u]->getX() - 2);
+            ponto[u].setX(ponto[u].getX() - 2);
     }
-    if(ponto[u]->getX() < mw->width() - 215){
+    if(ponto[u].getX() < mw->width() - 215){
         if(r)
-            ponto[u]->setX(ponto[u]->getX() + 2);
+            ponto[u].setX(ponto[u].getX() + 2);
     }
 }
 
@@ -107,16 +109,16 @@ void Canvas2D::mousePressEvent(QMouseEvent *event){
     int mouse_y = 600 - event->y();
 
     if((f==1) && (event->x() > 15) && event->x() < mw->width()-215 && (mouse_y > 15) && (mouse_y < 590)){
-        Ponto* p = new Ponto();
-        p->setX(event->x());
-        p->setY(mouse_y);
+        Ponto p;
+        p.setX(event->x());
+        p.setY(mouse_y);
         ponto.push_back(p);
     }
     if(!f){
         for(int u = 0; u < ponto.size(); u++){
             //int l =(h-40)/10;
             //printf("\nAUX: %d", aux);
-            if((event->x() > ponto[u]->getX()-2) && (event->x() < ponto[u]->getX()+2) && (mouse_y > ponto[u]->getY()-2) && (mouse_y < ponto[u]->getY()+2)){
+            if((event->x() > ponto[u].getX()-2) && (event->x() < ponto[u].getX()+2) && (mouse_y > ponto[u].getY()-2) && (mouse_y < ponto[u].getY()+2)){
                 v = u;
                 break;
             }

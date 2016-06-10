@@ -4,15 +4,15 @@ Ponto::Ponto(){
     z = 10.0;
 }
 
-void Ponto::setX(int u){
+void Ponto::setX(float u){
     x = u;
 }
 
-void Ponto::setY(int u){
+void Ponto::setY(float u){
     y = u;
 }
 
-void Ponto::setZ(int u){
+void Ponto::setZ(float u){
     z = u;
 }
 
