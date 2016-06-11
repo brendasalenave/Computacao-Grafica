@@ -27,6 +27,8 @@ public:
 //Callbacks de Widgets
 public slots:
     void showMsg(); //metodo chamado quando o botao eh pressionado
+    void buttonPressed();
+
 
 protected:
     void resizeGL(int w, int h) Q_DECL_OVERRIDE;

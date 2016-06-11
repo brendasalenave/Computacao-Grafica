@@ -69,12 +69,6 @@ void Canvas2D::paintGL(){
         oldX = ponto[u].getX();
         oldY = ponto[u].getY();
     }
-     std::vector<Ponto>::size_type tam2 = ponto2.size();
-    oldX = 0, oldY = 0;
-    for(int u = 0; u < tam2 ; u++){
-        point(ponto2[u].getX(),ponto2[u].getY());
-    }
-
 
 }
 
@@ -120,8 +114,6 @@ void Canvas2D::mousePressEvent(QMouseEvent *event){
     }
     if(!f){
         for(int u = 0; u < ponto.size(); u++){
-            //int l =(h-40)/10;
-            //printf("\nAUX: %d", aux);
             if((event->x() > ponto[u].getX()-2) && (event->x() < ponto[u].getX()+2) && (mouse_y > ponto[u].getY()-2) && (mouse_y < ponto[u].getY()+2)){
                 v = u;
                 break;
@@ -144,6 +136,16 @@ void Canvas2D::showMsg(){
     QMessageBox* msg = new QMessageBox(this);
     msg->setText("Msg GlWidget");
     msg->show();
+}
+
+void Canvas2D::buttonPressed(){
+    qDebug("SWEEP BUTTON PRESSED");
+    std::vector<Ponto>::size_type tam = ponto.size();
+    ponto2 = t->cria(ponto2,tam);
+    std::vector<Ponto>::size_type tam2 = ponto.size();
+    for(int u = 0; u < tam2 ; u++){
+        //point(ponto2[u].getX(),ponto2[u].getY());
+    }
 }
 
 void Canvas2D::keyPressEvent(QKeyEvent* event){

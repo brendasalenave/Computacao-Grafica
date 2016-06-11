@@ -17,13 +17,13 @@ void Ponto::setZ(float u){
 }
 
 float Ponto::getX(){
-    return x;
+    return this->x;
 }
 
 float Ponto::getY(){
-    return y;
+    return this->y;
 }
 
 float Ponto::getZ(){
-    return z;
+    return this->z;
 }

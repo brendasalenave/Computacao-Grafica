@@ -3,8 +3,14 @@
 
 
 class Ponto{
-    float x,y,z;
+   // float x;
+    //float y;
+    //float z;
 public:
+    float x;
+    float y;
+    float z;
+
     Ponto();
 
     void setX(float u);

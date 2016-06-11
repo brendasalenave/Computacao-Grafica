@@ -150,6 +150,7 @@ MainWindow::MainWindow(){
     connect(actShowMsgGL,   SIGNAL(triggered(bool)),   canvas, SLOT(showMsg()) );
     connect(actShowMsgThis, SIGNAL(triggered(bool)),   this,   SLOT(showMsg()) );
     connect(aboutMenu, SIGNAL(triggered(bool)),   this,   SLOT(showMsg2()) );
+    connect(button3, SIGNAL(clicked()), canvas, SLOT(buttonPressed()));
     //connect(button1,        SIGNAL(released()) ,       canvas, SLOT(showMsg()) );
     connect(refreshRate,    SIGNAL(valueChanged(int)), this,   SLOT(updateIntervalChanged(int)) );
     connect(slider,         SIGNAL(valueChanged(int)), this,   SLOT(sliderChanged(int)) );
@@ -167,8 +168,7 @@ void MainWindow::checkBoxChanged(bool enabled)
     refreshRate->setEnabled(enabled);
 }
 
-void MainWindow::sliderChanged(int i)
-{
+void MainWindow::sliderChanged(int i){
     qDebug("Slider: %d", i );
 }
 
