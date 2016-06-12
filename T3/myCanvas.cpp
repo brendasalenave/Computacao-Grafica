@@ -139,7 +139,7 @@ void Canvas2D::showMsg(){
 }
 
 void Canvas2D::buttonPressed(){
-    qDebug("SWEEP BUTTON PRESSED");
+    qDebug("Sweep Button Pressed");
     std::vector<Ponto>::size_type tam = ponto.size();
     ponto2 = ponto;
     ponto2 = t->cria(ponto2,tam);
@@ -147,6 +147,20 @@ void Canvas2D::buttonPressed(){
     color(0,1,0);
     for(int u = 0; u < tam2 ; u++){
         point(ponto2[u].getX(),ponto2[u].getY());
+        //printf("\nponto y:%f", ponto2[u].getY());
+    }
+}
+
+void Canvas2D::button2Pressed(){
+    qDebug("Clean Button Pressed");
+
+    std::vector<Ponto>::size_type tam = ponto.size();
+    for(int u = 0; u < tam ; u++){
+        ponto.pop_back();
+    }
+    std::vector<Ponto>::size_type tam2 = ponto2.size();
+    for(int u = 0; u < tam2 ; u++){
+        ponto2.pop_back();
     }
 }
 

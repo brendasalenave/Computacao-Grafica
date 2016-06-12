@@ -151,6 +151,7 @@ MainWindow::MainWindow(){
     connect(actShowMsgThis, SIGNAL(triggered(bool)),   this,   SLOT(showMsg()) );
     connect(aboutMenu, SIGNAL(triggered(bool)),   this,   SLOT(showMsg2()) );
     connect(button3, SIGNAL(clicked()), canvas, SLOT(buttonPressed()));
+    connect(button2, SIGNAL(clicked()), canvas, SLOT(button2Pressed()));
     //connect(button1,        SIGNAL(released()) ,       canvas, SLOT(showMsg()) );
     connect(refreshRate,    SIGNAL(valueChanged(int)), this,   SLOT(updateIntervalChanged(int)) );
     connect(slider,         SIGNAL(valueChanged(int)), this,   SLOT(sliderChanged(int)) );
