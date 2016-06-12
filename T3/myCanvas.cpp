@@ -141,10 +141,12 @@ void Canvas2D::showMsg(){
 void Canvas2D::buttonPressed(){
     qDebug("SWEEP BUTTON PRESSED");
     std::vector<Ponto>::size_type tam = ponto.size();
+    ponto2 = ponto;
     ponto2 = t->cria(ponto2,tam);
     std::vector<Ponto>::size_type tam2 = ponto.size();
+    color(0,1,0);
     for(int u = 0; u < tam2 ; u++){
-        //point(ponto2[u].getX(),ponto2[u].getY());
+        point(ponto2[u].getX(),ponto2[u].getY());
     }
 }
 

@@ -17,7 +17,7 @@ void Ponto::setZ(float u){
 }
 
 float Ponto::getX(){
-    return this->x;
+    return x;
 }
 
 float Ponto::getY(){

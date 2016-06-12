@@ -14,18 +14,18 @@ Transformacoes::Transformacoes(){
 std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t){
     std::vector<Ponto> ponto2;
 
-    for(int x=0; x <t ; x++){
+    for(int u=0; u <t ; u++){
         for(float z=0; z<=theta; z+=0.001){
             Ponto resp;
-            resp.x =cos(z) * p[x].x;
-            /*resp.setX(cos(z) * p[x].getX());
-            resp.setY(p[x].getY());
+            //resp.x =cos(z) * p[u].x;
+            resp.setX(cos(z) * p[u].getX());
+            resp.setY(p[u].getY());
             resp.setZ(sin(z) * 6);
 
             resp = translada(resp);
             resp = rotacionaY(resp);
             resp = projeta(resp);
-            ponto2.push_back(resp);*/
+            ponto2.push_back(resp);
       }
     }
     return ponto2;
