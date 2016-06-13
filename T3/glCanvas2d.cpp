@@ -42,8 +42,7 @@ Canvas2D::Canvas2D(MainWindow *_mw)
     mw = _mw;
 }
 
-Canvas2D::~Canvas2D()
-{
+Canvas2D::~Canvas2D(){
 
 }
 
@@ -62,8 +61,7 @@ void Canvas2D::line( int x1, int y1, int x2, int y2 )
    glEnd();
 }
 
-void Canvas2D::rect( int x1, int y1, int x2, int y2 )
-{
+void Canvas2D::rect( int x1, int y1, int x2, int y2 ){
    glBegin(GL_LINE_LOOP);
       glVertex2d(x1, y1);
       glVertex2d(x1, y2);
@@ -72,8 +70,7 @@ void Canvas2D::rect( int x1, int y1, int x2, int y2 )
    glEnd();
 }
 
-void Canvas2D::rectFill( int x1, int y1, int x2, int y2 )
-{
+void Canvas2D::rectFill( int x1, int y1, int x2, int y2 ){
    glBegin(GL_QUADS);
       glVertex2d(x1, y1);
       glVertex2d(x1, y2);
@@ -82,8 +79,7 @@ void Canvas2D::rectFill( int x1, int y1, int x2, int y2 )
    glEnd();
 }
 
-void Canvas2D::polygon(float vx[], float vy[], int elems)
-{
+void Canvas2D::polygon(float vx[], float vy[], int elems){
    int cont;
    glBegin(GL_LINE_LOOP);
       for(cont=0; cont<elems; cont++)

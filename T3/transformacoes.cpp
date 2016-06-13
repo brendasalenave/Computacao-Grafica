@@ -26,6 +26,8 @@ std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>
             resp = translada(resp);
             if(cod == 1)
                 resp = projeta(resp);
+            else
+                resp = escala(resp);
             resp.x+=100;
             //resp.y+=100;
             ponto2.push_back(resp);
@@ -62,6 +64,20 @@ Ponto Transformacoes::translada(Ponto p){
     resp.setX(x);
     resp.setY(y - 10);
     resp.setZ(z - 12);
+
+    return resp;
+}
+
+Ponto Transformacoes::escala(Ponto p){
+    Ponto resp;
+
+    float x = p.getX();
+    float y = p.getY();
+    float z = p.getZ();
+
+    resp.setX(x * 0.5);
+    resp.setY(y * 0.5);
+    resp.setZ(z * 0.5);
 
     return resp;
 }

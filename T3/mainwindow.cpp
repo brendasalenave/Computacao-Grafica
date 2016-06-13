@@ -35,6 +35,7 @@ MainWindow::MainWindow(){
     Canvas2D *canvas = new Canvas2D(this);
     canvas->setMinimumHeight(600);
     canvas->setMaximumHeight(600);
+    canvas->setMinimumWidth(1000);
 
     QLabel *label = new QLabel(this);
     label->setText("A scrollable QOpenGLWidget");
@@ -64,13 +65,10 @@ MainWindow::MainWindow(){
 
     QPushButton *button1 = new QPushButton("Delete");
     QPushButton *button2 = new QPushButton("Limpar");
-    QPushButton *button3 = new QPushButton("Sweep");
     button1->setStyleSheet("background-color: orange;");
     button2->setStyleSheet("background-color: red;");
-    button3->setStyleSheet("background-color: green;");
     button1->setMinimumHeight(15);
     button2->setMinimumHeight(15);
-    button3->setMinimumHeight(15);
     //radioGroupBox->setMinimumWidth(170);
 
     QFont f( "Tahoma", 10, QFont::Bold);
@@ -105,7 +103,7 @@ MainWindow::MainWindow(){
     verticalLayout->addWidget(radioB2);
     verticalLayout->addWidget(button1);
     verticalLayout->addWidget(button2);
-    verticalLayout->addWidget(button3);
+    verticalLayout->setSpacing(10);
     //verticalLayout->addWidget(slider2);
 
 
@@ -120,9 +118,6 @@ MainWindow::MainWindow(){
     QGridLayout *gridLayout = new QGridLayout;// Pozzer: aqui estava QGridLayout(groupBox);
     gridLayout->addWidget(canvas,       0, 0, 3, 1);
     gridLayout->addWidget(radioGroupBox, 0, 1, 1, 1);
-    //gridLayout->addWidget(button2,      1, 1, 1, 1);
-    //gridLayout->addWidget(button3,      0, 1, 1, 1);
-    //gridLayout->addWidget(list,       3, 1, 1, 1);
     gridLayout->addWidget(updateGroupBox, 3, 0, 1, 2); //row, column, rowSpan, colSpan
     gridLayout->addWidget(slider,         4, 0, 1, 1);
 
@@ -131,24 +126,17 @@ MainWindow::MainWindow(){
     //groupBox->setTitle("QGroupBox Grid");
     setCentralWidget(groupBox);
 
-    //QScrollArea *scrollArea = new QScrollArea;
-    //scrollArea->setWidget(canvas);
-    //gridLayout->addWidget(scrollArea,1,0,8,1);
-
     menuBar()->setFont(f1);
     menuBar()->setStyleSheet("background-color: green;");
     QMenu *fileMenu = menuBar()->addMenu("&Arquivo");
     QMenu *showMenu = menuBar()->addMenu("&Ajuda");
-    //statusBar()->addWidget(button1);
 
     QAction *actExit        = new QAction("E&xit", fileMenu);
-    QAction *actShowMsgGL   = new QAction("Show Msg na Canvas", showMenu);
     QAction *actShowMsgThis = new QAction("Pontos", showMenu);
     QAction *aboutMenu = new QAction("Sobre", showMenu);
 
 
     fileMenu->addAction(actExit);
-    showMenu->addAction(actShowMsgGL);
     showMenu->addAction(actShowMsgThis);
     showMenu->addAction(aboutMenu);
 
@@ -162,10 +150,8 @@ MainWindow::MainWindow(){
     //tratamento de eventos de menu, checkbox, timer, botao, slider e QSpinBox (e etc)
     connect(m_timer,        SIGNAL(timeout()),         canvas, SLOT(update()));
     connect(actExit,        SIGNAL(triggered(bool)),   this,   SLOT(close())   );
-    connect(actShowMsgGL,   SIGNAL(triggered(bool)),   canvas, SLOT(showMsg()) );
     connect(actShowMsgThis, SIGNAL(triggered(bool)),   this,   SLOT(showMsg()) );
     connect(aboutMenu, SIGNAL(triggered(bool)),   this,   SLOT(showMsg2()) );
-    connect(button3, SIGNAL(clicked()), canvas, SLOT(buttonPressed()));
     connect(button2, SIGNAL(clicked()), canvas, SLOT(button2Pressed()));
     connect(button1,        SIGNAL(released()) ,       canvas, SLOT(button1Pressed()) );
     connect(refreshRate,    SIGNAL(valueChanged(int)), this,   SLOT(updateIntervalChanged(int)) );

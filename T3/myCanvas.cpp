@@ -49,16 +49,22 @@ void Canvas2D::paintGL(){
 
     std::vector<Ponto>::size_type tam = ponto.size();
 
-    for(int u = 0; u < tam; u ++){
+    for(int u = 0; u < (int)tam; u ++){
         if(v == u){
             movimenta(u);
             break;
         }
     }
 
+    color(0.9,0.9,0.8);
+    glLineWidth(3.0);
+    int cWidth = (mw->width() / 2) - 100;
+    line(cWidth, 0, cWidth, 600);
+    glLineWidth(1.0);
+
     int oldX = 0, oldY = 0;
 
-    for(int u = 0; u < tam ; u++){
+    for(int u = 0; u < (int)tam ; u++){
         if(oldX !=0 && oldY !=0){
             color(1,1,1);
             line(oldX, oldY, ponto[u].getX(), ponto[u].getY());
@@ -71,16 +77,20 @@ void Canvas2D::paintGL(){
         oldY = ponto[u].getY();
     }
 
+    ponto2 = ponto;
+    ponto2 = t->cria(ponto2,tam,c);
 
+    int x = (cWidth + (cWidth /4)) + 30;
+    int y = 200;
     std::vector<Ponto>::size_type tam2 = ponto2.size();
     oldX = 0, oldY = 0;
-    for(int u = 0; u < tam2 ; u++){
-        if((u+20) < tam2){
-            line(ponto2[u+20].getX(), ponto2[u+20].getY(), ponto2[u].getX(), ponto2[u].getY());
+    for(int u = 0; u < (int)tam2 ; u++){
+        if((u+20) < (int)tam2){
+            line(ponto2[u+20].getX()+x, ponto2[u+20].getY()+y, ponto2[u].getX()+x, ponto2[u].getY()+y);
         }
 
-        if(((u + 1) < tam2)){ // && ((u%20) != 0)
-            line(ponto2[u+1].getX(), ponto2[u+1].getY(), ponto2[u].getX(), ponto2[u].getY());
+        if(((u + 1) < (int)tam2)){ // && ((u%20) != 0)
+            line(ponto2[u+1].getX()+x, ponto2[u+1].getY()+y, ponto2[u].getX()+x, ponto2[u].getY()+y);
         }
      }
 }
@@ -119,14 +129,16 @@ void Canvas2D::mousePressEvent(QMouseEvent *event){
     mw->list->addItem("Mouse Click event");
     int mouse_y = 600 - event->y();
 
-    if((f==1) && (event->x() > 15) && event->x() < mw->width()-215 && (mouse_y > 15) && (mouse_y < 590)){
+    int cWidth = (mw->width() / 2) - 100;
+
+    if((f==1) && (event->x() > 5) && (event->x() < cWidth-5) && (mouse_y > 15) && (mouse_y < 590)){
         Ponto p;
         p.setX(event->x());
         p.setY(mouse_y);
         ponto.push_back(p);
     }
     if(!f){
-        for(int u = 0; u < ponto.size(); u++){
+        for(int u = 0; u < (int)ponto.size(); u++){
             if((event->x() > ponto[u].getX()-2) && (event->x() < ponto[u].getX()+2) && (mouse_y > ponto[u].getY()-2) && (mouse_y < ponto[u].getY()+2)){
                 v = u;
                 break;
@@ -144,13 +156,6 @@ void Canvas2D::mouseMoveEvent(QMouseEvent * event){
     mw->list->addItem("Mouse Move event");
 }
 
-//callback para botao definido na mainWindow.
-void Canvas2D::showMsg(){
-    QMessageBox* msg = new QMessageBox(this);
-    msg->setText("Msg GlWidget");
-    msg->show();
-}
-
 void Canvas2D::radioCheck(bool enabled){
     if(enabled == true)
         c = 1;
@@ -161,24 +166,15 @@ void Canvas2D::radioCheck2(bool enabled){
         c = 0;
 }
 
-void Canvas2D::buttonPressed(){
-    qDebug("Sweep Button Pressed");
-    std::vector<Ponto>::size_type tam = ponto.size();
-    ponto2 = ponto;
-    //qDebug("C: %d", c);
-    ponto2 = t->cria(ponto2,tam,c);
-    std::vector<Ponto>::size_type tam2 = ponto.size();
-}
-
 void Canvas2D::button2Pressed(){
     qDebug("Clean Button Pressed");
 
     std::vector<Ponto>::size_type tam = ponto.size();
-    for(int u = 0; u < tam ; u++){
+    for(int u = 0; u < (int)tam ; u++){
         ponto.pop_back();
     }
     std::vector<Ponto>::size_type tam2 = ponto2.size();
-    for(int u = 0; u < tam2 ; u++){
+    for(int u = 0; u < (int)tam2 ; u++){
         ponto2.pop_back();
     }
 }
@@ -187,7 +183,6 @@ void Canvas2D::button1Pressed(){
     qDebug("Delete Button Pressed");
 
     ponto.pop_back();
-    ponto2.pop_back();
 }
 
 void Canvas2D::keyPressEvent(QKeyEvent* event){
