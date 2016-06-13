@@ -1,6 +1,8 @@
 #include <math.h>
 //#include <vector>
 
+#include <stdio.h>
+
 #include "transformacoes.h"
 #include "ponto.h"
 
@@ -17,7 +19,6 @@ std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>
     for(int u=0; u <t ; u++){
         for(float z=0; z<=theta; z+=0.001){
             Ponto resp;
-            //resp.x =cos(z) * p[u].x;
             resp.setX(cos(z) * p[u].getX());
             resp.setY(p[u].getY());
             resp.setZ(sin(z) * 6);
@@ -25,14 +26,19 @@ std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>
             resp = translada(resp);
             resp = rotacionaY(resp);
             resp = projeta(resp);
+            resp.x+=100;
+            resp.y+=100;
             ponto2.push_back(resp);
+
+            printf(" x: %f y: %f", resp.x, resp.y);
+
       }
     }
     return ponto2;
 }
 
 Ponto Transformacoes::projeta( Ponto p ){
-    float d = -10.0;
+    float d = -1.0;
     Ponto resp;
 
     float x = p.getX();
@@ -54,9 +60,9 @@ Ponto Transformacoes::rotacionaY(Ponto p ){
     float y = p.getY();
     float z = p.getZ();
 
-    resp.setX(sin(theta)*x - cos(theta)*z);
+    resp.setX(cos(theta)*y - sin(theta)*z);
     resp.setY(y);
-    resp.setZ(sin(theta)*x + cos(theta)*z);
+    resp.setZ(sin(theta)*y + cos(theta)*z);
 
     //resp.x = p.x;
     //resp.y = cos(theta)*p.y - sin(theta)*p.z;
@@ -72,10 +78,12 @@ Ponto Transformacoes::translada(Ponto p){
     float y = p.getY();
     float z = p.getZ();
 
+
     resp.setX(x);
     resp.setY(y - 10);
     resp.setZ(z - 12);
 
+    //printf("x: %f y: %f", x, y);
     //resp.x = p.x;
     //resp.y = p.y - 10 ;
     //resp.z = p.z - 12;

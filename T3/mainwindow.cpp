@@ -58,9 +58,10 @@ MainWindow::MainWindow(){
     timerBased->setChecked(true);
     timerBased->setToolTip("Toggles using a timer to trigger update()");
 
-    //QPushButton *button1 = new QPushButton("Button 1 - Status Bar");
+    QPushButton *button1 = new QPushButton("Delete");
     QPushButton *button2 = new QPushButton("Limpar");
     QPushButton *button3 = new QPushButton("Sweep");
+    button1->setStyleSheet("background-color: orange;");
     button2->setStyleSheet("background-color: red;");
     button3->setStyleSheet("background-color: green;");
 
@@ -93,6 +94,9 @@ MainWindow::MainWindow(){
     QVBoxLayout *verticalLayout = new QVBoxLayout;
     verticalLayout->addWidget(radioB1);
     verticalLayout->addWidget(radioB2);
+    verticalLayout->addWidget(button1);
+    verticalLayout->addWidget(button2);
+    verticalLayout->addWidget(button3);
 
     QGroupBox *radioGroupBox = new QGroupBox(this);
     radioGroupBox->setLayout(verticalLayout);
@@ -104,9 +108,9 @@ MainWindow::MainWindow(){
 
     QGridLayout *gridLayout = new QGridLayout;// Pozzer: aqui estava QGridLayout(groupBox);
     gridLayout->addWidget(canvas,       0, 0, 3, 1);
-    gridLayout->addWidget(radioGroupBox, 2, 1, 1, 1);
-    gridLayout->addWidget(button2,      1, 1, 1, 1);
-    gridLayout->addWidget(button3,      0, 1, 1, 1);
+    gridLayout->addWidget(radioGroupBox, 0, 1, 1, 1);
+    //gridLayout->addWidget(button2,      1, 1, 1, 1);
+    //gridLayout->addWidget(button3,      0, 1, 1, 1);
     //gridLayout->addWidget(list,       3, 1, 1, 1);
     gridLayout->addWidget(updateGroupBox, 3, 0, 1, 2); //row, column, rowSpan, colSpan
     gridLayout->addWidget(slider,         4, 0, 1, 1);
@@ -152,7 +156,7 @@ MainWindow::MainWindow(){
     connect(aboutMenu, SIGNAL(triggered(bool)),   this,   SLOT(showMsg2()) );
     connect(button3, SIGNAL(clicked()), canvas, SLOT(buttonPressed()));
     connect(button2, SIGNAL(clicked()), canvas, SLOT(button2Pressed()));
-    //connect(button1,        SIGNAL(released()) ,       canvas, SLOT(showMsg()) );
+    connect(button1,        SIGNAL(released()) ,       canvas, SLOT(button1Pressed()) );
     connect(refreshRate,    SIGNAL(valueChanged(int)), this,   SLOT(updateIntervalChanged(int)) );
     connect(slider,         SIGNAL(valueChanged(int)), this,   SLOT(sliderChanged(int)) );
     connect(timerBased,     SIGNAL(clicked(bool)),     this,   SLOT(checkBoxChanged(bool)));

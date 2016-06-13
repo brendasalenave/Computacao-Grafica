@@ -144,10 +144,22 @@ void Canvas2D::buttonPressed(){
     ponto2 = ponto;
     ponto2 = t->cria(ponto2,tam);
     std::vector<Ponto>::size_type tam2 = ponto.size();
-    color(0,1,0);
+    color(1,1,0);
+    //for(int u = 0; u < tam2 ; u++){
+    //    point(ponto2[u].getX(),ponto2[u].getY());
+    //    qDebug("\nponto x: %f ; ponto y:%f",ponto2[u].getX() ,ponto2[u].getY());
+    //}
+
+    int oldX = 0, oldY = 0;
     for(int u = 0; u < tam2 ; u++){
-        point(ponto2[u].getX(),ponto2[u].getY());
-        //printf("\nponto y:%f", ponto2[u].getY());
+        if(oldX !=0 && oldY !=0){
+            color(1,1,0);
+            glLineWidth(4);
+            line(oldX+50, oldY+50, ponto[u].getX()+50, ponto[u].getY()+50);
+        }
+        qDebug("\nponto x: %f ; ponto y:%f",ponto2[u].getX() ,ponto2[u].getY());
+        oldX = ponto[u].getX();
+        oldY = ponto[u].getY();
     }
 }
 
@@ -162,6 +174,15 @@ void Canvas2D::button2Pressed(){
     for(int u = 0; u < tam2 ; u++){
         ponto2.pop_back();
     }
+}
+
+void Canvas2D::button1Pressed(){
+    qDebug("Delete Button Pressed");
+
+    std::vector<Ponto>::size_type tam = ponto.size();
+    ponto.pop_back();
+    std::vector<Ponto>::size_type tam2 = ponto2.size();
+    ponto2.pop_back();
 }
 
 void Canvas2D::keyPressEvent(QKeyEvent* event){

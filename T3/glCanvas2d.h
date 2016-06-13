@@ -29,6 +29,7 @@ public slots:
     void showMsg(); //metodo chamado quando o botao eh pressionado
     void buttonPressed();
     void button2Pressed();
+    void button1Pressed();
 
 
 protected:
