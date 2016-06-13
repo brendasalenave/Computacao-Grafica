@@ -30,6 +30,7 @@ public slots:
     void buttonPressed();
     void button2Pressed();
     void button1Pressed();
+    void radioCheck(bool enabled);
 
 
 protected:

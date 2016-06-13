@@ -159,11 +159,12 @@ MainWindow::MainWindow(){
     connect(button1,        SIGNAL(released()) ,       canvas, SLOT(button1Pressed()) );
     connect(refreshRate,    SIGNAL(valueChanged(int)), this,   SLOT(updateIntervalChanged(int)) );
     connect(slider,         SIGNAL(valueChanged(int)), this,   SLOT(sliderChanged(int)) );
+    connect(radioB1,         SIGNAL(released()), this,   SLOT(radioCheck(enabled)) );
+    //connect(radioB2,         SIGNAL(released()), this,   SLOT(radioCheck()) );
     connect(timerBased,     SIGNAL(clicked(bool)),     this,   SLOT(checkBoxChanged(bool)));
 }
 
-void MainWindow::checkBoxChanged(bool enabled)
-{
+void MainWindow::checkBoxChanged(bool enabled){
     qDebug("Checkbox: %d", enabled );
     if (enabled) {
         m_timer->start();

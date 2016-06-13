@@ -70,6 +70,22 @@ void Canvas2D::paintGL(){
         oldY = ponto[u].getY();
     }
 
+
+    std::vector<Ponto>::size_type tam2 = ponto2.size();
+    oldX = 0, oldY = 0;
+    for(int u = 0; u < tam2 ; u++){
+        if(oldX !=0 && oldY !=0){
+            color(1,0,0);
+            //glLineWidth(4.0);
+            line(oldX+50, oldY+50, ponto2[u].getX()+50, ponto2[u].getY()+50);
+            //line(100, 100, 200, 200);
+        }
+        //qDebug("\nponto x: %f ; ponto y:%f",ponto2[u].getX() ,ponto2[u].getY());
+        oldX = ponto2[u].getX();
+        oldY = ponto2[u].getY();
+        //line(100, 100, 200, 200);
+        //Sleep(1000);
+     }
 }
 
 void Canvas2D::movimenta(int u){
@@ -138,29 +154,16 @@ void Canvas2D::showMsg(){
     msg->show();
 }
 
+void Canvas2D::radioCheck(bool enabled){
+    //if(enabled == true)
+}
+
 void Canvas2D::buttonPressed(){
     qDebug("Sweep Button Pressed");
     std::vector<Ponto>::size_type tam = ponto.size();
     ponto2 = ponto;
-    ponto2 = t->cria(ponto2,tam);
+    ponto2 = t->cria(ponto2,tam,1);
     std::vector<Ponto>::size_type tam2 = ponto.size();
-    color(1,1,0);
-    //for(int u = 0; u < tam2 ; u++){
-    //    point(ponto2[u].getX(),ponto2[u].getY());
-    //    qDebug("\nponto x: %f ; ponto y:%f",ponto2[u].getX() ,ponto2[u].getY());
-    //}
-
-    int oldX = 0, oldY = 0;
-    for(int u = 0; u < tam2 ; u++){
-        if(oldX !=0 && oldY !=0){
-            color(1,1,0);
-            glLineWidth(4);
-            line(oldX+50, oldY+50, ponto[u].getX()+50, ponto[u].getY()+50);
-        }
-        qDebug("\nponto x: %f ; ponto y:%f",ponto2[u].getX() ,ponto2[u].getY());
-        oldX = ponto[u].getX();
-        oldY = ponto[u].getY();
-    }
 }
 
 void Canvas2D::button2Pressed(){

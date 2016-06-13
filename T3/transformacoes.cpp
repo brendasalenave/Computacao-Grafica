@@ -13,7 +13,7 @@ Transformacoes::Transformacoes(){
     theta = 6.28;
 }
 
-std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t){
+std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t, int cod){
     std::vector<Ponto> ponto2;
 
     for(int u=0; u <t ; u++){
@@ -21,16 +21,17 @@ std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>
             Ponto resp;
             resp.setX(cos(z) * p[u].getX());
             resp.setY(p[u].getY());
-            resp.setZ(sin(z) * 6);
+            resp.setZ((sin(z) * p[u].getX())-1000);
 
             resp = translada(resp);
-            resp = rotacionaY(resp);
-            resp = projeta(resp);
+            //resp = rotacionaY(resp);
+            if(cod == 1)
+                resp = projeta(resp);
             resp.x+=100;
-            resp.y+=100;
+            //resp.y+=100;
             ponto2.push_back(resp);
 
-            printf(" x: %f y: %f", resp.x, resp.y);
+            //printf(" x: %f y: %f", resp.x, resp.y);
 
       }
     }
@@ -38,7 +39,7 @@ std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>
 }
 
 Ponto Transformacoes::projeta( Ponto p ){
-    float d = -1.0;
+    float d = -300.0;
     Ponto resp;
 
     float x = p.getX();
