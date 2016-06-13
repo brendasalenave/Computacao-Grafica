@@ -35,6 +35,7 @@ int f, v = -1;
 int up = 0, down = 0, l = 0, r = 0;
 //int del = 0;
 int b = 0;
+int c = 1;
 
 
 // *******************************************************************************
@@ -74,17 +75,13 @@ void Canvas2D::paintGL(){
     std::vector<Ponto>::size_type tam2 = ponto2.size();
     oldX = 0, oldY = 0;
     for(int u = 0; u < tam2 ; u++){
-        if(oldX !=0 && oldY !=0){
-            color(1,0,0);
-            //glLineWidth(4.0);
-            line(oldX+50, oldY+50, ponto2[u].getX()+50, ponto2[u].getY()+50);
-            //line(100, 100, 200, 200);
+        if((u+20) < tam2){
+            line(ponto2[u+20].getX(), ponto2[u+20].getY(), ponto2[u].getX(), ponto2[u].getY());
         }
-        //qDebug("\nponto x: %f ; ponto y:%f",ponto2[u].getX() ,ponto2[u].getY());
-        oldX = ponto2[u].getX();
-        oldY = ponto2[u].getY();
-        //line(100, 100, 200, 200);
-        //Sleep(1000);
+
+        if(((u + 1) < tam2)){ // && ((u%20) != 0)
+            line(ponto2[u+1].getX(), ponto2[u+1].getY(), ponto2[u].getX(), ponto2[u].getY());
+        }
      }
 }
 
@@ -155,14 +152,21 @@ void Canvas2D::showMsg(){
 }
 
 void Canvas2D::radioCheck(bool enabled){
-    //if(enabled == true)
+    if(enabled == true)
+        c = 1;
+}
+
+void Canvas2D::radioCheck2(bool enabled){
+    if(enabled == true)
+        c = 0;
 }
 
 void Canvas2D::buttonPressed(){
     qDebug("Sweep Button Pressed");
     std::vector<Ponto>::size_type tam = ponto.size();
     ponto2 = ponto;
-    ponto2 = t->cria(ponto2,tam,1);
+    //qDebug("C: %d", c);
+    ponto2 = t->cria(ponto2,tam,c);
     std::vector<Ponto>::size_type tam2 = ponto.size();
 }
 
@@ -182,9 +186,7 @@ void Canvas2D::button2Pressed(){
 void Canvas2D::button1Pressed(){
     qDebug("Delete Button Pressed");
 
-    std::vector<Ponto>::size_type tam = ponto.size();
     ponto.pop_back();
-    std::vector<Ponto>::size_type tam2 = ponto2.size();
     ponto2.pop_back();
 }
 

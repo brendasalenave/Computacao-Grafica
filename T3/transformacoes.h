@@ -13,7 +13,6 @@ public:
     Transformacoes();
     std::vector<Ponto> cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t, int cod);
     Ponto projeta( Ponto p );
-    Ponto rotacionaY(Ponto p );
     Ponto translada(Ponto p);
 
 };

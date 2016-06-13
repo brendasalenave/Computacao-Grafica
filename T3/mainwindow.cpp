@@ -48,6 +48,10 @@ MainWindow::MainWindow(){
     slider->setRange(0, 50);
     slider->setSliderPosition(30);
 
+    /* *slider2 = new QSlider(this);
+    slider2->setOrientation(Qt::Horizontal);
+    slider2->setRange(0, 50);*/
+
     refreshRate = new QSpinBox(this);
     refreshRate->setSuffix(" ms");
     refreshRate->setValue(10);
@@ -64,6 +68,10 @@ MainWindow::MainWindow(){
     button1->setStyleSheet("background-color: orange;");
     button2->setStyleSheet("background-color: red;");
     button3->setStyleSheet("background-color: green;");
+    button1->setMinimumHeight(15);
+    button2->setMinimumHeight(15);
+    button3->setMinimumHeight(15);
+    //radioGroupBox->setMinimumWidth(170);
 
     QFont f( "Tahoma", 10, QFont::Bold);
     QFont f1( "Tahoma", 10);
@@ -74,6 +82,8 @@ MainWindow::MainWindow(){
     QRadioButton *radioB2 = new QRadioButton("Ortográfica");
     radioB2->setToolTip("Projeção ortográfica do objeto");
     radioB1->setChecked(true);
+    radioB1->setMinimumHeight(15);
+    radioB2->setMinimumHeight(15);
 
     QLabel *updateLabel = new QLabel("Tempo de Espera entre updates da Canvas");
 
@@ -85,7 +95,6 @@ MainWindow::MainWindow(){
     horizontalLayout->addWidget(updateLabel);
     horizontalLayout->addWidget(refreshRate);
     horizontalLayout->addWidget(timerBased);
-    //horizontalLayout->addWidget(button1);
 
     QGroupBox *updateGroupBox = new QGroupBox(this);
     updateGroupBox->setLayout(horizontalLayout);
@@ -97,6 +106,8 @@ MainWindow::MainWindow(){
     verticalLayout->addWidget(button1);
     verticalLayout->addWidget(button2);
     verticalLayout->addWidget(button3);
+    //verticalLayout->addWidget(slider2);
+
 
     QGroupBox *radioGroupBox = new QGroupBox(this);
     radioGroupBox->setLayout(verticalLayout);
@@ -159,8 +170,8 @@ MainWindow::MainWindow(){
     connect(button1,        SIGNAL(released()) ,       canvas, SLOT(button1Pressed()) );
     connect(refreshRate,    SIGNAL(valueChanged(int)), this,   SLOT(updateIntervalChanged(int)) );
     connect(slider,         SIGNAL(valueChanged(int)), this,   SLOT(sliderChanged(int)) );
-    connect(radioB1,         SIGNAL(released()), this,   SLOT(radioCheck(enabled)) );
-    //connect(radioB2,         SIGNAL(released()), this,   SLOT(radioCheck()) );
+    connect(radioB1,         SIGNAL(toggled(bool)), canvas,   SLOT(radioCheck(bool)) );
+    connect(radioB2,         SIGNAL(toggled(bool)), canvas,   SLOT(radioCheck2(bool)) );
     connect(timerBased,     SIGNAL(clicked(bool)),     this,   SLOT(checkBoxChanged(bool)));
 }
 
