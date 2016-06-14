@@ -16,7 +16,7 @@ Transformacoes::Transformacoes(){
 std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t, int cod){
     std::vector<Ponto> ponto2;
 
-    for(int u=0; u <t ; u++){
+    for(int u=0; u <(int)t ; u++){
         for(float z=0; z<=theta; z+= (theta/20)){
             Ponto resp;
             resp.setX(cos(z) * p[u].getX());

@@ -29,8 +29,6 @@ public slots:
     void button2Pressed();
     void button1Pressed();
     void radioCheck(bool enabled);
-    void radioCheck2(bool enabled);
-
 
 protected:
     void resizeGL(int w, int h) Q_DECL_OVERRIDE;

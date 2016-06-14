@@ -24,8 +24,10 @@
 #include <QGridLayout>
 #include <QRadioButton>
 #include <QVBoxLayout>
+#include <QKeyEvent>
 
 #include "glwidget.h"
+
 
 MainWindow::MainWindow(){
     //****************************************************
@@ -36,6 +38,9 @@ MainWindow::MainWindow(){
     canvas->setMinimumHeight(600);
     canvas->setMaximumHeight(600);
     canvas->setMinimumWidth(1000);
+
+    canvas->setFocusPolicy(Qt::StrongFocus);
+
 
     QLabel *label = new QLabel(this);
     label->setText("A scrollable QOpenGLWidget");
@@ -65,10 +70,13 @@ MainWindow::MainWindow(){
 
     QPushButton *button1 = new QPushButton("Delete");
     QPushButton *button2 = new QPushButton("Limpar");
-    button1->setStyleSheet("background-color: orange;");
-    button2->setStyleSheet("background-color: red;");
+    button1->setStyleSheet("background-color: red;");
+    button2->setStyleSheet("background-color: blue;");
     button1->setMinimumHeight(15);
     button2->setMinimumHeight(15);
+    button1->setToolTip("Deleta último ponto adicionado");
+    button2->setToolTip("Remove todos os pontos");
+
     //radioGroupBox->setMinimumWidth(170);
 
     QFont f( "Tahoma", 10, QFont::Bold);
@@ -157,7 +165,6 @@ MainWindow::MainWindow(){
     connect(refreshRate,    SIGNAL(valueChanged(int)), this,   SLOT(updateIntervalChanged(int)) );
     connect(slider,         SIGNAL(valueChanged(int)), this,   SLOT(sliderChanged(int)) );
     connect(radioB1,         SIGNAL(toggled(bool)), canvas,   SLOT(radioCheck(bool)) );
-    connect(radioB2,         SIGNAL(toggled(bool)), canvas,   SLOT(radioCheck2(bool)) );
     connect(timerBased,     SIGNAL(clicked(bool)),     this,   SLOT(checkBoxChanged(bool)));
 }
 
@@ -179,10 +186,8 @@ void MainWindow::sliderChanged(int i){
 void MainWindow::showMsg(){
     QMessageBox* msg = new QMessageBox(this);
     msg->setWindowTitle("Pontos");
-    msg->setText("Movimentação dos pontos:\n• Para criação dos pontos basta clicar na àrea de desenho utilizando"
-                 " o botão direito do mouse"
-                 "\n\n• Para movimentação dos pontos já existentes clique sobre o ponto que deseja mover utilizando"
-                 " o botão esquerdo do mouse");
+    msg->setText("• Para movimentação dos pontos já existentes clique sobre o ponto que deseja mover utilizando"
+                 " o botão direito do mouse");
     msg->show();
 }
 
