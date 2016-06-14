@@ -15,6 +15,7 @@ int main( int argc, char ** argv ){
     QApplication a( argc, argv );
 
     MainWindow mw;
+    mw.setWindowTitle("Computação Gráfica: trabalho 3");
     mw.setMinimumSize(600,800);
     mw.setMinimumWidth(1200);
     mw.resize(800,600);

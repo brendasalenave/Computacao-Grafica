@@ -54,9 +54,6 @@ MainWindow::MainWindow(){
     slider->setRange(0, 50);
     slider->setSliderPosition(30);
 
-    /* *slider2 = new QSlider(this);
-    slider2->setOrientation(Qt::Horizontal);
-    slider2->setRange(0, 50);*/
 
     refreshRate = new QSpinBox(this);
     refreshRate->setSuffix(" ms");
@@ -91,6 +88,15 @@ MainWindow::MainWindow(){
     radioB1->setMinimumHeight(15);
     radioB2->setMinimumHeight(15);
 
+    QRadioButton *radioB3 = new QRadioButton("Eixo X");
+    radioB1->setToolTip("Rotaciona o objeto no eixo X");
+    QRadioButton *radioB4 = new QRadioButton("Eixo Y");
+    radioB2->setToolTip("Rotaciona o objeto no eixo Y");
+    QRadioButton *radioB5 = new QRadioButton("Nenhum");
+    radioB5->setToolTip("Objeto estático");
+    radioB5->setChecked(true);
+
+
     QLabel *updateLabel = new QLabel("Tempo de Espera entre updates da Canvas");
 
     //****************************************************
@@ -104,16 +110,23 @@ MainWindow::MainWindow(){
 
     QGroupBox *updateGroupBox = new QGroupBox(this);
     updateGroupBox->setLayout(horizontalLayout);
-    updateGroupBox->setTitle("QGroupBox Horizontal");
+    //updateGroupBox->setTitle("QGroupBox Horizontal");
 
     QVBoxLayout *verticalLayout = new QVBoxLayout;
     verticalLayout->addWidget(radioB1);
     verticalLayout->addWidget(radioB2);
-    verticalLayout->addWidget(button1);
-    verticalLayout->addWidget(button2);
-    verticalLayout->setSpacing(10);
-    //verticalLayout->addWidget(slider2);
+    verticalLayout->setSpacing(2);
 
+    QVBoxLayout *verticalLayout2 = new QVBoxLayout;
+    verticalLayout2->addWidget(radioB5);
+    verticalLayout2->addWidget(radioB3);
+    verticalLayout2->addWidget(radioB4);
+    verticalLayout2->setSpacing(2);
+
+    QVBoxLayout *verticalLayout3 = new QVBoxLayout;
+    verticalLayout3->addWidget(button1);
+    verticalLayout3->addWidget(button2);
+    verticalLayout3->setSpacing(2);
 
     QGroupBox *radioGroupBox = new QGroupBox(this);
     radioGroupBox->setLayout(verticalLayout);
@@ -123,15 +136,32 @@ MainWindow::MainWindow(){
     radioGroupBox->setMaximumWidth(170);
     radioGroupBox->setFixedHeight(140);
 
+    QGroupBox *radioGroupBox2 = new QGroupBox(this);
+    radioGroupBox2->setLayout(verticalLayout2);
+    radioGroupBox2->setTitle("            ROTAÇÃO");
+    radioGroupBox2->setFont(f);
+    radioGroupBox2->setMinimumWidth(170);
+    radioGroupBox2->setMaximumWidth(170);
+    radioGroupBox2->setFixedHeight(140);
+
+    QGroupBox *radioGroupBox3 = new QGroupBox(this);
+    radioGroupBox3->setLayout(verticalLayout3);
+    radioGroupBox3->setFont(f);
+    radioGroupBox3->setMinimumWidth(170);
+    radioGroupBox3->setMaximumWidth(170);
+    radioGroupBox3->setFixedHeight(140);
+
+
     QGridLayout *gridLayout = new QGridLayout;// Pozzer: aqui estava QGridLayout(groupBox);
     gridLayout->addWidget(canvas,       0, 0, 3, 1);
     gridLayout->addWidget(radioGroupBox, 0, 1, 1, 1);
+    gridLayout->addWidget(radioGroupBox2, 1, 1, 1, 1);
+    gridLayout->addWidget(radioGroupBox3, 2, 1, 1, 1);
     gridLayout->addWidget(updateGroupBox, 3, 0, 1, 2); //row, column, rowSpan, colSpan
     gridLayout->addWidget(slider,         4, 0, 1, 1);
 
     QGroupBox * groupBox = new QGroupBox(this);
     groupBox->setLayout(gridLayout);
-    //groupBox->setTitle("QGroupBox Grid");
     setCentralWidget(groupBox);
 
     menuBar()->setFont(f1);
@@ -165,6 +195,9 @@ MainWindow::MainWindow(){
     connect(refreshRate,    SIGNAL(valueChanged(int)), this,   SLOT(updateIntervalChanged(int)) );
     connect(slider,         SIGNAL(valueChanged(int)), this,   SLOT(sliderChanged(int)) );
     connect(radioB1,         SIGNAL(toggled(bool)), canvas,   SLOT(radioCheck(bool)) );
+    connect(radioB3,         SIGNAL(toggled(bool)), canvas,   SLOT(radioCheck3(bool)) );
+    connect(radioB4,         SIGNAL(toggled(bool)), canvas,   SLOT(radioCheck4(bool)) );
+    connect(radioB5,         SIGNAL(toggled(bool)), canvas,   SLOT(radioCheck2(bool)) );
     connect(timerBased,     SIGNAL(clicked(bool)),     this,   SLOT(checkBoxChanged(bool)));
 }
 

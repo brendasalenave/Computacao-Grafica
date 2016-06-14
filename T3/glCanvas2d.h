@@ -23,12 +23,15 @@ public:
     Canvas2D(MainWindow *mw);
     ~Canvas2D();
 
-
 //Callbacks de Widgets
 public slots:
     void button2Pressed();
     void button1Pressed();
     void radioCheck(bool enabled);
+    void radioCheck2(bool enabled);
+    void radioCheck3(bool enabled);
+    void radioCheck4(bool enabled);
+
 
 protected:
     void resizeGL(int w, int h) Q_DECL_OVERRIDE;

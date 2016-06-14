@@ -11,9 +11,10 @@ using namespace std;
 
 Transformacoes::Transformacoes(){
     theta = 6.28;
+    ang = 0;
 }
 
-std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t, int cod){
+std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t, int cod, int cod2){
     std::vector<Ponto> ponto2;
 
     for(int u=0; u <(int)t ; u++){
@@ -29,7 +30,10 @@ std::vector<Ponto> Transformacoes::cria(std::vector<Ponto> p, std::vector<Ponto>
             else
                 resp = escala(resp);
             resp.x+=100;
-            //resp.y+=100;
+            if(cod2 == 1)
+                resp = rotacionaY(resp);
+            else if(cod2 == 2)
+                resp = rotacionaX(resp);
             ponto2.push_back(resp);
 
             //printf(" x: %f y: %f", resp.x, resp.y);
@@ -52,6 +56,33 @@ Ponto Transformacoes::projeta( Ponto p ){
     resp.setZ(0);
 
     return resp;
+}
+Ponto Transformacoes::rotacionaX(Ponto p ){
+
+   Ponto resp;
+   if(ang >= 6.28)
+       ang = 0;
+   ang += 0.0001;
+
+   resp.x = cos(ang)*p.x - sin(ang)*p.z;
+   resp.y = p.y;
+   resp.z = sin(ang)*p.x + cos(ang)*p.z;
+
+   return resp;
+}
+
+Ponto Transformacoes::rotacionaY(Ponto p ){
+
+   Ponto resp;
+   if(ang >= 6.28)
+       ang = 0;
+   ang += 0.0001;
+
+   resp.x = p.x;
+   resp.y = cos(ang)*p.y - sin(ang)*p.z;
+   resp.z = sin(ang)*p.y + cos(ang)*p.z;
+
+   return resp;
 }
 
 Ponto Transformacoes::translada(Ponto p){

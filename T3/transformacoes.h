@@ -8,13 +8,16 @@ using namespace std;
 
 class Transformacoes{
     float theta;
+    float ang;
 
 public:
     Transformacoes();
-    std::vector<Ponto> cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t, int cod);
+    std::vector<Ponto> cria(std::vector<Ponto> p, std::vector<Ponto>::size_type t, int cod, int cod2);
     Ponto projeta( Ponto p );
     Ponto translada(Ponto p);
     Ponto escala(Ponto p);
+    Ponto rotacionaX(Ponto p );
+    Ponto rotacionaY(Ponto p );
 
 
 };

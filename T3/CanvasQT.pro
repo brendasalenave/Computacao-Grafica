@@ -1,4 +1,5 @@
 QT += widgets
+QT += multimedia
 
 SOURCES += main.cpp \
            mainwindow.cpp \

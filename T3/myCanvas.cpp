@@ -22,6 +22,7 @@
 #include <QMessageBox>
 #include <QWheelEvent>
 #include <QLabel>
+#include <QMediaPlayer>
 #include <vector>
 
 using namespace std;
@@ -33,17 +34,25 @@ std::vector<Ponto> ponto2;
 
 Transformacoes *t = new Transformacoes();
 
+
 int f, v = -1;
 int up = 0, down = 0, l = 0, r = 0;
 //int del = 0;
 int b = 0;
 int c = 1;
+int rot;
 
 
 // *******************************************************************************
 //Coloque seu codigo aqui, usando as funcoes da Canvas2D defindas na classe glWidgets.
 // *******************************************************************************
 void Canvas2D::paintGL(){
+    QLabel *label = new QLabel(this);
+    label->setText("Área para Desenho");
+    label->setAlignment(Qt::AlignHCenter);
+    label->setGeometry(QRect(150, 0, 100, 15));
+
+
     srand( (unsigned)time(NULL) );
 
     clear(0,0,0.1);
@@ -61,7 +70,7 @@ void Canvas2D::paintGL(){
 
     color(0.9,0.9,0.8);
     glLineWidth(3.0);
-    int cWidth = (mw->width() / 2) - 100;
+    int cWidth = (mw->width() / 2) - 150;
     line(cWidth, 0, cWidth, 600);
     glLineWidth(1.0);
 
@@ -82,10 +91,20 @@ void Canvas2D::paintGL(){
     }
 
     ponto2 = ponto;
-    ponto2 = t->cria(ponto2,tam,c);
+    ponto2 = t->cria(ponto2,tam,c,rot);
 
-    int x = (cWidth + (cWidth /4)) + 30;
-    int y = 200;
+    int x, y;
+    if(rot == 0){
+        x = (cWidth + (cWidth /4)) + 30;
+        y = 200;
+    }else if(rot == 1){
+        x = (cWidth + (cWidth /4)) + 100;
+        y = 300;
+    }else{
+        x = (cWidth + (cWidth /4)) + 200;
+        y = 200;
+    }
+
     std::vector<Ponto>::size_type tam2 = ponto2.size();
     oldX = 0, oldY = 0;
 
@@ -141,9 +160,10 @@ void Canvas2D::mousePressEvent(QMouseEvent *event){
     mw->list->addItem("Mouse Click event");
     int mouse_y = 600 - event->y();
 
-    int cWidth = (mw->width() / 2) - 100;
+    int cWidth = (mw->width() / 2) - 150;
 
-    if((f==1) && (event->x() > 5) && (event->x() < cWidth-5) && (mouse_y > 15) && (mouse_y < 590)){
+
+    if((f==1) && (event->x() > 5) && (event->x() < cWidth-5) && (mouse_y > 15) && (mouse_y < 585)){
         Ponto p;
         int f1 = 0;
         int u;
@@ -165,14 +185,6 @@ void Canvas2D::mousePressEvent(QMouseEvent *event){
         }
 
     }
-    /*if(!f){
-        for(int u = 0; u < (int)ponto.size(); u++){
-            if((event->x() > ponto[u].getX()-2) && (event->x() < ponto[u].getX()+2) && (mouse_y > ponto[u].getY()-2) && (mouse_y < ponto[u].getY()+2)){
-                v = u;
-                break;
-            }
-        }
-    }*/
 }
 
 void Canvas2D::mouseReleaseEvent(QMouseEvent *event){
@@ -190,8 +202,29 @@ void Canvas2D::radioCheck(bool enabled){
     else c = 0;
 }
 
+void Canvas2D::radioCheck2(bool enabled){
+    if(enabled == true)
+        rot = 0;
+}
+
+void Canvas2D::radioCheck3(bool enabled){
+    if(enabled == true)
+        rot = 1;
+}
+
+void Canvas2D::radioCheck4(bool enabled){
+    if(enabled == true)
+        rot = 2;
+}
+
 void Canvas2D::button2Pressed(){
     qDebug("Clean Button Pressed");
+
+    QMediaPlayer* effect;
+    effect = new QMediaPlayer(this);
+    effect->setMedia(QUrl(":/sounds/clean.mp3"));
+    effect->setVolume(100);
+    effect->play();
 
     std::vector<Ponto>::size_type tam = ponto.size();
     for(int u = 0; u < (int)tam ; u++){
@@ -225,8 +258,6 @@ void Canvas2D::keyPressEvent(QKeyEvent* event){
             break;
         case Qt::Key_Down:
             down = 1;
-            qDebug("Down: %d", down);
-
             break;
         case Qt::Key_S:
             down = 1;
