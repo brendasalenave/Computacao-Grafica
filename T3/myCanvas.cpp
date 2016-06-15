@@ -23,6 +23,7 @@
 #include <QWheelEvent>
 #include <QLabel>
 #include <QMediaPlayer>
+#include <QSound>
 #include <vector>
 
 using namespace std;
@@ -176,6 +177,7 @@ void Canvas2D::mousePressEvent(QMouseEvent *event){
             }
         }
         if(f1 == 0){
+            QSound::play(":/sounds/blup.wav");
             p.setX(event->x());
             p.setY(mouse_y);
             ponto.push_back(p);
@@ -220,11 +222,7 @@ void Canvas2D::radioCheck4(bool enabled){
 void Canvas2D::button2Pressed(){
     qDebug("Clean Button Pressed");
 
-    QMediaPlayer* effect;
-    effect = new QMediaPlayer(this);
-    effect->setMedia(QUrl(":/sounds/clean.mp3"));
-    effect->setVolume(100);
-    effect->play();
+    QSound::play(":/sounds/clean.wav");
 
     std::vector<Ponto>::size_type tam = ponto.size();
     for(int u = 0; u < (int)tam ; u++){
@@ -238,6 +236,8 @@ void Canvas2D::button2Pressed(){
 
 void Canvas2D::button1Pressed(){
     qDebug("Delete Button Pressed");
+    QSound::play(":/sounds/pop.wav");
+
     std::vector<Ponto>::size_type tam = ponto.size();
     if((int)tam != 0)
         ponto.pop_back();

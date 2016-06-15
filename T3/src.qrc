@@ -3,6 +3,8 @@
         <file>background.jpg</file>
     </qresource>
     <qresource prefix="/sounds">
-        <file>clean.mp3</file>
+        <file>blup.wav</file>
+        <file>clean.wav</file>
+        <file>pop.wav</file>
     </qresource>
 </RCC>
