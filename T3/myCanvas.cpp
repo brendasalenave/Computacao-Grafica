@@ -1,14 +1,13 @@
 
 // *********************************************************************
-// Canvas para desenho - Versao C.
-//  Autor: Cesar Tadeu Pozzer
+// Canvas para desenho - Versao C baseado nos demos de Computação Gráfica (Pozzer).
+//  Autora: Brenda Salenave Santana
 //         07/2016
 //
 //  Pode ser utilizada para fazer desenhos ou animacoes, como jogos simples.
 //  Tem tratamento de mosue
 // *
-// *   pozzer@inf.ufsm.br
-// *   pozzer3@gmail.com
+// *   bsantana@inf.ufsm.br
 // *
 //
 
@@ -22,7 +21,7 @@
 #include <QMessageBox>
 #include <QWheelEvent>
 #include <QLabel>
-#include <QMediaPlayer>
+//#include <QMediaPlayer>
 #include <QSound>
 #include <vector>
 
@@ -106,6 +105,11 @@ void Canvas2D::paintGL(){
         y = 200;
     }
 
+    /* Linhas dos eixos */
+    line(cWidth+10, 5, cWidth + 10, 25);
+    line(cWidth+10, 5, cWidth + 30, 5);
+    line(cWidth+10, 5, cWidth + 30, 20);
+
     std::vector<Ponto>::size_type tam2 = ponto2.size();
     oldX = 0, oldY = 0;
 
@@ -120,7 +124,7 @@ void Canvas2D::paintGL(){
             line(ponto2[u+20].getX()+x, ponto2[u+20].getY()+y, ponto2[u].getX()+x, ponto2[u].getY()+y);
         }
 
-        if(((u + 1) < (int)tam2)){ // && ((u%20) != 0)
+        if(((u + 1) < (int)tam2)&& ((u%20) != 0)){
             line(ponto2[u+1].getX()+x, ponto2[u+1].getY()+y, ponto2[u].getX()+x, ponto2[u].getY()+y);
         }
      }
@@ -128,11 +132,7 @@ void Canvas2D::paintGL(){
 }
 
 void Canvas2D::movimenta(int u){
-    //qDebug("DEVERIA FUNCIONAR %d", u);
-    //qDebug("Down: %d", down);
-
     if((ponto[u].getY() > 15) && (down == 1)){
-        qDebug("DEVERIA DESCER");
         ponto[u].setY(ponto[u].getY() - 2);
     }
     if(ponto[u].getY() < 590 && up == 1){

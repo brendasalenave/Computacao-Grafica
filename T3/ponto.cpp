@@ -1,3 +1,11 @@
+// *********************************************************************
+//  Autora: Brenda S. Santana
+//         06/2016
+// *
+// *   bsantana@inf.ufsm.br
+// *
+//
+
 #include "ponto.h"
 
 Ponto::Ponto(){

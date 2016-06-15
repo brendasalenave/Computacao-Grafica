@@ -1,3 +1,12 @@
+// *********************************************************************
+//  Autora: Brenda S. Santana
+//         06/2016
+// *
+// *   bsantana@inf.ufsm.br
+// *
+// Objetivo da Classe: Implementar funções de controle dos pontos inseridos pelo usuário.
+//
+
 #ifndef PONTO_H
 #define PONTO_H
 

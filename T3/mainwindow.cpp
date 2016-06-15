@@ -74,8 +74,6 @@ MainWindow::MainWindow(){
     button1->setToolTip("Deleta último ponto adicionado");
     button2->setToolTip("Remove todos os pontos");
 
-    //radioGroupBox->setMinimumWidth(170);
-
     QFont f( "Tahoma", 10, QFont::Bold);
     QFont f1( "Tahoma", 10);
     f1.setItalic(true);
@@ -110,7 +108,6 @@ MainWindow::MainWindow(){
 
     QGroupBox *updateGroupBox = new QGroupBox(this);
     updateGroupBox->setLayout(horizontalLayout);
-    //updateGroupBox->setTitle("QGroupBox Horizontal");
 
     QVBoxLayout *verticalLayout = new QVBoxLayout;
     verticalLayout->addWidget(radioB1);
@@ -152,7 +149,7 @@ MainWindow::MainWindow(){
     radioGroupBox3->setFixedHeight(140);
 
 
-    QGridLayout *gridLayout = new QGridLayout;// Pozzer: aqui estava QGridLayout(groupBox);
+    QGridLayout *gridLayout = new QGridLayout;
     gridLayout->addWidget(canvas,       0, 0, 3, 1);
     gridLayout->addWidget(radioGroupBox, 0, 1, 1, 1);
     gridLayout->addWidget(radioGroupBox2, 1, 1, 1, 1);
@@ -241,5 +238,5 @@ void MainWindow::updateIntervalChanged(int value){
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e){
-     qDebug("janela redimensionada" );
+     qDebug("Janela redimensionada" );
 }

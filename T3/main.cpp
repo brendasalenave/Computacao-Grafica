@@ -7,14 +7,12 @@
 
 #include <QApplication>
 #include <QMainWindow>
-#include <QSound>
 #include "mainwindow.h"
 
 //Baseado no demo C:\Qt\Qt5.5.1\Examples\Qt-5.5\opengl\qopenglwidget
 
 int main( int argc, char ** argv ){
     QApplication a( argc, argv );
-    //QSound::play(":/sounds/clean.wav");
 
     MainWindow mw;
     mw.setWindowTitle("Computação Gráfica: trabalho 3");

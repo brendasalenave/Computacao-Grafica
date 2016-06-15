@@ -1,4 +1,4 @@
-Autora: Brenda Salenave Santana
+﻿Autora: Brenda Salenave Santana
        bsantana@inf.ufsm.br
 
 ● Requisitos Implementados:
@@ -8,7 +8,7 @@ Autora: Brenda Salenave Santana
 - Visualização do objeto gerado através de pontos e linhas
 - Opção para projeção ortográfica e perspectiva (wireframe)
 - Opção de rotação do objeto nos eixos X ou Y;
-- Background texturizado;
+- Background personalizado;
 - Efeitos sonoros
 
 

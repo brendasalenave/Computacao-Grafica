@@ -1,3 +1,12 @@
+// *********************************************************************
+//  Autora: Brenda S. Santana
+//         06/2016
+// *
+// *   bsantana@inf.ufsm.br
+// *
+// Objetivo da Classe: Implementar funções de transformações a serem aplicadas sobre o objeto.
+//
+
 #ifndef TRANSFORMACOES_H
 #define TRANSFORMACOES_H
 
