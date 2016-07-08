@@ -10,7 +10,7 @@ Draw::Draw()
 void Draw::cube_(float x, float y, float z, float s, float rx, float ry, float rz){
     glLoadIdentity();
     glTranslatef(x,y,z);
-    glScalef(1.0f,1.0f,1.0f);
+    glScalef(0.5f,0.5f,0.5f);
 
     // rotation about X axis
     glRotatef(rx+20,1.0,0.0,0.0);
@@ -54,9 +54,4 @@ void Draw::cube_(float x, float y, float z, float s, float rx, float ry, float r
       glVertex3f( 1.0f,-1.0f, 1.0f);    // Bottom Left Of The Quad (Right)
       glVertex3f( 1.0f,-1.0f,-1.0f);    // Bottom Right Of The Quad (Right)
     glEnd();            // End Drawing The Cube
-
-    glLoadIdentity();
-    glTranslatef(x,y,z);
-
-
 }

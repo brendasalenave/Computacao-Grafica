@@ -8,13 +8,18 @@
 
 // Camera
 // Ponto onde esta
-float x_eye;
-float y_eye;
-float z_eye;
+float eyex;
+float eyey;
+float eyez;
 
 // Ponto para onde olha
-float x_center;
-float y_center;
+float centerx;
+float centery;
+
+//UP
+const GLdouble upx = 0;
+const GLdouble upy = 1;
+const GLdouble upz = 0;
 
 int   polygonMode = 1;
 float rx = 0, rz = 0;
@@ -24,40 +29,36 @@ float rx = 0, rz = 0;
    float zfar   = 20;
    float aspect = 1;
 
-float z_center;
+float centerz;
 
  GLfloat xRotated, yRotated, zRotated;
 GLWidget::GLWidget(MainWindow *mw){
     this->mw = mw;
     this->setMinimumSize(800, 600);
-    x_eye = 10.0;
-    y_eye = 10.0;
-    z_eye = 10.0;
-    x_center = 0.0;
-    y_center = 0.0;
-    z_center = 0.0;
+    eyex = 10.0;
+    eyey = 10.0;
+    eyez = 10.0;
+    centerx = 0.0;
+    centery = 0.0;
+    centerz = 0.0;
 }
 
 
 
 void GLWidget::paintGL(){
-    glMatrixMode(GL_MODELVIEW);
-       // clear the drawing buffer.
-    glClear(GL_COLOR_BUFFER_BIT);
-    glLoadIdentity();
-    glTranslatef(0.0,0.0,-10.5);
-    Draw *d = new Draw();
-    d->cube_(0.0,0.0,-10.0,0.0, xRotated, yRotated, zRotated);
+    glLoadIdentity( );
+    gluLookAt(eyex, eyey, eyez,  //from. Posicao onde a camera esta posicionada
+              centerx, centery, centerz,  //to. Posicao absoluta onde a camera esta vendo
+              0, 1, 0); //up. Vetor Up.
+    glRotatef ((GLfloat) xRotated, 0.0f, 1.0f, 0.0f);
+    glRotatef ((GLfloat) yRotated, 1.0f, 0.0f, 0.0f);
 
-  /*glRotatef(xRotated,1.0,0.0,0.0);
-  // rotation about Y axis
-  glRotatef(yRotated,0.0,1.0,0.0);
-  // rotation about Z axis
-  glRotatef(zRotated,0.0,0.0,1.0);*/
+   Draw *d = new Draw();
+   d->cube_(0.0,0.0,-10.0,0.0, xRotated, yRotated, zRotated);
 
-   glFlush();
+   /*glFlush();
    yRotated += 0.01;
-   xRotated += 0.02;
+   xRotated += 0.02;*/
 
 
 }
@@ -65,27 +66,17 @@ void GLWidget::paintGL(){
 void GLWidget::initializeGL(){
     initializeOpenGLFunctions();
 
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity( );
+    gluPerspective(abertura, aspect, znear, zfar);
+    glMatrixMode(GL_MODELVIEW);
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0, 0, 0, 1);
 
-      // printf("\n%f", abertura);
-       glMatrixMode(GL_PROJECTION);
-       glLoadIdentity( );
-       //glOrtho(-1,1,-1,1,1,-1);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-       //printMatrix(GL_PROJECTION_MATRIX);
-
-       gluPerspective(abertura, aspect, znear, zfar);
-
-       //printMatrix(GL_MODELVIEW_MATRIX);
-
-       glMatrixMode(GL_MODELVIEW);
-       glLoadIdentity( );
-       gluLookAt(0, 0, 3,  //from. Posicao onde a camera esta posicionada
-                 0, 0, 0,  //to. Posicao absoluta onde a camera esta vendo
-                 0, 1, 0); //up. Vetor Up.
-
-
+    glEnable(GL_DEPTH_TEST);
 }
 
 void GLWidget::resizeGL(int w, int h){
@@ -93,11 +84,13 @@ void GLWidget::resizeGL(int w, int h){
     glLoadIdentity();
     gluPerspective(45, (float)(w/h), 0.1, 500);
     glLoadIdentity();
-    gluLookAt(x_eye, y_eye, z_eye, 0, 0, 0, 0, 1, 0);
+    gluLookAt(eyex, eyey, eyez, 0, 0, 0, upx, upy, upz);
 }
 
 void GLWidget::mousePressEvent(QMouseEvent  *event){
-
+    qDebug("\nMouse Press: %d %d", event->x(), 600 - event->y() );
+    //eyex = event->x();
+    //eyey = event->y();
 }
 
 void GLWidget::mouseMoveEvent(QMouseEvent * event){
@@ -105,7 +98,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent * event){
 }
 
 void GLWidget::mouseReleaseEvent(QMouseEvent *event){
-
+    qDebug("\nMouse Release: %d %d", event->x(),event->y());
 }
 
 void GLWidget::keyboard(QKeyEvent *event){
@@ -113,18 +106,9 @@ void GLWidget::keyboard(QKeyEvent *event){
 }
 
 void GLWidget::keyPressEvent(QKeyEvent *event){
-    switch(event->key()){
-        case Qt::Key_Y:
-            y_eye += 0.1;
-            break;
-        case Qt::Key_Z:
-            z_eye += 0.1;
-            break;
-        case Qt::Key_X:
-            x_eye += 1;
-            break;
-        case Qt::Key_Q:
-            exit(1);
-    }
+    qDebug("\nKeyboard Press: %c", event->key());
+}
 
+void GLWidget::keyReleaseEvent(QKeyEvent* event){
+    qDebug("\nKeyboard Release: %c", event->key());
 }
