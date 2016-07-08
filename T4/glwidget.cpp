@@ -46,16 +46,14 @@ void GLWidget::paintGL(){
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
     glTranslatef(0.0,0.0,-10.5);
-    Draw *cube = new Draw();
-    cube->cube_(0.0,0.0,0.0,-10.0);
+    Draw *d = new Draw();
+    d->cube_(0.0,0.0,-10.0,0.0, xRotated, yRotated, zRotated);
 
-  glRotatef(xRotated,1.0,0.0,0.0);
+  /*glRotatef(xRotated,1.0,0.0,0.0);
   // rotation about Y axis
   glRotatef(yRotated,0.0,1.0,0.0);
   // rotation about Z axis
-  glRotatef(zRotated,0.0,0.0,1.0);
-
-
+  glRotatef(zRotated,0.0,0.0,1.0);*/
 
    glFlush();
    yRotated += 0.01;
