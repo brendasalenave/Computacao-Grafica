@@ -6,7 +6,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     // Seta o titulo da janela
-    this->setWindowTitle("T4");
+    this->setWindowTitle("T4 - DRAGA");
 
     // Cria os Widgets da tela
     this->glwidget = new GLWidget(this);

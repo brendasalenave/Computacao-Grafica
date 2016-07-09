@@ -5,12 +5,17 @@
 #include <GL/glu.h>
 #include <QKeyEvent>
 
+#define PI_2 6.28318530718
+
+
 //float rx = 0, rz = 0;
 
 Draw *d = new Draw();
 Cube *base = new Cube();
 Cube *a1 = new Cube();
 Cube *a2 = new Cube();
+Cube *a3 = new Cube();
+Cube *claw = new Cube();
 
 // Camera
 // Ponto onde esta
@@ -55,8 +60,8 @@ void GLWidget::paintGL(){
     gluLookAt(eyex, eyey, eyez,  //from. Posicao onde a camera esta posicionada
               centerx, centery, centerz,  //to. Posicao absoluta onde a camera esta vendo
               0, 1, 0); //up. Vetor Up.
-    glRotatef ((GLfloat) xRotated, 0.0f, 1.0f, 0.0f);
-    glRotatef ((GLfloat) yRotated, 1.0f, 0.0f, 0.0f);
+    //glRotatef ((GLfloat) xRotated, 0.0f, 1.0f, 0.0f);
+    //glRotatef ((GLfloat) yRotated, 1.0f, 0.0f, 0.0f);
 
    /* Draw base plataform */
    float ***m_base = base->setForm(5.0,0.10,3.0,1.0,1.0,1.0);
@@ -67,13 +72,24 @@ void GLWidget::paintGL(){
    d->cube_(-1.0,-0.90,-09.5,0.0, xRotated, yRotated, zRotated,m_arm1);
 
    /* Draw the second arm */
-   float ***m_arm2 = a2->setForm(0.30,1.50,0.50,1.0,0.0,0.0);
-   d->cube_(-1.0,1.30,-09.5,0.0, xRotated, yRotated, zRotated,m_arm2);
+   float ***m_arm2 = a2->setForm(0.30,1.50,0.50,1.0,1.0,0.0);
+   d->cube_(-0.50,1.0,-09.30,0.0, xRotated, yRotated, zRotated-45,m_arm2);
 
+   /* Draw the third arm */
+   float ***m_arm3 = a2->setForm(0.30,1.50,0.50,0.50,1.0,0.0);
+   d->cube_(0.40,1.3,-09.30,0.0, xRotated, yRotated, zRotated+45,m_arm3);
+
+   /* Draw claw */
+   float ***m_claw = claw->setForm(1.0,1.0,1.0,0.70,0.70,0.70);
+   d->cube_(1.20,0.50,-09.30,0.0, xRotated, yRotated, zRotated+45,m_claw);
+
+
+   /* d->cylinder_(10,10,10);*/
 
    /*glFlush();
    yRotated += 0.01;
    xRotated += 0.02;*/
+
 }
 
 void GLWidget::initializeGL(){

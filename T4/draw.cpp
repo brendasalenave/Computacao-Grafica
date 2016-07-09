@@ -17,7 +17,7 @@ void Draw::cube_(float x, float y, float z, float s, float rx, float ry, float r
     // rotation about Y axis
     glRotatef(ry,0.0,1.0,0.0);
     // rotation about Z axis
-    //glRotatef(rz,0.0,0.0,1.0);
+    glRotatef(rz,0.0,0.0,1.0);
 
     glBegin(GL_QUADS);                  // Draw The Cube Using quads
     for(int i = 0; i < 6; i++){
