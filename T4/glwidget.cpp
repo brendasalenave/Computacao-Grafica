@@ -1,11 +1,16 @@
 #include "glwidget.h"
 #include "draw.h"
 #include "cube.h"
+#include <math.h>
 #include <GL/glu.h>
 #include <QKeyEvent>
 
 //float rx = 0, rz = 0;
 
+Draw *d = new Draw();
+Cube *base = new Cube();
+Cube *a1 = new Cube();
+Cube *a2 = new Cube();
 
 // Camera
 // Ponto onde esta
@@ -16,6 +21,7 @@ float eyez;
 // Ponto para onde olha
 float centerx;
 float centery;
+float centerz;
 
 //UP
 const GLdouble upx = 0;
@@ -30,9 +36,7 @@ float rx = 0, rz = 0;
    float zfar   = 20;
    float aspect = 1;
 
-float centerz;
-
- GLfloat xRotated, yRotated, zRotated;
+GLfloat xRotated, yRotated, zRotated;
 GLWidget::GLWidget(MainWindow *mw){
     this->mw = mw;
     this->setMinimumSize(800, 600);
@@ -54,16 +58,22 @@ void GLWidget::paintGL(){
     glRotatef ((GLfloat) xRotated, 0.0f, 1.0f, 0.0f);
     glRotatef ((GLfloat) yRotated, 1.0f, 0.0f, 0.0f);
 
-   Cube *c = new Cube();
-   float ***m = c->setForm(1.0,1.0,1.0,5.0,1.0,0.0);
-   Draw *d = new Draw();
-   d->cube_(0.0,0.0,-10.0,0.0, xRotated, yRotated, zRotated,m);
+   /* Draw base plataform */
+   float ***m_base = base->setForm(5.0,0.10,3.0,1.0,1.0,1.0);
+   d->cube_(0.0,-2.50,-10.0,0.0, xRotated, yRotated, zRotated,m_base);
+
+   /* Draw the first arm */
+   float ***m_arm1 = a1->setForm(0.30,3.0,0.50,1.0,1.0,0.0);
+   d->cube_(-1.0,-0.90,-09.5,0.0, xRotated, yRotated, zRotated,m_arm1);
+
+   /* Draw the second arm */
+   float ***m_arm2 = a2->setForm(0.30,1.50,0.50,1.0,0.0,0.0);
+   d->cube_(-1.0,1.30,-09.5,0.0, xRotated, yRotated, zRotated,m_arm2);
+
 
    /*glFlush();
    yRotated += 0.01;
    xRotated += 0.02;*/
-
-
 }
 
 void GLWidget::initializeGL(){
@@ -92,12 +102,16 @@ void GLWidget::resizeGL(int w, int h){
 
 void GLWidget::mousePressEvent(QMouseEvent  *event){
     qDebug("\nMouse Press: %d %d", event->x(), 600 - event->y() );
+    //xRotated = event->x();
+    //yRotated = mw->height() - event->y();
     //eyex = event->x();
     //eyey = event->y();
 }
 
-void GLWidget::mouseMoveEvent(QMouseEvent * event){
-
+void GLWidget::mouseMoveEvent(QMouseEvent *event){
+    //qDebug("\nMouse Press: %d %d", event->x(), 600 - event->y() );
+    xRotated = event->x();
+    yRotated = mw->height() - event->y();
 }
 
 void GLWidget::mouseReleaseEvent(QMouseEvent *event){

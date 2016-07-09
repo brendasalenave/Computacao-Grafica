@@ -21,21 +21,21 @@ float*** Cube::setForm(float x, float y, float z, float r, float g, float b){
 
     glColor3f((GLfloat)r,(GLfloat)g,(GLfloat)b);        // Color Yellow
     /* Top Face */
-    form[0][0][0] = 1 * x;
-    form[0][0][1] = 1 * y;
+    form[0][0][0] =  1 * x;
+    form[0][0][1] =  1 * y;
     form[0][0][2] = -1 * z;
 
     form[0][1][0] = -1 * x;
-    form[0][1][1] = 1 * y;
+    form[0][1][1] =  1 * y;
     form[0][1][2] = -1* z;
 
     form[0][2][0] = -1 * x;
-    form[0][2][1] = 1 * y;
-    form[0][2][2] = 1* z;
+    form[0][2][1] =  1 * y;
+    form[0][2][2] =  1 * z;
 
     form[0][3][0] = 1 * x;
     form[0][3][1] = 1 * y;
-    form[0][3][2] = 1* z;
+    form[0][3][2] = 1 * z;
 
     /* Bottom */
     form[1][0][0] =  1 * x;
