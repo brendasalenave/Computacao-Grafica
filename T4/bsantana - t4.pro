@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     glwidget.cpp \
-    draw.cpp
+    draw.cpp \
+    cube.cpp
 
 HEADERS  += mainwindow.h \
     glwidget.h \
-    draw.h
+    draw.h \
+    cube.h
 
 
 unix|win32: LIBS += -lfreeglut

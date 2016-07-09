@@ -1,5 +1,6 @@
 #include "glwidget.h"
 #include "draw.h"
+#include "cube.h"
 #include <GL/glu.h>
 #include <QKeyEvent>
 
@@ -53,8 +54,10 @@ void GLWidget::paintGL(){
     glRotatef ((GLfloat) xRotated, 0.0f, 1.0f, 0.0f);
     glRotatef ((GLfloat) yRotated, 1.0f, 0.0f, 0.0f);
 
+   Cube *c = new Cube();
+   float ***m = c->setForm(1.0,1.0,1.0,5.0,1.0,0.0);
    Draw *d = new Draw();
-   d->cube_(0.0,0.0,-10.0,0.0, xRotated, yRotated, zRotated);
+   d->cube_(0.0,0.0,-10.0,0.0, xRotated, yRotated, zRotated,m);
 
    /*glFlush();
    yRotated += 0.01;
