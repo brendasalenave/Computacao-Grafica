@@ -23,6 +23,9 @@ float eyex;
 float eyey;
 float eyez;
 
+float angley = 0;
+float anglex = 0;
+
 // Ponto para onde olha
 float centerx;
 float centery;
@@ -37,74 +40,70 @@ const GLdouble upz = 0;
 int   polygonMode = 1;
 float rx = 0, rz = 0;
 
-   float abertura;// = 44.0;
-   float znear;//  = 0.1;
-   float zfar;//   = 20;
-   float aspect;// = mw->1;
+   float abertura = 44.0;
+   float znear = 0.1;
+   float zfar = 900;
+   float aspect = 1;
 
 GLfloat xRotated, yRotated, zRotated;
 GLWidget::GLWidget(MainWindow *mw){
     this->mw = mw;
     this->setMinimumSize(800, 600);
-    eyex = 10.0;
-    eyey = 10.0;
+    eyex = 0.0;
+    eyey = 0.0;
     eyez = 10.0;
     centerx = 0.0;
     centery = 0.0;
     centerz = 0.0;
-
+/*
     float abertura = 44.0;
     float znear  = 0.1;
     float zfar   = 500;
-    float aspect = mw->width()/mw->height();
+    float aspect = mw->width()/mw->height();*/
 }
 
 
 
 void GLWidget::paintGL(){
     this->update();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glLoadIdentity( );
-    gluLookAt(10, 10, 10,          //from. Posicao onde a camera esta posicionada
+    gluLookAt(eyex, eyey, eyez,          //from. Posicao onde a camera esta posicionada
               centerx, centery, centerz, //to. Posicao absoluta onde a camera esta vendo
               0, 1, 0);                  //up. Vetor Up.
 
-    qDebug("\neyex: %f",eyez);
-
-
-
-
-
-    /* Draw cabin */
-    float ***m_cabin = cabin->setForm(1.20,1.20,1.20,0.0,0.55,0.80);
-    d->cube_(-1.80,-1.70,-9.20,0.0, xRotated, yRotated, zRotated,m_cabin);
-
    /* Draw base plataform */
    float ***m_base = base->setForm(5.0,0.10,3.0,0.50,1.0,0.0);
-   d->cube_(-0.50,-2.50,-10.0,0.0, xRotated, yRotated, zRotated,m_base);
+   d->cube_(-0.50,-2.50,-10.0,0.0, xRotated+anglex, yRotated+angley, zRotated,m_base);
+
+   /* Draw cabin */
+   float ***m_cabin = cabin->setForm(1.20,1.20,1.20,0.0,0.55,0.80);
+   d->cube_(-0.50,-1.80,-9.0,0.0, xRotated+anglex, yRotated+angley, zRotated,m_cabin);
 
    /* Draw arm1 */
-   float ***m_arms = arms->setForm(0.30,2.50,0.50,1.0,1.0,0.0);
-   d->cube_(-1.0,-0.90,-09.5,0.0, xRotated, yRotated, zRotated-10,m_arms);
+   float ***m_arms = arms->setForm(0.20,2.50,0.40,1.0,1.0,0.0);
+   d->cube_(-0.50,-1.0,-9.0,0.0, xRotated+anglex, yRotated+angley, zRotated-10,m_arms);
 
    /* Draw arm2 */
-   m_arms = arms->setForm(0.30,1.50,0.50,1.0,1.0,0.0);
-   d->cube_(-0.3,0.70,-09.30,0.0, xRotated, yRotated, zRotated-45,m_arms);
+   m_arms = arms->setForm(0.20,1.50,0.40,1.0,1.0,0.0);
+   d->cube_(0.20,0.70,-9.0,0.0, xRotated+anglex, yRotated+angley, zRotated-50,m_arms);
 
    /* Draw arm3 */
-   m_arms = arms->setForm(0.30,1.50,0.50,1.0,1.0,0.0);
-   d->cube_(0.40,1.3,-09.30,0.0, xRotated, yRotated, zRotated+45,m_arms);
+   m_arms = arms->setForm(0.20,1.50,0.40,1.0,1.0,0.0);
+   d->cube_(0.80,1.0,-9.0,0.0, xRotated+anglex, yRotated+angley, zRotated+45,m_arms);
 
    /* Draw claw */
    float ***m_claw = claw->setForm(0.80,0.80,0.80,0.70,0.70,0.70);
-   d->cube_(1.21,0.50,-09.30,0.0, xRotated, yRotated, zRotated+45,m_claw);
+   d->cube_(1.5,0.30,-09.30,0.0, xRotated+anglex, yRotated+angley, zRotated+45,m_claw);
 
    /* Piston 1 */
-   float ***m_p = piston->setForm(0.02,1.40,0.02,0.8,0.8,0.8);
-   d->cube_(-0.55,0.050,-09.30,0.0, xRotated, yRotated-30, zRotated-30,m_p);
+   float ***m_p = piston->setForm(0.02,1.60,0.02,0.8,0.8,0.8);
+   d->cube_(0.0,0.050,-09.80,0.0, xRotated+anglex, yRotated, zRotated-30,m_p);
 
    /* Piston 2 */
    m_p = piston->setForm(0.02,1.0,0.02,0.8,0.8,0.8);
-   d->cube_(-0.20,1.20,-09.30,0.0, xRotated, yRotated-30, zRotated-10,m_p);
+   d->cube_(0.30,1.20,-09.80,0.0, xRotated+anglex, yRotated, zRotated-10,m_p);
 
 
    /* d->cylinder_(10,10,10);*/
@@ -124,22 +123,31 @@ void GLWidget::initializeGL(){
 
     glClearColor(0, 0, 0, 1);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glEnable(GL_DEPTH_TEST);
 }
 
 void GLWidget::resizeGL(int w, int h){
-    glViewport(0, 0, w, h);
+    /*glViewport(0, 0, w, h);
     glLoadIdentity();
     gluPerspective(45, (float)(w/h), 0.1, 500);
     glLoadIdentity();
-    gluLookAt(eyex, eyey, eyez, 0, 0, 0, upx, upy, upz);
+    gluLookAt(eyex, eyey, eyez, 0, 0, 0, upx, upy, upz);*/
+
+    glViewport (0, 0, (GLsizei) w, (GLsizei) h);
+    glMatrixMode (GL_PROJECTION);
+    glLoadIdentity ();
+    glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
+    glMatrixMode (GL_MODELVIEW);
 }
 
 void GLWidget::mousePressEvent(QMouseEvent  *event){
     qDebug("\nMouse Press: %d %d", event->x(), 600 - event->y() );
+    if(event->buttons() == Qt::RightButton){
+        if (angley >= 10) angley -= 5;
+    }
     //xRotated = event->x();
     //yRotated = mw->height() - event->y();
     //eyex = event->x();
@@ -164,11 +172,24 @@ void GLWidget::keyPressEvent(QKeyEvent *event){
     qDebug("\nKeyboard Press: %c", event->key());
     switch (event->key()) {
     case Qt::Key_Right:
-        eyez += 5;
-        qDebug("\neye x:%f", eyex);
+        if(angley >= 5)
+            angley -= 5;
+        qDebug("\n angley :%f", angley);
         break;
     case Qt::Key_Left:
-        zRotated -= 0.5;
+        if(angley < 180)
+            angley += 5;
+        qDebug("\n angley :%f", angley);
+        break;
+    case Qt::Key_Up:
+        if(anglex >= 5)
+            anglex -= 5;
+        qDebug("\n anglex :%f", anglex);
+        break;
+    case Qt::Key_Down:
+        if(anglex < 180)
+            anglex += 5;
+        qDebug("\n anglex :%f", anglex);
         break;
     default:
         break;

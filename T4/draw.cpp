@@ -10,14 +10,13 @@ Draw::Draw(){
 void Draw::cube_(float x, float y, float z, float s, float rx, float ry, float rz, float ***m){
     glLoadIdentity();
     glTranslatef(x,y,z);
-    glScalef(0.5f,0.5f,0.5f);
-
     // rotation about X axis
     glRotatef(rx,1.0,0.0,0.0);
     // rotation about Y axis
     glRotatef(ry,0.0,1.0,0.0);
     // rotation about Z axis
     glRotatef(rz,0.0,0.0,1.0);
+    glScalef(0.5f,0.5f,0.5f);
 
     glBegin(GL_QUADS);                  // Draw The Cube Using quads
     for(int i = 0; i < 6; i++){
