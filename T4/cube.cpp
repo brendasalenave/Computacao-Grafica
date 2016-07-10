@@ -125,3 +125,6 @@ float*** Cube::setForm(float x, float y, float z, float r, float g, float b){
     return form;
 }
 
+void Cube::setNormalArray(){
+    //glNormal3f()
+}
