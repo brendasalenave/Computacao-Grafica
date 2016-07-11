@@ -111,15 +111,15 @@ void GLWidget::paintGL(){
 
    /* Draw claw */
    float ***m_claw = claw->setForm(0.80,0.80,0.80,0.70,0.70,0.70);
-   d->cube_(1.5+(sizeA3/2.5+(sizeA2/1.2)-(angA2/110)),0.30-(sizeA3/1.2)+(sizeA2*0.9)-(angA2/25),-09.30,0.0, xRotated+anglex, yRotated+angley, zRotated+45+angClaw-angA2,m_claw);
+   d->cube_(1.5+(sizeA3/5.5)+(sizeA2/1.2)-(angA2/110),0.30-(sizeA3/2.8)+(sizeA2*0.70)-(angA2/35),-09.30,0.0, xRotated+anglex, yRotated+angley, zRotated+45+angClaw-angA2,m_claw);
 
    /* Piston 1 */
    float ***m_p = piston->setForm(0.02,1.5+(sizeA2*0.2)-(angA2/45),0.02,0.8,0.8,0.8);
    d->cube_(-0.2,0.050,-09.80,0.0, xRotated+anglex, yRotated, zRotated-30,m_p);
 
    /* Piston 2 */
-   m_p = piston->setForm(0.02,0.8+(sizeA2*-0.1)-(angA2/200),0.02,0.8,0.8,0.8);
-   d->cube_(0.30+(sizeA2 /1.3)+(angA2/120),1.10+(sizeA2*0.5)-(angA2/80),-09.80,0.0, xRotated+anglex, yRotated, zRotated-10,m_p);
+   m_p = piston->setForm(0.02,0.8+(sizeA2*-0.003)-(angA2/150)+(sizeA3/30),0.02,0.8,0.8,0.8);
+   d->cube_(0.30+(sizeA2 /1.5)+(angA2/80)+(sizeA3/6),1.10+(sizeA2*0.6)-(angA2/80)+(sizeA3/3),-09.80,0.0, xRotated+anglex, yRotated, zRotated-10,m_p);
 
 
    /* d->cylinder_(10,10,10);*/
