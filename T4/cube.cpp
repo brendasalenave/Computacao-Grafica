@@ -1,3 +1,16 @@
+// *********************************************************************
+// T4 - Draga
+//  Autora: Brenda Salenave Santana
+//         07/2016
+//
+//  Funções utilizadas inicialização da matriz que compoem os cubos e também
+//  para definir a forma e a cor dos mesmos.
+//
+// *
+// *   bsantana@inf.ufsm.br
+// *
+//
+
 #include <QOpenGLFunctions_1_1>
 #include <stdio.h>
 #include "cube.h"

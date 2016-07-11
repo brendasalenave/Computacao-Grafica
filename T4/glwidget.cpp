@@ -88,7 +88,7 @@ void GLWidget::paintGL(){
 
    /* Draw base plataform */
    float ***m_base = base->setForm(5.0,0.10,3.0,0.50,1.0,0.0);
-   d->cube_(-0.50,-2.70,-10.0,0.0, xRotated+anglex, yRotated+angley, zRotated,m_base);
+   d->cube_(-0.50,-2.70,-10.0,0.0, xRotated, yRotated, zRotated,m_base);
 
    /* Draw cabin */
    float ***m_cabin = cabin->setForm(0.80,0.80,0.80,0.0,0.4,1.0);
@@ -107,11 +107,11 @@ void GLWidget::paintGL(){
 
    /* Draw arm3 */
    m_arms = arms->setForm(0.20,1.50+sizeA3,0.40,1.0,1.0,0.0);
-   d->cube_(0.80+(sizeA3/3)+(sizeA2/1.5)+(angA2/300),1.1-(sizeA3/3)+(sizeA2/2)-(angA2/40),-9.0,0.0, xRotated+anglex, yRotated+angley, zRotated+45-angA2,m_arms);
+   d->cube_(0.80+(sizeA3/3)+(sizeA2/1.6)+(angA2/300),1.1-(sizeA3/3)+(sizeA2/2)-(angA2/40),-9.0,0.0, xRotated+anglex, yRotated+angley, zRotated+45-angA2,m_arms);
 
    /* Draw claw */
    float ***m_claw = claw->setForm(0.80,0.80,0.80,0.70,0.70,0.70);
-   d->cube_(1.5+(sizeA3/5.5)+(sizeA2/1.2)-(angA2/110),0.30-(sizeA3/2.8)+(sizeA2*0.70)-(angA2/35),-09.30,0.0, xRotated+anglex, yRotated+angley, zRotated+45+angClaw-angA2,m_claw);
+   d->cube_(1.5+(sizeA3/3.5)+(sizeA2/1.2)-(angA2/110),0.30-(sizeA3/1.8)+(sizeA2*0.70)-(angA2/35),-09.30,0.0, xRotated+anglex, yRotated+angley, zRotated+45+angClaw-angA2,m_claw);
 
    /* Piston 1 */
    float ***m_p = piston->setForm(0.02,1.5+(sizeA2*0.2)-(angA2/45),0.02,0.8,0.8,0.8);
@@ -119,7 +119,7 @@ void GLWidget::paintGL(){
 
    /* Piston 2 */
    m_p = piston->setForm(0.02,0.8+(sizeA2*-0.003)-(angA2/150)+(sizeA3/30),0.02,0.8,0.8,0.8);
-   d->cube_(0.30+(sizeA2 /1.5)+(angA2/80)+(sizeA3/6),1.10+(sizeA2*0.6)-(angA2/80)+(sizeA3/3),-09.80,0.0, xRotated+anglex, yRotated, zRotated-10,m_p);
+   d->cube_(0.30+(sizeA2 /1.5)+(angA2/90)+(sizeA3/8),1.10+(sizeA2*0.6)-(angA2/70)+(sizeA3/25),-09.80,0.0, xRotated+anglex, yRotated, zRotated-10,m_p);
 
 
    /* d->cylinder_(10,10,10);*/
@@ -216,7 +216,7 @@ void GLWidget::keyPressEvent(QKeyEvent *event){
             space = 0;
         break;
     case Qt::Key_W:
-        if(angClaw < 7)
+        if(angClaw < 10)
             angClaw += 1;
         break;
     case Qt::Key_S:

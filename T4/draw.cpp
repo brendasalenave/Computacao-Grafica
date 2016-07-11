@@ -1,3 +1,15 @@
+// *********************************************************************
+// T4 - Draga
+//  Autora: Brenda Salenave Santana
+//         07/2016
+//
+//  Funções utilizadas para realizar o desenho na janela de visualização.
+//
+// *
+// *   bsantana@inf.ufsm.br
+// *
+//
+
 #include "draw.h"
 #include <QOpenGLFunctions_1_1>
 

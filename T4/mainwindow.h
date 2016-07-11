@@ -18,6 +18,9 @@ protected:
 
 private:
     GLWidget *glwidget;
+
+private slots:
+    void showMsg();
 };
 
 #endif // MAINWINDOW_H
